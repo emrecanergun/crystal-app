@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Crystal Hotels - Guest Information Hub</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -11,279 +11,391 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
-
         body { 
-            font-family: 'Poppins', sans-serif; 
+            font-family: 'Montserrat', sans-serif; 
             background-color: #ffffff; 
             margin: 0;
             padding: 0;
+            overflow-x: hidden;
         }
+        /* Ekrana Tam Sığdırma (Autosize) */
         .app-container { 
             max-width: 480px; 
             margin: 0 auto; 
             background-color: #ffffff; 
-            min-height: 100vh; 
+            height: 100dvh; 
             display: flex;
             flex-direction: column;
             position: relative;
         }
-        .serif-title {
-            font-family: 'Cinzel', serif;
-            letter-spacing: 1px;
+        .scrollable-content {
+            height: 100dvh;
+            overflow-y: auto;
+            max-width: 480px;
+            margin: 0 auto;
+            background-color: #f9fbfd;
         }
-        .serif-sub {
-            font-family: 'Playfair Display', serif;
-        }
-        .dashed-border-y {
-            border-top: 1px dashed #d1d5db;
-            border-bottom: 1px dashed #d1d5db;
-        }
-        .dashed-border-b {
-            border-bottom: 1px dashed #d1d5db;
-        }
+        
+        .serif-title { font-family: 'Cinzel', serif; letter-spacing: 1px; }
+        .serif-sub { font-family: 'Playfair Display', serif; }
+        .dashed-border-y { border-top: 1px dashed #e5e7eb; border-bottom: 1px dashed #e5e7eb; }
+        .dashed-border-b { border-bottom: 1px dashed #e5e7eb; }
 
-        /* Orijinal 3D Turkuaz Buton Tasarımları Korundu */
-        .3d-turkuaz-btn {
-            background: linear-gradient(to bottom, #4fc3f7, #0288d1);
-            border: 2px solid #01579b;
-            border-radius: 12px;
-            box-shadow: 
-                0 4px 0 #01579b,
-                0 8px 16px rgba(0,0,0,0.2),
-                inset 0 2px 2px rgba(255,255,255,0.4);
+        /* Orijinal Crystal Mavi Buton Tasarımı */
+        .crystal-btn {
+            background-color: #49bad5; 
+            border-radius: 8px;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.6), 0 2px 4px rgba(0,0,0,0.05); 
             color: #ffffff;
-            font-size: 1.5rem;
-            font-weight: 700;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
-            transition: all 0.1s ease;
+            font-weight: 600;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            transition: all 0.15s ease;
             cursor: pointer;
+            border: 1px solid #3ca5be;
         }
-        .3d-turkuaz-btn:active {
-            transform: translateY(3px);
-            box-shadow: 0 1px 0 #01579b, 0 3px 6px rgba(0,0,0,0.2), inset 0 1px 1px rgba(255,255,255,0.2);
+        .crystal-btn:active {
+            transform: scale(0.97);
+            background-color: #3ca5be;
         }
-        .3d-small-btn {
-            background: linear-gradient(to bottom, #4fc3f7, #0288d1);
-            border: 1px solid #01579b;
-            border-radius: 10px;
-            box-shadow: 
-                0 3px 0 #01579b,
-                0 4px 8px rgba(0,0,0,0.15),
-                inset 0 1px 1px rgba(255,255,255,0.4);
+        
+        /* Orijinal Mavi Bilgi Paneli */
+        .crystal-panel {
+            background-color: #49bad5;
+            border-radius: 12px;
+            padding: 1.5rem;
             color: #ffffff;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-            transition: all 0.1s ease;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5), 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
         }
-        .3d-small-btn:active {
-            transform: translateY(2px);
-            box-shadow: 0 1px 0 #01579b, 0 2px 4px rgba(0,0,0,0.15);
-        }
+        .crystal-panel a { text-decoration: underline; font-weight: bold; }
 
-        /* Dinamik Dönüşümlü Kutu Stilleri */
+        /* Şuan Açık Widget Stilleri */
         .now-box {
             background: linear-gradient(145deg, #ffffff, #fdfdfd); 
             border: 1px solid #eaeaea; 
             border-radius: 12px; 
-            padding: 18px 15px; 
+            padding: 12px 15px; 
             text-align: left; 
-            font-family: 'Montserrat', sans-serif; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.06); 
-            position: relative;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.04); 
         }
-        #content-wrapper {
-            transition: opacity 0.6s ease-in-out; 
-            opacity: 1;
-        }
-        .fade-out {
-            opacity: 0 !important;
-        }
-        .now-title {
-            font-size: 12px; 
-            color: #8c8c8c; 
-            text-transform: uppercase;
-            letter-spacing: 2.5px; 
-            margin-bottom: 15px; 
-            font-weight: 600;
-            border-bottom: 1px solid #f0f0f0; 
-            padding-bottom: 10px;
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-        }
-        .event-item {
-            font-size: 13px; 
-            font-weight: 600;
-            color: #2c3e50; 
-            margin-bottom: 10px; 
-            display: flex;
-            justify-content: space-between; 
-            align-items: center;
-            border-bottom: 1px solid #f8f8f8; 
-            padding-bottom: 8px;
-        }
-        .event-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-        .event-time {
-            font-size: 10px; 
-            font-weight: 700;
-            color: #00a2df; 
-            background-color: transparent; 
-            border: 1px solid #00a2df; 
-            padding: 3px 10px; 
-            border-radius: 20px; 
-            white-space: nowrap;
-            margin-left: 10px;
-            letter-spacing: 0.5px;
-        }
-        .weather-note {
-            font-size: 10px;
-            color: #a0a0a0;
-            text-align: center;
-            margin-top: 15px;
-            font-style: italic;
-            font-weight: 500;
-        }
+        #content-wrapper { transition: opacity 0.4s ease-in-out; opacity: 1; }
+        .fade-out { opacity: 0 !important; }
+        .now-title { font-size: 11px; color: #8c8c8c; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; font-weight: 600; border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; display: flex; justify-content: center; align-items: center; gap: 8px; }
+        .event-item { font-size: 12px; font-weight: 600; color: #2c3e50; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f8f8f8; padding-bottom: 6px; }
+        .event-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .event-time { font-size: 10px; font-weight: 700; color: #49bad5; background-color: transparent; border: 1px solid #49bad5; padding: 2px 8px; border-radius: 20px; white-space: nowrap; margin-left: 10px; }
+        .weather-note { font-size: 9px; color: #a0a0a0; text-align: center; margin-top: 10px; font-style: italic; font-weight: 500; }
+        
+        /* A'la Carte Tablosu */
+        .alacarte-table th, .alacarte-table td { border: 1px solid #e5e7eb; padding: 6px; text-align: center; font-size: 10px; font-weight: 600; }
+        .alacarte-table th { background-color: #fef08a; color: #374151; }
+        .bg-open { background-color: #38bdf8; color: white; }
+        .bg-closed { background-color: #f87171; color: white; }
+        
+        .hide-scroll::-webkit-scrollbar { display: none; }
+        .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body>
 
-<div class="app-container">
+<!-- 1. DİL SEÇİM & ŞU AN AÇIK EKRANI -->
+<div id="landing-screen" class="app-container">
     
-    <!-- En Üst İnce Grid Çizgileri -->
-    <div class="w-full flex justify-between px-4 border-b border-gray-100 py-1 mb-6">
+    <div class="w-full flex justify-between px-4 border-b border-gray-100 py-1 mb-3 shrink-0">
         <span class="w-[1px] h-2 bg-gray-200"></span><span class="w-[1px] h-2 bg-gray-200"></span><span class="w-[1px] h-2 bg-gray-200"></span>
         <span class="w-[1px] h-2 bg-gray-200"></span><span class="w-[1px] h-2 bg-gray-200"></span><span class="w-[1px] h-2 bg-gray-200"></span>
     </div>
 
-    <!-- 1. BÖLÜM: DİL SEÇİM VE DİNAMİK BİLGİ EKRANI -->
-    <div id="landing-screen" class="flex-1 flex flex-col justify-between px-6">
-        
-        <div class="text-center mt-2">
-            <h1 class="serif-title text-4xl font-semibold text-gray-800 mb-2 mt-4 tracking-wider">CRYSTAL HOTELS</h1>
-            <p class="serif-sub text-lg text-gray-700 italic tracking-wide">Guest Information Hub</p>
-        </div>
+    <!-- Başlık (Üst Logo Çıkarıldı) -->
+    <div class="text-center mt-3 shrink-0">
+        <h1 class="serif-title text-3xl font-semibold text-gray-800 mb-1 tracking-wider">CRYSTAL HOTELS</h1>
+        <p class="serif-sub text-base text-gray-700 italic tracking-wide">Guest Information Hub</p>
+    </div>
 
-        <div class="dashed-border-y py-6 my-6 grid grid-cols-2 gap-x-4 gap-y-5">
-            <button onclick="selectLanguage('en')" class="3d-turkuaz-btn py-4 w-full">English</button>
-            <button onclick="selectLanguage('tr')" class="3d-turkuaz-btn py-4 w-full">Türkçe</button>
-            <button onclick="selectLanguage('de')" class="3d-turkuaz-btn py-4 w-full">Deutsch</button>
-            <button onclick="selectLanguage('ru')" class="3d-turkuaz-btn py-4 w-full">Русский</button>
-        </div>
+    <!-- Dil Butonları -->
+    <div class="dashed-border-y py-4 my-4 grid grid-cols-2 gap-3 px-6 shrink-0">
+        <button onclick="selectLanguage('en')" class="crystal-btn py-3 w-full text-lg">English</button>
+        <button onclick="selectLanguage('tr')" class="crystal-btn py-3 w-full text-lg">Türkçe</button>
+        <button onclick="selectLanguage('de')" class="crystal-btn py-3 w-full text-lg">Deutsch</button>
+        <button onclick="selectLanguage('ru')" class="crystal-btn py-3 w-full text-lg">Русский</button>
+    </div>
 
-        <!-- YENİ DİNAMİK "ŞU AN AÇIK" KUTUSU -->
-        <div class="now-box mb-6">
+    <!-- Şu An Açık Widget -->
+    <div class="px-6 flex-grow flex flex-col justify-center overflow-hidden">
+        <div class="now-box w-full">
             <div id="content-wrapper">
-                <div style="text-align:center; color:#888; font-family:'Montserrat', sans-serif;">Loading...</div>
+                <div style="text-align:center; color:#888; font-size: 12px;">Loading...</div>
             </div>
         </div>
     </div>
 
+    <!-- Alt Logo (Sabit) -->
+    <div class="dashed-border-b py-3 flex justify-center items-center bg-white border-t border-gray-100 shrink-0">
+        <img src="mainlogo.png" alt="Main Logo" onerror="this.style.display='none'" class="h-8 object-contain">
+    </div>
+</div>
 
-    <!-- 2. BÖLÜM: ANA MENÜ EKRANI -->
-    <div id="main-menu-screen" class="hidden flex-1 flex flex-col px-6 pt-4">
-        
-        <div class="flex justify-between items-center mb-4">
-            <button onclick="goBackToLanguages()" class="text-sky-600 font-semibold text-xs flex items-center space-x-1">
-                <i class="fa-solid fa-chevron-left"></i> <span id="back-lbl">Geri Dön</span>
-            </button>
-            <div class="flex space-x-1">
-                <button onclick="changeLang('tr')" class="px-2 py-0.5 bg-gray-100 rounded text-xs">🇹🇷 TR</button>
-                <button onclick="changeLang('en')" class="px-2 py-0.5 bg-gray-100 rounded text-xs">🇬🇧 EN</button>
-                <button onclick="changeLang('de')" class="px-2 py-0.5 bg-gray-100 rounded text-xs">🇩🇪 DE</button>
-                <button onclick="changeLang('ru')" class="px-2 py-0.5 bg-gray-100 rounded text-xs">🇷🇺 RU</button>
-            </div>
-        </div>
-
-        <div class="text-center mb-6">
-            <h2 class="serif-title text-2xl font-semibold text-gray-800 mb-2 mt-2">CRYSTAL HOTELS</h2>
-            <p id="welcome-text" class="text-xs text-gray-500 leading-relaxed max-w-sm mx-auto">
-                Konaklamanız boyunca tüm otel bilgilerine zahmetsizce erişin. Restoran ve bar saatleri, etkinlikler, oda olanakları, harita ve yapay zeka asistanı tek noktada.<br>📱 QR kodu okutun ve keşfedin.
-            </p>
-        </div>
-
-        <div class="dashed-border-y py-6 grid grid-cols-2 gap-x-4 gap-y-4 mb-6">
-            <button class="3d-small-btn flex flex-col items-center justify-center p-4">
-                <i class="fa-solid fa-bed text-xl mb-2"></i><span id="btn-room" class="font-bold text-xs">Oda Rehberi</span>
-            </button>
-            <button class="3d-small-btn flex flex-col items-center justify-center p-4">
-                <i class="fa-solid fa-utensils text-xl mb-2"></i><span id="btn-food" class="font-bold text-xs">Yiyecek & İçecek</span>
-            </button>
-            <button class="3d-small-btn flex flex-col items-center justify-center p-4">
-                <i class="fa-solid fa-map-location-dot text-xl mb-2"></i><span id="btn-map" class="font-bold text-xs">Tesis Haritası</span>
-            </button>
-            <button class="3d-small-btn flex flex-col items-center justify-center p-4">
-                <i class="fa-solid fa-icons text-xl mb-2"></i><span id="btn-activities" class="font-bold text-xs">Aktiviteler</span>
-            </button>
-            <button class="3d-small-btn flex flex-col items-center justify-center p-4">
-                <i class="fa-solid fa-book-open-reader text-xl mb-2"></i><span id="btn-menus" class="font-bold text-xs">Menüler</span>
-            </button>
-            <button class="3d-small-btn flex flex-col items-center justify-center p-4">
-                <i class="fa-solid fa-plane-departure text-xl mb-2"></i><span id="btn-transfer" class="font-bold text-xs">Transfer Bilgileri</span>
-            </button>
-        </div>
-
-        <div class="mb-8">
-            <button class="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold py-4 rounded-2xl shadow-lg flex items-center justify-center space-x-2 transition transform active:scale-95">
-                <i class="fa-solid fa-robot text-lg"></i><span id="btn-ai" class="text-sm">AI Asistan'a Sorun!</span>
-            </button>
+<!-- 2. ANA MENÜ EKRANI -->
+<div id="main-menu-screen" class="app-container hidden">
+    
+    <div class="flex justify-between items-center px-6 pt-3 shrink-0">
+        <button onclick="goBackToLanguages()" class="text-sky-600 font-semibold text-xs flex items-center space-x-1">
+            <i class="fa-solid fa-chevron-left"></i> <span id="back-lbl">Geri Dön</span>
+        </button>
+        <div class="flex space-x-1">
+            <button onclick="changeLang('tr')" class="px-2 py-0.5 bg-gray-100 rounded text-[10px] font-bold">🇹🇷 TR</button>
+            <button onclick="changeLang('en')" class="px-2 py-0.5 bg-gray-100 rounded text-[10px] font-bold">🇬🇧 EN</button>
+            <button onclick="changeLang('de')" class="px-2 py-0.5 bg-gray-100 rounded text-[10px] font-bold">🇩🇪 DE</button>
+            <button onclick="changeLang('ru')" class="px-2 py-0.5 bg-gray-100 rounded text-[10px] font-bold">🇷🇺 RU</button>
         </div>
     </div>
 
-    <!-- ALT KISIM: YATAY ANA LOGO (Her iki ekranda da sabit footer) -->
-    <div class="dashed-border-b mt-auto py-6 flex justify-center items-center bg-white px-4 border-t border-gray-100">
-        <img src="mainlogo.png" alt="Crystal Hotels" class="h-10 object-contain">
+    <div class="text-center px-6 mt-3 shrink-0">
+        <h2 class="serif-title text-xl font-semibold text-gray-800 mb-1">CRYSTAL HOTELS</h2>
+        <p id="welcome-text" class="text-[11px] text-gray-500 leading-tight max-w-sm mx-auto">
+            Konaklamanız boyunca tüm otel bilgilerine zahmetsizce erişin. Restoran saatleri, harita ve AI asistan tek noktada.
+        </p>
     </div>
 
+    <!-- Ana Menü Grid -->
+    <div class="dashed-border-y py-4 my-3 grid grid-cols-2 gap-3 px-6 shrink-0">
+        <button onclick="openPage('room')" class="crystal-btn flex flex-col items-center justify-center py-4">
+            <i class="fa-solid fa-bed text-xl mb-1"></i><span id="btn-room" class="font-bold text-[11px]">Oda Rehberi</span>
+        </button>
+        <button onclick="openPage('food')" class="crystal-btn flex flex-col items-center justify-center py-4">
+            <i class="fa-solid fa-utensils text-xl mb-1"></i><span id="btn-food" class="font-bold text-[11px]">Yiyecek & İçecek</span>
+        </button>
+        <button onclick="openPage('map')" class="crystal-btn flex flex-col items-center justify-center py-4">
+            <i class="fa-solid fa-map-location-dot text-xl mb-1"></i><span id="btn-map" class="font-bold text-[11px]">Tesis Haritası</span>
+        </button>
+        <button onclick="openPage('activities')" class="crystal-btn flex flex-col items-center justify-center py-4">
+            <i class="fa-solid fa-icons text-xl mb-1"></i><span id="btn-activities" class="font-bold text-[11px]">Aktiviteler</span>
+        </button>
+        <button onclick="openPage('menus')" class="crystal-btn flex flex-col items-center justify-center py-4">
+            <i class="fa-solid fa-book-open-reader text-xl mb-1"></i><span id="btn-menus" class="font-bold text-[11px]">Menüler</span>
+        </button>
+        <button onclick="openPage('transfer')" class="crystal-btn flex flex-col items-center justify-center py-4">
+            <i class="fa-solid fa-plane-departure text-xl mb-1"></i><span id="btn-transfer" class="font-bold text-[11px]">Transfer Bilgileri</span>
+        </button>
+    </div>
+
+    <!-- AI Asistan -->
+    <div class="px-6 flex-grow flex flex-col justify-center">
+        <button class="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold py-3.5 rounded-xl shadow-md flex items-center justify-center space-x-2 transition transform active:scale-95">
+            <i class="fa-solid fa-robot text-lg"></i><span id="btn-ai" class="text-sm">AI Asistan'a Sorun!</span>
+        </button>
+    </div>
+
+    <div class="dashed-border-b py-3 flex justify-center items-center bg-white border-t border-gray-100 shrink-0">
+        <img src="mainlogo.png" alt="Main Logo" onerror="this.style.display='none'" class="h-8 object-contain">
+    </div>
+</div>
+
+<!-- 3. İÇERİK (ALT SAYFA) EKRANLARI -->
+<div id="content-screen" class="scrollable-content hidden flex-col relative pb-10">
+    
+    <!-- Sabit Üst Bar -->
+    <div class="sticky top-0 bg-white/90 backdrop-blur-md z-10 px-6 py-4 flex items-center border-b border-gray-100 shadow-sm">
+        <button onclick="goBackToMenu()" class="text-gray-800 text-xl mr-4"><i class="fa-solid fa-arrow-left"></i></button>
+        <h2 id="page-title" class="font-bold text-gray-800 text-lg uppercase tracking-wide"></h2>
+    </div>
+
+    <!-- Sayfa İçerikleri (JS ile Doldurulacak) -->
+    <div id="page-content" class="p-6"></div>
+
+    <div class="mt-auto pt-6 pb-2 flex justify-center opacity-50">
+        <img src="mainlogo.png" alt="Logo" onerror="this.style.display='none'" class="h-6">
+    </div>
 </div>
 
 <script>
-    // --- 1. ANA MENÜ VE SAYFA İÇİ ÇEVİRİ YÖNETİMİ ---
+    // --- SABİT METİNLER (Sayfalar İçin) ---
+    const pageData = {
+        transfer: {
+            tr: `<div class="crystal-panel mb-6 text-sm leading-relaxed text-left">
+                    <b>Sayın Misafirimiz,</b><br><br>Bu linkte yer alan transfer bilgileri acenteler tarafından doğrudan sistemimize yüklenmektedir. Transfer saatleri ve operasyonları ile ilgili otel yönetimimizin bir sorumluluğu bulunmamaktadır.<br><br>Oda çıkış saatimizin <b>12:00</b> olduğunu hatırlatır, iyi yolculuklar dileriz.
+                 </div>
+                 <a href="https://drive.google.com/drive/folders/1zytCMcVdCUR4D6UtBvVWM9u_TGI5f_7K?usp=sharing" target="_blank" class="crystal-btn block w-full py-4 text-center text-lg"><i class="fa-solid fa-bus mr-2"></i> Transfer Saatini Görüntüle!</a>`,
+            en: `<div class="crystal-panel mb-6 text-sm leading-relaxed text-left">
+                    <b>Dear Guest,</b><br><br>The transfer information provided in this link is sent directly to us by the travel agencies and uploaded to our system. Please note that our hotel management holds no responsibility regarding the transfer operations or schedules.<br><br>We kindly remind you that our check-out time is <b>12:00 PM</b>. We wish you a safe and pleasant journey.
+                 </div>
+                 <a href="https://drive.google.com/drive/folders/1zytCMcVdCUR4D6UtBvVWM9u_TGI5f_7K?usp=sharing" target="_blank" class="crystal-btn block w-full py-4 text-center text-lg"><i class="fa-solid fa-bus mr-2"></i> View Your Pick-up Time!</a>`,
+            de: `<div class="crystal-panel mb-6 text-sm leading-relaxed text-left">
+                    <b>Lieber Gast,</b><br><br>Die in diesem Link bereitgestellten Transferinformationen werden uns direkt von den Reisebüros übermittelt. Bitte beachten Sie, dass unser Hotelmanagement keine Verantwortung für die Transferabläufe oder -zeiten übernimmt.<br><br>Wir möchten Sie daran erinnern, dass unsere Check-out-Zeit <b>12:00 Uhr</b> ist. Wir wünschen Ihnen eine gute Reise.
+                 </div>
+                 <a href="https://drive.google.com/drive/folders/1zytCMcVdCUR4D6UtBvVWM9u_TGI5f_7K?usp=sharing" target="_blank" class="crystal-btn block w-full py-4 text-center text-lg"><i class="fa-solid fa-bus mr-2"></i> Abholzeit anzeigen!</a>`,
+            ru: `<div class="crystal-panel mb-6 text-sm leading-relaxed text-left">
+                    <b>Дорогой Гость,</b><br><br>Информация о трансфере, предоставленная по этой ссылке, отправляется нам напрямую туристическими агентствами. Обратите внимание, что руководство отеля не несет ответственности за операции или расписание трансферов.<br><br>Напоминаем, что время выезда — <b>12:00</b>. Желаем вам безопасного и приятного пути.
+                 </div>
+                 <a href="https://drive.google.com/drive/folders/1zytCMcVdCUR4D6UtBvVWM9u_TGI5f_7K?usp=sharing" target="_blank" class="crystal-btn block w-full py-4 text-center text-lg"><i class="fa-solid fa-bus mr-2"></i> Посмотреть время трансфера!</a>`
+        },
+        menus: {
+            tr: `<div class="crystal-panel mb-6 text-sm leading-relaxed">
+                    A'la carte restoranlarımız her gün <b>18:30 - 23:00</b> saatleri arasında hizmet vermektedir.<br><br>Rezervasyon gerekli değildir; misafirlerimiz konaklamaları boyunca bu deneyimin tadını çıkarabilirler.
+                 </div>
+                 <h3 class="font-bold text-gray-700 text-center mb-2 text-sm uppercase">A'la Carte Programı</h3>
+                 <div class="overflow-hidden rounded-xl border border-gray-200 mb-8 shadow-sm">
+                    <table class="w-full alacarte-table">
+                        <tr><th></th><th>Pts</th><th>Sal</th><th>Çar</th><th>Per</th><th>Cum</th><th>Cts</th><th>Paz</th></tr>
+                        <tr><td class="text-left font-bold bg-red-600 text-white text-[9px]">ÖZ REST.</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td><td class="bg-closed">KAPALI</td><td class="bg-open">AÇIK</td></tr>
+                        <tr><td class="text-left font-bold bg-red-600 text-white text-[9px]">MED. BREEZE</td><td class="bg-open">AÇIK</td><td class="bg-closed">KAPALI</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td></tr>
+                        <tr><td class="text-left font-bold bg-red-600 text-white text-[9px]">LATIN AM.</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td><td class="bg-closed">KAPALI</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td></tr>
+                        <tr><td class="text-left font-bold bg-red-600 text-white text-[9px]">ORIENTAL E.</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td><td class="bg-closed">KAPALI</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td></tr>
+                        <tr><td class="text-left font-bold bg-red-600 text-white text-[9px]">FISH BONE</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td><td class="bg-closed">KAPALI</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td></tr>
+                    </table>
+                 </div>
+                 <div class="crystal-panel mb-6 text-sm leading-relaxed">
+                    Oda servisimiz <b>24 saat</b> hizmetinizdedir (Ekstra ücrete tabidir).
+                 </div>
+                 <a href="http://wa.me/905497844996" target="_blank" class="crystal-btn block w-full py-4 text-center text-lg bg-green-500 border-green-600"><i class="fa-brands fa-whatsapp text-2xl mr-2 align-middle"></i> Oda Servisi Siparişi Ver</a>`,
+            en: `<div class="crystal-panel mb-6 text-sm leading-relaxed">
+                    Our à la carte restaurants welcome you daily between <b>18:30 and 23:00</b>.<br><br>No reservation is required, guests can enjoy these experiences throughout their stay.
+                 </div>
+                 <h3 class="font-bold text-gray-700 text-center mb-2 text-sm uppercase">A'la Carte Schedule</h3>
+                 <div class="overflow-hidden rounded-xl border border-gray-200 mb-8 shadow-sm">
+                    <table class="w-full alacarte-table">
+                        <tr><th></th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th></tr>
+                        <tr><td class="text-left font-bold bg-red-600 text-white text-[9px]">ÖZ REST.</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td><td class="bg-closed">CLOSED</td><td class="bg-open">OPEN</td></tr>
+                        <tr><td class="text-left font-bold bg-red-600 text-white text-[9px]">MED. BREEZE</td><td class="bg-open">OPEN</td><td class="bg-closed">CLOSED</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td></tr>
+                        <tr><td class="text-left font-bold bg-red-600 text-white text-[9px]">LATIN AM.</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td><td class="bg-closed">CLOSED</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td></tr>
+                        <tr><td class="text-left font-bold bg-red-600 text-white text-[9px]">ORIENTAL E.</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td><td class="bg-closed">CLOSED</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td></tr>
+                        <tr><td class="text-left font-bold bg-red-600 text-white text-[9px]">FISH BONE</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td><td class="bg-closed">CLOSED</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td></tr>
+                    </table>
+                 </div>
+                 <div class="crystal-panel mb-6 text-sm leading-relaxed">
+                    Our room service is available <b>24 hours</b> (subject to additional charge).
+                 </div>
+                 <a href="http://wa.me/905497844996" target="_blank" class="crystal-btn block w-full py-4 text-center text-lg bg-green-500 border-green-600"><i class="fa-brands fa-whatsapp text-2xl mr-2 align-middle"></i> Order Room Service</a>`,
+            de: `<div class="crystal-panel mb-6 text-sm leading-relaxed">
+                    Unsere À-la-carte-Restaurants begrüßen Sie täglich von <b>18:30 bis 23:00 Uhr</b>.<br><br>Keine Reservierung erforderlich.
+                 </div>
+                 <div class="crystal-panel mb-6 text-sm leading-relaxed">
+                    Zimmerservice ist <b>24 Stunden</b> verfügbar (gegen Aufpreis).
+                 </div>
+                 <a href="http://wa.me/905497844996" target="_blank" class="crystal-btn block w-full py-4 text-center text-lg bg-green-500 border-green-600"><i class="fa-brands fa-whatsapp mr-2"></i> Zimmerservice Bestellen</a>`,
+            ru: `<div class="crystal-panel mb-6 text-sm leading-relaxed">
+                    Наши рестораны A'la Carte открыты ежедневно с <b>18:30 до 23:00</b>.<br><br>Бронирование не требуется.
+                 </div>
+                 <div class="crystal-panel mb-6 text-sm leading-relaxed">
+                    Обслуживание номеров доступно <b>24 часа</b> (за дополнительную плату).
+                 </div>
+                 <a href="http://wa.me/905497844996" target="_blank" class="crystal-btn block w-full py-4 text-center text-lg bg-green-500 border-green-600"><i class="fa-brands fa-whatsapp mr-2"></i> Заказать Обслуживание</a>`
+        },
+        room: {
+            tr: `<div class="space-y-5 text-gray-700 text-sm">
+                    <div><h3 class="font-bold text-gray-800"><i class="fa-regular fa-clock text-sky-500 mr-2"></i> Çıkış Saati (Check-out)</h3><p class="mt-1">Çıkış saati <b>12:00</b>'dir. 12:00'den sonra tesis kullanımına devam edilmesi ekstra ücrete tabidir.</p></div>
+                    <hr>
+                    <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-broom text-sky-500 mr-2"></i> Oda Temizliği & Doğa Koruması</h3><p class="mt-1">Temizlik her gün 09:00 - 16:00 arası yapılır. ("Rahatsız Etmeyin" kartı olan odalara hizmet verilemez.)<br><br>Doğayı korumak için:<br>• Havluyu tekrar kullanmak için: Asılı bırakın.<br>• Havluyu değiştirmek için: Yere bırakın.</p></div>
+                    <hr>
+                    <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-bottle-water text-sky-500 mr-2"></i> Minibar & Çay/Kahve Seti</h3><p class="mt-1">Minibar ve çay/kahve setiniz günde bir kez ücretsiz olarak yenilenir.</p></div>
+                    <hr>
+                    <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-snowflake text-sky-500 mr-2"></i> Klima</h3><p class="mt-1">Sistem duvardaki panelden kontrol edilir. Balkon kapısı açıkken klima çalışmaz.</p></div>
+                    <hr>
+                    <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-bed text-sky-500 mr-2"></i> Yastık Seçenekleri & Misafir İlişkileri</h3><p class="mt-1">Tüm istek ve yastık değişim talepleriniz için lütfen telefondan <b>6666</b>'yı tuşlayarak Misafir İlişkilerine ulaşın.</p></div>
+                    <hr>
+                    <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-lock text-sky-500 mr-2"></i> Kasa (Safe)</h3><p class="mt-1">Değerli eşyalarınızı kasada saklamanızı öneririz. Kasa dışında bırakılan eşyalardan otel sorumlu değildir.</p></div>
+                 </div>`,
+            en: `<div class="space-y-5 text-gray-700 text-sm">
+                    <div><h3 class="font-bold text-gray-800"><i class="fa-regular fa-clock text-sky-500 mr-2"></i> Check-out Time</h3><p class="mt-1">Check-out time is <b>12:00</b>. Use of facility services after 12:00 is subject to an extra fee.</p></div>
+                    <hr>
+                    <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-broom text-sky-500 mr-2"></i> Room Cleaning & Nature Conservation</h3><p class="mt-1">Daily 09:00 – 16:00. (Rooms with a "Do Not Disturb" sign cannot be serviced.)<br><br>To support nature:<br>• Reuse towel: Leave hanging.<br>• Replace towel: Place on the floor.</p></div>
+                    <hr>
+                    <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-bottle-water text-sky-500 mr-2"></i> Minibar & Tea/Coffee</h3><p class="mt-1">Replenished once daily, free of charge.</p></div>
+                    <hr>
+                    <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-snowflake text-sky-500 mr-2"></i> Air Conditioning</h3><p class="mt-1">Operated via wall panel. The system will not operate when the balcony door is open.</p></div>
+                    <hr>
+                    <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-bed text-sky-500 mr-2"></i> Pillow Options & Guest Relations</h3><p class="mt-1">For any requests, pillow changes or malfunction reports, please dial <b>6666</b>.</p></div>
+                    <hr>
+                    <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-lock text-sky-500 mr-2"></i> Safe Deposit Box</h3><p class="mt-1">We recommend storing valuables in the safe. The hotel is not responsible for items outside.</p></div>
+                 </div>`,
+            de: `<div class="text-sm text-gray-700 text-center py-10">Zimmerinformationen werden übersetzt...</div>`, 
+            ru: `<div class="text-sm text-gray-700 text-center py-10">Информация о номере переводится...</div>`
+        },
+        activities: {
+            tr: `<div class="crystal-panel mb-6 text-sm leading-relaxed">
+                    <b>Crystal Hotels App</b>, günlük aktivitelere, şov programlarına ve önemli konaklama bilgilerine merkezi erişim sağlayarak kusursuz bir misafir deneyimini destekler.
+                 </div>
+                 <div class="flex space-x-4 mb-6">
+                    <button class="crystal-btn flex-1 py-3 text-xs"><i class="fa-brands fa-apple text-2xl block mb-1"></i> iOS için İndir</button>
+                    <button class="crystal-btn flex-1 py-3 text-xs"><i class="fa-brands fa-google-play text-2xl block mb-1"></i> Android için İndir</button>
+                 </div>
+                 <div class="flex justify-center space-x-4 text-sky-500 text-3xl">
+                    <i class="fa-brands fa-facebook"></i><i class="fa-brands fa-instagram"></i><i class="fa-solid fa-globe"></i>
+                 </div>`,
+            en: `<div class="crystal-panel mb-6 text-sm leading-relaxed">
+                    The <b>Crystal Hotels App</b> provides centralized access to daily activities, show schedules, and essential stay information, supporting a smooth guest experience.
+                 </div>
+                 <div class="flex space-x-4 mb-6">
+                    <button class="crystal-btn flex-1 py-3 text-xs"><i class="fa-brands fa-apple text-2xl block mb-1"></i> App for iOS</button>
+                    <button class="crystal-btn flex-1 py-3 text-xs"><i class="fa-brands fa-google-play text-2xl block mb-1"></i> App for Android</button>
+                 </div>
+                 <div class="flex justify-center space-x-4 text-sky-500 text-3xl">
+                    <i class="fa-brands fa-facebook"></i><i class="fa-brands fa-instagram"></i><i class="fa-solid fa-globe"></i>
+                 </div>`,
+            de: `<div class="crystal-panel mb-6 text-sm leading-relaxed">Die <b>Crystal Hotels App</b> bietet zentralen Zugriff auf tägliche Aktivitäten und Showprogramme.</div>`,
+            ru: `<div class="crystal-panel mb-6 text-sm leading-relaxed">Приложение <b>Crystal Hotels App</b> предоставляет доступ к ежедневным мероприятиям и расписаниям шоу.</div>`
+        },
+        map: {
+            tr: `<p class="text-xs text-gray-500 text-center mb-4">Görseli büyütmek için üzerine tıklayabilirsiniz.</p>
+                 <img src="map.png" alt="Hotel Map" onerror="this.outerHTML='<div class=\\'bg-gray-100 p-10 text-center rounded-xl text-gray-400\\'>Lütfen GitHub\\'a <b>map.png</b> dosyasını yükleyin.</div>'" class="w-full rounded-xl shadow-md">`,
+            en: `<p class="text-xs text-gray-500 text-center mb-4">You can click on the image to enlarge it.</p>
+                 <img src="map.png" alt="Hotel Map" onerror="this.outerHTML='<div class=\\'bg-gray-100 p-10 text-center rounded-xl text-gray-400\\'>Please upload <b>map.png</b> to GitHub.</div>'" class="w-full rounded-xl shadow-md">`,
+            de: `<img src="map.png" alt="Hotel Map" class="w-full rounded-xl">`,
+            ru: `<img src="map.png" alt="Hotel Map" class="w-full rounded-xl">`
+        },
+        food: {
+            tr: `<h3 class="font-bold text-gray-700 text-center mb-4 text-sm uppercase">Hizmet Saatleri</h3>
+                 <img src="fb-hours.png" alt="Food Beverage Hours" onerror="this.outerHTML='<div class=\\'bg-gray-100 p-10 text-center rounded-xl text-gray-400\\'>Lütfen GitHub\\'a <b>fb-hours.png</b> dosyasını yükleyin.</div>'" class="w-full rounded-xl shadow-md">`,
+            en: `<h3 class="font-bold text-gray-700 text-center mb-4 text-sm uppercase">Operation Hours</h3>
+                 <img src="fb-hours.png" alt="Food Beverage Hours" onerror="this.outerHTML='<div class=\\'bg-gray-100 p-10 text-center rounded-xl text-gray-400\\'>Please upload <b>fb-hours.png</b> to GitHub.</div>'" class="w-full rounded-xl shadow-md">`,
+            de: `<img src="fb-hours.png" class="w-full rounded-xl">`,
+            ru: `<img src="fb-hours.png" class="w-full rounded-xl">`
+        }
+    };
+
+    // --- TEMEL DİL VERİLERİ ---
     const translations = {
         tr: {
             back: "Giriş Ekranı",
-            welcome: "Konaklamanız boyunca tüm otel bilgilerine zahmetsizce erişin. Restoran ve bar saatleri, etkinlikler, oda olanakları, harita ve yapay zeka asistanı tek noktada. 📱 QR kodu okutun ve keşfedin.",
+            welcome: "Konaklamanız boyunca tüm otel bilgilerine zahmetsizce erişin. Restoran saatleri, harita ve AI asistan tek noktada.",
             room: "Oda Rehberi", food: "Yiyecek & İçecek", map: "Tesis Haritası", act: "Aktiviteler", menus: "Menüler", transfer: "Transfer Bilgileri", ai: "AI Asistan'a Sorun!"
         },
         en: {
             back: "Home",
-            welcome: "Effortlessly access all hotel information during your stay. Restaurant and bar hours, events, room amenities, a map, and an AI assistant, all in one place. 📱 Scan the QR code and explore.",
+            welcome: "Effortlessly access all hotel information. Restaurant hours, map, and AI assistant, all in one place.",
             room: "Room Guide", food: "Food & Beverage", map: "Hotel Map", act: "Activities", menus: "Menus", transfer: "Transfer Info", ai: "Ask AI Assistant!"
         },
         de: {
             back: "Startseite",
-            welcome: "Erhalten Sie während Ihres Aufenthalts mühelos Zugriff auf alle Hotelinformationen. Restaurant- und Barzeiten, Veranstaltungen, Zimmerausstattung, eine Karte und ein KI-Assistent an einem Ort. 📱 Scannen Sie den QR-Code und entdecken Sie mehr.",
+            welcome: "Erhalten Sie mühelos Zugriff auf alle Hotelinformationen. Restaurantzeiten, Karte und KI-Assistent an einem Ort.",
             room: "Zimmerleitfaden", food: "Essen & Trinken", map: "Lageplan", act: "Aktivitäten", menus: "Menüs", transfer: "Transfer Info", ai: "KI-Assistent fragen!"
         },
         ru: {
             back: "Назад",
-            welcome: "Легко получайте доступ ко всей информации об отеле во время вашего пребывания. Часы работы ресторанов и баров, мероприятия, удобства в номере, карта и ИИ-ассистент — всё в одном месте. 📱 Отсканируйте QR-код и исследуйте.",
+            welcome: "Легко получайте доступ ко всей информации об отеле. Часы работы, карта и ИИ-ассистент — всё в одном месте.",
             room: "Гид по номеру", food: "Еда и Напитки", map: "Карта Отеля", act: "Мероприятия", menus: "Меню", transfer: "Трансфер", ai: "Спросить ИИ-ассистента!"
         }
     };
 
+    let currentLang = 'en';
+
     function selectLanguage(lang) {
+        currentLang = lang;
         changeLang(lang);
         document.getElementById('landing-screen').classList.add('hidden');
         document.getElementById('main-menu-screen').classList.remove('hidden');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function goBackToLanguages() {
         document.getElementById('main-menu-screen').classList.add('hidden');
         document.getElementById('landing-screen').classList.remove('hidden');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function changeLang(lang) {
+        currentLang = lang;
         const t = translations[lang];
         document.getElementById('back-lbl').innerText = t.back;
         document.getElementById('welcome-text').innerHTML = t.welcome;
@@ -296,70 +408,54 @@
         document.getElementById('btn-ai').innerText = t.ai;
     }
 
-    // --- 2. DİNAMİK "ŞU AN AÇIK" WIDGET'I (Sizin Kodunuz) ---
+    function openPage(pageKey) {
+        document.getElementById('main-menu-screen').classList.add('hidden');
+        const contentScreen = document.getElementById('content-screen');
+        contentScreen.classList.remove('hidden');
+        contentScreen.classList.add('flex');
+        
+        const titles = { room: "btn-room", food: "btn-food", map: "btn-map", activities: "btn-activities", menus: "btn-menus", transfer: "btn-transfer" };
+        document.getElementById('page-title').innerText = document.getElementById(titles[pageKey]).innerText;
+        
+        let htmlData = pageData[pageKey][currentLang] || pageData[pageKey]['en'];
+        document.getElementById('page-content').innerHTML = htmlData;
+        
+        contentScreen.scrollTop = 0; 
+    }
+
+    function goBackToMenu() {
+        document.getElementById('content-screen').classList.add('hidden');
+        document.getElementById('content-screen').classList.remove('flex');
+        document.getElementById('main-menu-screen').classList.remove('hidden');
+    }
+
+    // --- "ŞU AN AÇIK" WIDGET MANTIĞI ---
     const uiTexts = {
-        en: { title: "OPEN RIGHT NOW", until: "until", weather: "(Activities are subject to change due to weather conditions.)" },
-        tr: { title: "ŞU AN AÇIK", until: "kapanış", weather: "(Aktivitelerimiz hava koşullarına bağlı değişiklikler gösterebilir.)" },
-        ru: { title: "ОТКРЫТО СЕЙЧАС", until: "до", weather: "(Программа может меняться в зависимости от погодных условий.)" },
-        de: { title: "JETZT GEÖFFNET", until: "bis", weather: "(Aktivitäten können sich wetterbedingt ändern.)" }
+        en: { title: "OPEN RIGHT NOW", until: "until", weather: "(Subject to weather conditions)" },
+        tr: { title: "ŞU AN AÇIK", until: "kapanış", weather: "(Hava şartlarına bağlı değişebilir)" },
+        ru: { title: "ОТКРЫТО СЕЙЧАС", until: "до", weather: "(Зависит от погодных условий)" },
+        de: { title: "JETZT GEÖFFNET", until: "bis", weather: "(Wetterbedingt variabel)" }
     };
 
     const baseSchedule = [
-        { name: { en: "🍳 Main Rest. Breakfast (-1. Floor)", tr: "🍳 Ana Restoran Kahvaltı (-1. Kat)", ru: "🍳 Главный Ресторан Завтрак (-1. Этаж)", de: "🍳 Hauptrest. Frühstück (-1. Etage)" }, start: "07:00", end: "11:00" },
-        { name: { en: "🍟 Food Court Snack (-2. Floor)", tr: "🍟 Food Court Snack (-2. Kat)", ru: "🍟 Food Court Снэк (-2. Этаж)", de: "🍟 Food Court Snack (-2. Etage)" }, start: "11:00", end: "12:00" },
-        { name: { en: "🍔 Snack Restaurants (-2. Floor)", tr: "🍔 Snack Restoranlar (-2. Kat)", ru: "🍔 Снэк-рестораны (-2. Этаж)", de: "🍔 Snack-Restaurants (-2. Etage)" }, start: "12:00", end: "16:00" },
-        
-        { name: { en: "🏖️ Beach Snack (-1. Floor)", tr: "🏖️ Sahil Snack (-1. Kat)", ru: "🏖️ Пляжный Снэк (-1. Этаж)", de: "🏖️ Strandsnack (-1. Etage)" }, start: "11:00", end: "18:00" },
-        { name: { en: "🥙 Flatbread (-1. Floor)", tr: "🥙 Gözleme (-1. Kat)", ru: "🥙 Гёзлеме (-1. Этаж)", de: "🥙 Fladenbrot (-1. Etage)" }, start: "11:00", end: "18:00" },
-        
-        { name: { en: "🍝 Italian A'la Carte Snack (-1. Floor)", tr: "🍝 İtalyan A'la Carte Snack (-1. Kat)", ru: "🍝 Итальянский Снэк (-1. Этаж)", de: "🍝 Ital. Snack A'la Carte (-1. Etage)" }, start: "12:00", end: "18:00" },
-        { name: { en: "🌊 Waterworld Rest. (-1. Floor)", tr: "🌊 Waterworld Restoran (-1. Kat)", ru: "🌊 Ресторан Waterworld (-1. Этаж)", de: "🌊 Waterworld Restaurant (-1. Etage)" }, start: "16:00", end: "18:30" },
-        { name: { en: "🍷 Main Rest. Dinner (-1. Floor)", tr: "🍷 Ana Restoran Akşam (-1. Kat)", ru: "🍷 Главный Ресторан Ужин (-1. Этаж)", de: "🍷 Hauptrest. Abendessen (-1. Etage)" }, start: "18:30", end: "21:30" },
-        { name: { en: "🌊 Waterworld Night (-1. Floor)", tr: "🌊 Waterworld Gece (-1. Kat)", ru: "🌊 Waterworld Ночной (-1. Этаж)", de: "🌊 Waterworld Nacht (-1. Etage)" }, start: "21:30", end: "08:00" },
-        { name: { en: "🍻 Irish Pub (-1. Floor)", tr: "🍻 Irish Pub (-1. Kat)", ru: "🍻 Ирландский Паб (-1. Этаж)", de: "🍻 Irish Pub (-1. Etage)" }, start: "18:00", end: "08:00" },
-        
-        { name: { en: "🎈 Kids Show", tr: "🎈 Çocuk Şovu (Kids Show)", ru: "🎈 Детское шоу", de: "🎈 Kinder Show" }, start: "20:30", end: "21:15" },
-        { name: { en: "🎪 Evening Show", tr: "🎪 Akşam Şovu (Evening Show)", ru: "🎪 Вечернее Шоу", de: "🎪 Abendshow" }, start: "21:15", end: "22:30" },
-        { name: { en: "🪩 Disco (-2. Floor)", tr: "🪩 Disko (-2. Kat)", ru: "🪩 Дискотека (-2. Этаж)", de: "🪩 Disco (-2. Etage)" }, start: "23:00", end: "01:30" }
+        { name: { en: "🍳 Breakfast", tr: "🍳 Kahvaltı", ru: "🍳 Завтрак", de: "🍳 Frühstück" }, start: "07:00", end: "11:00" },
+        { name: { en: "🍟 Food Court", tr: "🍟 Food Court", ru: "🍟 Food Court", de: "🍟 Food Court" }, start: "11:00", end: "12:00" },
+        { name: { en: "🍔 Snack Rest.", tr: "🍔 Snack Rest.", ru: "🍔 Снэк-рест.", de: "🍔 Snack Rest." }, start: "12:00", end: "16:00" },
+        { name: { en: "🏖️ Beach Snack", tr: "🏖️ Sahil Snack", ru: "🏖️ Пляжный Снэк", de: "🏖️ Strandsnack" }, start: "11:00", end: "18:00" },
+        { name: { en: "🥙 Flatbread", tr: "🥙 Gözleme", ru: "🥙 Гёзлеме", de: "🥙 Fladenbrot" }, start: "11:00", end: "18:00" },
+        { name: { en: "🍷 Dinner", tr: "🍷 Akşam Yemeği", ru: "🍷 Ужин", de: "🍷 Abendessen" }, start: "18:30", end: "21:30" },
+        { name: { en: "🎪 Evening Show", tr: "🎪 Akşam Şovu", ru: "🎪 Вечернее Шоу", de: "🎪 Abendshow" }, start: "21:15", end: "22:30" }
     ];
-
-    const dailyAlacarteMsg = {
-        0: { en: "🍽️ All A'la Carte Restaurants are open!", tr: "🍽️ Tüm A'la Carte Restoranlarımız açık!", ru: "🍽️ Все рестораны A'la Carte открыты!", de: "🍽️ Alle A-la-carte-Restaurants sind geöffnet!" },
-        1: { en: "🍽️ All A'la Carte Restaurants are open!", tr: "🍽️ Tüm A'la Carte Restoranlarımız açık!", ru: "🍽️ Все рестораны A'la Carte открыты!", de: "🍽️ Alle A-la-carte-Restaurants sind geöffnet!" },
-        2: { en: "🍽️ All open except Mediterranean Breeze!", tr: "🍽️ Mediterranean Breeze hariç tüm A'la Cartelar açık!", ru: "🍽️ Открыты все рестораны, кроме Mediterranean Breeze!", de: "🍽️ Alle geöffnet außer Mediterranean Breeze!" },
-        3: { en: "🍽️ All open except Latin America!", tr: "🍽️ Latin Amerika hariç tüm A'la Cartelar açık!", ru: "🍽️ Открыты все рестораны, кроме Latin America!", de: "🍽️ Alle geöffnet außer Latin America!" },
-        4: { en: "🍽️ All open except Fish Bone!", tr: "🍽️ Fish Bone hariç tüm A'la Cartelar açık!", ru: "🍽️ Открыты все рестораны, кроме Fish Bone!", de: "🍽️ Alle geöffnet außer Fish Bone!" },
-        5: { en: "🍽️ All open except Oriental Express!", tr: "🍽️ Oriental Express hariç tüm A'la Cartelar açık!", ru: "🍽️ Открыты все рестораны, кроме Oriental Express!", de: "🍽️ Alle geöffnet außer Oriental Express!" },
-        6: { en: "🍽️ All open except ÖZ Restoran!", tr: "🍽️ ÖZ Restoran hariç tüm A'la Cartelar açık!", ru: "🍽️ Открыты все рестораны, кроме ÖZ Restoran!", de: "🍽️ Alle geöffnet außer ÖZ Restoran!" }
-    };
-
-    function timeToMinutes(timeStr) {
-        let parts = timeStr.split(':');
-        return parseInt(parts[0]) * 60 + parseInt(parts[1]);
-    }
 
     function renderContent() {
         let d = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
         let currentMinutes = d.getHours() * 60 + d.getMinutes();
-        let currentDayIndex = d.getDay(); 
-
-        let todaySchedule = [...baseSchedule];
-        let todayAlacarte = dailyAlacarteMsg[currentDayIndex];
-        if (todayAlacarte) {
-            todaySchedule.push({ name: todayAlacarte, start: "18:30", end: "23:00" });
-        }
 
         let activeEvents = [];
-        todaySchedule.forEach(item => {
-            let startMin = timeToMinutes(item.start);
-            let endMin = timeToMinutes(item.end);
-            let isActive = false;
-
-            if (startMin > endMin) { 
-                if (currentMinutes >= startMin || currentMinutes < endMin) isActive = true;
-            } else {
-                if (currentMinutes >= startMin && currentMinutes < endMin) isActive = true;
-            }
+        baseSchedule.forEach(item => {
+            let startMin = parseInt(item.start.split(':')[0])*60 + parseInt(item.start.split(':')[1]);
+            let endMin = parseInt(item.end.split(':')[0])*60 + parseInt(item.end.split(':')[1]);
+            let isActive = (startMin > endMin) ? (currentMinutes >= startMin || currentMinutes < endMin) : (currentMinutes >= startMin && currentMinutes < endMin);
 
             if (isActive) {
                 let diff = endMin - currentMinutes;
@@ -367,39 +463,30 @@
                 activeEvents.push({ ...item, timeLeft: diff });
             }
         });
-
         activeEvents.sort((a, b) => a.timeLeft - b.timeLeft);
+        
+        activeEvents = activeEvents.slice(0, 3);
 
-        const languages = ['en', 'tr', 'ru', 'de'];
+        const langs = ['en', 'tr', 'ru', 'de'];
         const flags = { en: "🇬🇧", tr: "🇹🇷", ru: "🇷🇺", de: "🇩🇪" }; 
-        let lang = languages[currentLangIndex];
+        let lang = langs[currentLangIndex];
 
         let activeEventsHTML = "";
-        activeEvents.forEach(event => {
-            let timeLabel = uiTexts[lang].until + " " + event.end;
-            activeEventsHTML += '<div class="event-item"><span>' + event.name[lang] + 
-                                '</span> <span class="event-time">' + timeLabel + '</span></div>';
+        activeEvents.forEach(e => {
+            activeEventsHTML += `<div class="event-item"><span>${e.name[lang]}</span> <span class="event-time">${uiTexts[lang].until} ${e.end}</span></div>`;
         });
 
-        let finalHTML = '<div class="now-title">' + flags[lang] + ' ' + uiTexts[lang].title + ' ' + flags[lang] + '</div>' + 
-                        '<div id="active-events">' + (activeEventsHTML || '<div class="no-event text-center text-gray-500 font-semibold text-sm py-4">Check schedule.</div>') + '</div>' +
-                        '<div class="weather-note">' + uiTexts[lang].weather + '</div>';
+        let finalHTML = `<div class="now-title">${flags[lang]} ${uiTexts[lang].title} ${flags[lang]}</div>
+                         <div id="active-events">${activeEventsHTML || '<div class="text-center text-gray-400 font-semibold py-2 text-xs">No active service.</div>'}</div>
+                         <div class="weather-note">${uiTexts[lang].weather}</div>`;
 
         let wrapper = document.getElementById('content-wrapper');
         wrapper.classList.add('fade-out');
-        
-        setTimeout(() => {
-            wrapper.innerHTML = finalHTML;
-            wrapper.classList.remove('fade-out');
-        }, 600); 
+        setTimeout(() => { wrapper.innerHTML = finalHTML; wrapper.classList.remove('fade-out'); }, 400); 
     }
 
     let currentLangIndex = 0;
-    setInterval(() => {
-        currentLangIndex = (currentLangIndex + 1) % 4;
-        renderContent();
-    }, 4000);
-
+    setInterval(() => { currentLangIndex = (currentLangIndex + 1) % 4; renderContent(); }, 4000);
     renderContent();
 </script>
 
