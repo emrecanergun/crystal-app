@@ -21,7 +21,6 @@
             padding: 0;
             overflow-x: hidden;
         }
-        /* Ekrana Tam Sığdırma (Autosize) */
         .app-container { 
             max-width: 480px; 
             margin: 0 auto; 
@@ -77,17 +76,18 @@
             background: linear-gradient(145deg, #ffffff, #fdfdfd); 
             border: 1px solid #eaeaea; 
             border-radius: 12px; 
-            padding: 12px 15px; 
+            padding: 10px 15px; 
             text-align: left; 
             box-shadow: 0 5px 20px rgba(0,0,0,0.04); 
+            height: 100%;
         }
         #content-wrapper { transition: opacity 0.4s ease-in-out; opacity: 1; }
         .fade-out { opacity: 0 !important; }
-        .now-title { font-size: 11px; color: #8c8c8c; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; font-weight: 600; border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; display: flex; justify-content: center; align-items: center; gap: 8px; }
-        .event-item { font-size: 12px; font-weight: 600; color: #2c3e50; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f8f8f8; padding-bottom: 6px; }
+        .now-title { font-size: 11px; color: #8c8c8c; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; font-weight: 600; border-bottom: 1px solid #f0f0f0; padding-bottom: 6px; display: flex; justify-content: center; align-items: center; gap: 8px; }
+        .event-item { font-size: 12px; font-weight: 600; color: #2c3e50; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f8f8f8; padding-bottom: 4px; }
         .event-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
         .event-time { font-size: 10px; font-weight: 700; color: #49bad5; background-color: transparent; border: 1px solid #49bad5; padding: 2px 8px; border-radius: 20px; white-space: nowrap; margin-left: 10px; }
-        .weather-note { font-size: 9px; color: #a0a0a0; text-align: center; margin-top: 10px; font-style: italic; font-weight: 500; }
+        .weather-note { font-size: 9px; color: #a0a0a0; text-align: center; margin-top: 8px; font-style: italic; font-weight: 500; }
         
         /* A'la Carte Tablosu */
         .alacarte-table th, .alacarte-table td { border: 1px solid #e5e7eb; padding: 6px; text-align: center; font-size: 10px; font-weight: 600; }
@@ -101,109 +101,87 @@
 </head>
 <body>
 
-<!-- 1. DİL SEÇİM & ŞU AN AÇIK EKRANI -->
-<div id="landing-screen" class="app-container">
+<!-- 1. ANA MENÜ EKRANI -->
+<div id="main-menu-screen" class="app-container">
     
-    <div class="w-full flex justify-between px-4 border-b border-gray-100 py-1 mb-3 shrink-0">
-        <span class="w-[1px] h-2 bg-gray-200"></span><span class="w-[1px] h-2 bg-gray-200"></span><span class="w-[1px] h-2 bg-gray-200"></span>
-        <span class="w-[1px] h-2 bg-gray-200"></span><span class="w-[1px] h-2 bg-gray-200"></span><span class="w-[1px] h-2 bg-gray-200"></span>
-    </div>
-
-    <!-- Başlık (Üst Logo Çıkarıldı) -->
-    <div class="text-center mt-3 shrink-0">
-        <h1 class="serif-title text-3xl font-semibold text-gray-800 mb-1 tracking-wider">CRYSTAL HOTELS</h1>
-        <p class="serif-sub text-base text-gray-700 italic tracking-wide">Guest Information Hub</p>
-    </div>
-
-    <!-- Dil Butonları -->
-    <div class="dashed-border-y py-4 my-4 grid grid-cols-2 gap-3 px-6 shrink-0">
-        <button onclick="selectLanguage('en')" class="crystal-btn py-3 w-full text-lg">English</button>
-        <button onclick="selectLanguage('tr')" class="crystal-btn py-3 w-full text-lg">Türkçe</button>
-        <button onclick="selectLanguage('de')" class="crystal-btn py-3 w-full text-lg">Deutsch</button>
-        <button onclick="selectLanguage('ru')" class="crystal-btn py-3 w-full text-lg">Русский</button>
-    </div>
-
-    <!-- Şu An Açık Widget -->
-    <div class="px-6 flex-grow flex flex-col justify-center overflow-hidden">
-        <div class="now-box w-full">
-            <div id="content-wrapper">
-                <div style="text-align:center; color:#888; font-size: 12px;">Loading...</div>
-            </div>
+    <!-- Üst Bar ve Dil Seçimi -->
+    <div class="flex justify-between items-center px-6 pt-4 shrink-0 relative z-20">
+        <div class="w-10"></div> <!-- Simetri için boş div -->
+        
+        <!-- Dil Uyarı Baloncuğu (Tooltip) -->
+        <div id="lang-tooltip" class="absolute top-12 right-6 bg-gray-800 text-white text-[10px] py-1.5 px-3 rounded shadow-lg transition-opacity duration-700 opacity-100 flex flex-col items-center">
+            🌍 Dil Seçimi / Language
+            <div class="absolute -top-1 right-6 w-2.5 h-2.5 bg-gray-800 rotate-45"></div>
         </div>
-    </div>
 
-    <!-- Alt Logo (Sabit) -->
-    <div class="dashed-border-b py-3 flex justify-center items-center bg-white border-t border-gray-100 shrink-0">
-        <img src="mainlogo.png" alt="Main Logo" onerror="this.style.display='none'" class="h-8 object-contain">
-    </div>
-</div>
-
-<!-- 2. ANA MENÜ EKRANI -->
-<div id="main-menu-screen" class="app-container hidden">
-    
-    <div class="flex justify-between items-center px-6 pt-3 shrink-0">
-        <button onclick="goBackToLanguages()" class="text-sky-600 font-semibold text-xs flex items-center space-x-1">
-            <i class="fa-solid fa-chevron-left"></i> <span id="back-lbl">Geri Dön</span>
-        </button>
         <div class="flex space-x-1">
-            <button onclick="changeLang('tr')" class="px-2 py-0.5 bg-gray-100 rounded text-[10px] font-bold">🇹🇷 TR</button>
-            <button onclick="changeLang('en')" class="px-2 py-0.5 bg-gray-100 rounded text-[10px] font-bold">🇬🇧 EN</button>
-            <button onclick="changeLang('de')" class="px-2 py-0.5 bg-gray-100 rounded text-[10px] font-bold">🇩🇪 DE</button>
-            <button onclick="changeLang('ru')" class="px-2 py-0.5 bg-gray-100 rounded text-[10px] font-bold">🇷🇺 RU</button>
+            <button onclick="changeLang('tr')" class="px-2 py-0.5 bg-gray-100 border border-gray-200 rounded text-[10px] font-bold text-gray-700 hover:bg-gray-200">🇹🇷 TR</button>
+            <button onclick="changeLang('en')" class="px-2 py-0.5 bg-gray-100 border border-gray-200 rounded text-[10px] font-bold text-gray-700 hover:bg-gray-200">🇬🇧 EN</button>
+            <button onclick="changeLang('de')" class="px-2 py-0.5 bg-gray-100 border border-gray-200 rounded text-[10px] font-bold text-gray-700 hover:bg-gray-200">🇩🇪 DE</button>
+            <button onclick="changeLang('ru')" class="px-2 py-0.5 bg-gray-100 border border-gray-200 rounded text-[10px] font-bold text-gray-700 hover:bg-gray-200">🇷🇺 RU</button>
         </div>
     </div>
 
-    <div class="text-center px-6 mt-3 shrink-0">
-        <h2 class="serif-title text-xl font-semibold text-gray-800 mb-1">CRYSTAL HOTELS</h2>
+    <div class="text-center px-6 mt-2 shrink-0">
+        <h2 class="serif-title text-2xl font-semibold text-gray-800 mb-1">CRYSTAL HOTELS</h2>
         <p id="welcome-text" class="text-[11px] text-gray-500 leading-tight max-w-sm mx-auto">
             Konaklamanız boyunca tüm otel bilgilerine zahmetsizce erişin. Restoran saatleri, harita ve AI asistan tek noktada.
         </p>
     </div>
 
-    <!-- Ana Menü Grid -->
-    <div class="dashed-border-y py-4 my-3 grid grid-cols-2 gap-3 px-6 shrink-0">
-        <button onclick="openPage('room')" class="crystal-btn flex flex-col items-center justify-center py-4">
+    <!-- 6'lı Grid Menü -->
+    <div class="dashed-border-y py-3 mt-3 mb-2 grid grid-cols-2 gap-2 px-6 shrink-0">
+        <button onclick="openPage('room')" class="crystal-btn flex flex-col items-center justify-center py-3">
             <i class="fa-solid fa-bed text-xl mb-1"></i><span id="btn-room" class="font-bold text-[11px]">Oda Rehberi</span>
         </button>
-        <button onclick="openPage('food')" class="crystal-btn flex flex-col items-center justify-center py-4">
+        <button onclick="openPage('food')" class="crystal-btn flex flex-col items-center justify-center py-3">
             <i class="fa-solid fa-utensils text-xl mb-1"></i><span id="btn-food" class="font-bold text-[11px]">Yiyecek & İçecek</span>
         </button>
-        <button onclick="openPage('map')" class="crystal-btn flex flex-col items-center justify-center py-4">
+        <button onclick="openPage('map')" class="crystal-btn flex flex-col items-center justify-center py-3">
             <i class="fa-solid fa-map-location-dot text-xl mb-1"></i><span id="btn-map" class="font-bold text-[11px]">Tesis Haritası</span>
         </button>
-        <button onclick="openPage('activities')" class="crystal-btn flex flex-col items-center justify-center py-4">
+        <button onclick="openPage('activities')" class="crystal-btn flex flex-col items-center justify-center py-3">
             <i class="fa-solid fa-icons text-xl mb-1"></i><span id="btn-activities" class="font-bold text-[11px]">Aktiviteler</span>
         </button>
-        <button onclick="openPage('menus')" class="crystal-btn flex flex-col items-center justify-center py-4">
+        <button onclick="openPage('menus')" class="crystal-btn flex flex-col items-center justify-center py-3">
             <i class="fa-solid fa-book-open-reader text-xl mb-1"></i><span id="btn-menus" class="font-bold text-[11px]">Menüler</span>
         </button>
-        <button onclick="openPage('transfer')" class="crystal-btn flex flex-col items-center justify-center py-4">
+        <button onclick="openPage('transfer')" class="crystal-btn flex flex-col items-center justify-center py-3">
             <i class="fa-solid fa-plane-departure text-xl mb-1"></i><span id="btn-transfer" class="font-bold text-[11px]">Transfer Bilgileri</span>
         </button>
     </div>
 
-    <!-- AI Asistan -->
-    <div class="px-6 flex-grow flex flex-col justify-center">
-        <button class="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold py-3.5 rounded-xl shadow-md flex items-center justify-center space-x-2 transition transform active:scale-95">
+    <!-- AI Asistan (Hemen Grid'in Altına Yaslandı) -->
+    <div class="px-6 shrink-0 mb-2">
+        <a id="ai-link" href="http://crystalsunset.otai.app/tr" target="_blank" class="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold py-3 rounded-xl shadow-md flex items-center justify-center space-x-2 transition transform active:scale-95">
             <i class="fa-solid fa-robot text-lg"></i><span id="btn-ai" class="text-sm">AI Asistan'a Sorun!</span>
-        </button>
+        </a>
     </div>
 
-    <div class="dashed-border-b py-3 flex justify-center items-center bg-white border-t border-gray-100 shrink-0">
+    <!-- Şu An Açık Widget -->
+    <div class="px-6 flex-grow flex flex-col justify-start overflow-hidden pb-3">
+        <div class="now-box w-full">
+            <div id="content-wrapper">
+                <div style="text-align:center; color:#888; font-size: 12px; margin-top: 10px;">Loading...</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashed-border-b py-2 flex justify-center items-center bg-white border-t border-gray-100 shrink-0">
         <img src="mainlogo.png" alt="Main Logo" onerror="this.style.display='none'" class="h-8 object-contain">
     </div>
 </div>
 
-<!-- 3. İÇERİK (ALT SAYFA) EKRANLARI -->
+<!-- 2. İÇERİK (ALT SAYFA) EKRANLARI -->
 <div id="content-screen" class="scrollable-content hidden flex-col relative pb-10">
     
     <!-- Sabit Üst Bar -->
     <div class="sticky top-0 bg-white/90 backdrop-blur-md z-10 px-6 py-4 flex items-center border-b border-gray-100 shadow-sm">
         <button onclick="goBackToMenu()" class="text-gray-800 text-xl mr-4"><i class="fa-solid fa-arrow-left"></i></button>
-        <h2 id="page-title" class="font-bold text-gray-800 text-lg uppercase tracking-wide"></h2>
+        <!-- Başlık JS tarafından büyük/küçük harf kurallarına göre dinamik yazdırılacak -->
+        <h2 id="page-title" class="font-bold text-gray-800 text-lg tracking-wide"></h2>
     </div>
 
-    <!-- Sayfa İçerikleri (JS ile Doldurulacak) -->
     <div id="page-content" class="p-6"></div>
 
     <div class="mt-auto pt-6 pb-2 flex justify-center opacity-50">
@@ -356,48 +334,47 @@
         }
     };
 
-    // --- TEMEL DİL VERİLERİ ---
+    // --- TEMEL DİL VERİLERİ (Büyük I/İ Bug'ı için özel başlıklar tanımlandı) ---
     const translations = {
         tr: {
-            back: "Giriş Ekranı",
             welcome: "Konaklamanız boyunca tüm otel bilgilerine zahmetsizce erişin. Restoran saatleri, harita ve AI asistan tek noktada.",
-            room: "Oda Rehberi", food: "Yiyecek & İçecek", map: "Tesis Haritası", act: "Aktiviteler", menus: "Menüler", transfer: "Transfer Bilgileri", ai: "AI Asistan'a Sorun!"
+            room: "Oda Rehberi", food: "Yiyecek & İçecek", map: "Tesis Haritası", act: "Aktiviteler", menus: "Menüler", transfer: "Transfer Bilgileri", ai: "AI Asistan'a Sorun!",
+            titles: { room: "ODA REHBERİ", food: "YİYECEK & İÇECEK", map: "TESİS HARİTASI", activities: "AKTİVİTELER", menus: "MENÜLER", transfer: "TRANSFER BİLGİLERİ" }
         },
         en: {
-            back: "Home",
             welcome: "Effortlessly access all hotel information. Restaurant hours, map, and AI assistant, all in one place.",
-            room: "Room Guide", food: "Food & Beverage", map: "Hotel Map", act: "Activities", menus: "Menus", transfer: "Transfer Info", ai: "Ask AI Assistant!"
+            room: "Room Guide", food: "Food & Beverage", map: "Hotel Map", act: "Activities", menus: "Menus", transfer: "Transfer Info", ai: "Ask AI Assistant!",
+            titles: { room: "ROOM GUIDE", food: "FOOD & BEVERAGE", map: "HOTEL MAP", activities: "ACTIVITIES", menus: "MENUS", transfer: "TRANSFER INFO" }
         },
         de: {
-            back: "Startseite",
             welcome: "Erhalten Sie mühelos Zugriff auf alle Hotelinformationen. Restaurantzeiten, Karte und KI-Assistent an einem Ort.",
-            room: "Zimmerleitfaden", food: "Essen & Trinken", map: "Lageplan", act: "Aktivitäten", menus: "Menüs", transfer: "Transfer Info", ai: "KI-Assistent fragen!"
+            room: "Zimmerleitfaden", food: "Essen & Trinken", map: "Lageplan", act: "Aktivitäten", menus: "Menüs", transfer: "Transfer Info", ai: "KI-Assistent fragen!",
+            titles: { room: "ZIMMERLEITFADEN", food: "ESSEN & TRINKEN", map: "LAGEPLAN", activities: "AKTIVITÄTEN", menus: "MENÜS", transfer: "TRANSFER INFO" }
         },
         ru: {
-            back: "Назад",
             welcome: "Легко получайте доступ ко всей информации об отеле. Часы работы, карта и ИИ-ассистент — всё в одном месте.",
-            room: "Гид по номеру", food: "Еда и Напитки", map: "Карта Отеля", act: "Мероприятия", menus: "Меню", transfer: "Трансфер", ai: "Спросить ИИ-ассистента!"
+            room: "Гид по номеру", food: "Еда и Напитки", map: "Карта Отеля", act: "Мероприятия", menus: "Меню", transfer: "Трансфер", ai: "Спросить ИИ-ассистента!",
+            titles: { room: "ГИД ПО НОМЕРУ", food: "ЕДА И НАПИТКИ", map: "КАРТА ОТЕЛЯ", activities: "МЕРОПРИЯТИЯ", menus: "МЕНЮ", transfer: "ТРАНСФЕР" }
         }
     };
 
-    let currentLang = 'en';
+    let currentLang = 'tr'; // Varsayılan dil
 
-    function selectLanguage(lang) {
-        currentLang = lang;
-        changeLang(lang);
-        document.getElementById('landing-screen').classList.add('hidden');
-        document.getElementById('main-menu-screen').classList.remove('hidden');
-    }
-
-    function goBackToLanguages() {
-        document.getElementById('main-menu-screen').classList.add('hidden');
-        document.getElementById('landing-screen').classList.remove('hidden');
-    }
+    // Baloncuğu 5 Saniye Sonra Gizleme
+    setTimeout(() => {
+        const tooltip = document.getElementById('lang-tooltip');
+        if (tooltip) {
+            tooltip.classList.remove('opacity-100');
+            tooltip.classList.add('opacity-0');
+            setTimeout(() => tooltip.style.display = 'none', 700); // Tamamen kaldır
+        }
+    }, 5000);
 
     function changeLang(lang) {
         currentLang = lang;
+        document.documentElement.lang = lang; // Tarayıcı dili güncellendi (İngilizce büyük harf sorununu önler)
         const t = translations[lang];
-        document.getElementById('back-lbl').innerText = t.back;
+        
         document.getElementById('welcome-text').innerHTML = t.welcome;
         document.getElementById('btn-room').innerText = t.room;
         document.getElementById('btn-food').innerText = t.food;
@@ -406,6 +383,15 @@
         document.getElementById('btn-menus').innerText = t.menus;
         document.getElementById('btn-transfer').innerText = t.transfer;
         document.getElementById('btn-ai').innerText = t.ai;
+        
+        // AI Asistan linkini seçili dile göre güncelle
+        document.getElementById('ai-link').href = `http://crystalsunset.otai.app/${lang}`;
+        
+        // Eğer alt sayfadaysa başlığı o dile çevir
+        if (!document.getElementById('content-screen').classList.contains('hidden')) {
+            const activePage = document.getElementById('content-screen').getAttribute('data-active-page');
+            if (activePage) openPage(activePage);
+        }
     }
 
     function openPage(pageKey) {
@@ -413,9 +399,10 @@
         const contentScreen = document.getElementById('content-screen');
         contentScreen.classList.remove('hidden');
         contentScreen.classList.add('flex');
+        contentScreen.setAttribute('data-active-page', pageKey);
         
-        const titles = { room: "btn-room", food: "btn-food", map: "btn-map", activities: "btn-activities", menus: "btn-menus", transfer: "btn-transfer" };
-        document.getElementById('page-title').innerText = document.getElementById(titles[pageKey]).innerText;
+        // Başlığı özel obje (titles) içinden alıyoruz, böylece büyük "İ" sorunu yaşanmıyor.
+        document.getElementById('page-title').innerText = translations[currentLang].titles[pageKey];
         
         let htmlData = pageData[pageKey][currentLang] || pageData[pageKey]['en'];
         document.getElementById('page-content').innerHTML = htmlData;
@@ -465,7 +452,7 @@
         });
         activeEvents.sort((a, b) => a.timeLeft - b.timeLeft);
         
-        activeEvents = activeEvents.slice(0, 3);
+        activeEvents = activeEvents.slice(0, 3); // Sadece aktif ilk 3 olayı göster ki ekran çok uzamasın.
 
         const langs = ['en', 'tr', 'ru', 'de'];
         const flags = { en: "🇬🇧", tr: "🇹🇷", ru: "🇷🇺", de: "🇩🇪" }; 
@@ -477,7 +464,7 @@
         });
 
         let finalHTML = `<div class="now-title">${flags[lang]} ${uiTexts[lang].title} ${flags[lang]}</div>
-                         <div id="active-events">${activeEventsHTML || '<div class="text-center text-gray-400 font-semibold py-2 text-xs">No active service.</div>'}</div>
+                         <div id="active-events">${activeEventsHTML || '<div class="text-center text-gray-400 font-semibold py-1 text-xs">No active service.</div>'}</div>
                          <div class="weather-note">${uiTexts[lang].weather}</div>`;
 
         let wrapper = document.getElementById('content-wrapper');
@@ -488,6 +475,7 @@
     let currentLangIndex = 0;
     setInterval(() => { currentLangIndex = (currentLangIndex + 1) % 4; renderContent(); }, 4000);
     renderContent();
+    changeLang('tr'); // İlk açılışta dili tanımla (TR)
 </script>
 
 </body>
