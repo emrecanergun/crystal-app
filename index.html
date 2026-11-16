@@ -43,7 +43,7 @@
         .dashed-border-y { border-top: 1px dashed #e5e7eb; border-bottom: 1px dashed #e5e7eb; }
         .dashed-border-b { border-bottom: 1px dashed #e5e7eb; }
 
-        /* Orijinal Crystal Mavi Buton Tasarımı */
+        /* Standart Buton (Aktivite İçi ve Dış Linkler İçin) */
         .crystal-btn {
             background-color: #49bad5; 
             border-radius: 8px;
@@ -55,32 +55,42 @@
             cursor: pointer;
             border: 1px solid #3ca5be;
         }
-        .crystal-btn:active {
-            transform: scale(0.97);
-            background-color: #3ca5be;
-        }
+        .crystal-btn:active { transform: scale(0.97); }
         
-        /* Orijinal Mavi Bilgi Paneli */
-        .crystal-panel {
-            background-color: #49bad5;
+        /* YENİ: Arkası Fotoğraflı Ana Menü Grid Butonları */
+        .crystal-menu-btn {
             border-radius: 12px;
-            padding: 1.5rem;
-            color: #ffffff;
-            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5), 0 4px 6px rgba(0,0,0,0.1);
-            text-align: center;
+            background-size: cover;
+            background-position: center;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5), 0 4px 10px rgba(0,0,0,0.08);
+            transition: all 0.15s ease;
+            cursor: pointer;
+            border: 1px solid #3ca5be;
+            position: relative;
         }
+        .crystal-menu-btn:active { transform: scale(0.96); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        
+        /* Otel Seçim Butonları */
+        .hotel-select-btn {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 14px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            transition: all 0.1s ease;
+            cursor: pointer;
+        }
+        .hotel-select-btn:active { background: #f3f4f6; transform: scale(0.98); }
+        .hotel-name { font-size: 11px; font-weight: 600; color: #374151; letter-spacing: 0.5px; }
+
+        .crystal-panel { background-color: #49bad5; border-radius: 12px; padding: 1.5rem; color: #ffffff; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5), 0 4px 6px rgba(0,0,0,0.1); text-align: center; }
         .crystal-panel a { text-decoration: underline; font-weight: bold; }
 
-        /* "Şuan Açık" Widget Stilleri (Ana Sayfa) */
-        .now-box {
-            background: linear-gradient(145deg, #ffffff, #fdfdfd); 
-            border: 1px solid #eaeaea; 
-            border-radius: 12px; 
-            padding: 16px 15px;
-            text-align: left; 
-            box-shadow: 0 5px 20px rgba(0,0,0,0.04); 
-            height: 100%;
-        }
+        /* Widget Stilleri */
+        .now-box { background: linear-gradient(145deg, #ffffff, #fdfdfd); border: 1px solid #eaeaea; border-radius: 12px; padding: 16px 15px; text-align: left; box-shadow: 0 5px 20px rgba(0,0,0,0.04); height: 100%; }
         #content-wrapper { transition: opacity 0.4s ease-in-out; opacity: 1; }
         .fade-out { opacity: 0 !important; }
         .now-title { font-size: 11px; color: #8c8c8c; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; font-weight: 600; border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; display: flex; justify-content: center; align-items: center; gap: 8px; }
@@ -89,7 +99,6 @@
         .event-time-main { font-size: 11px; font-weight: 700; color: #49bad5; background-color: transparent; border: 1px solid #49bad5; padding: 3px 10px; border-radius: 20px; white-space: nowrap; margin-left: 10px; }
         .weather-note { font-size: 9px; color: #a0a0a0; text-align: center; margin-top: 12px; font-style: italic; font-weight: 500; }
         
-        /* "Günlük Aktiviteler" Widget Stilleri (Alt Sayfa) */
         .activity-box { background: linear-gradient(145deg, #ffffff, #fdfdfd); border: 1px solid #eaeaea; border-radius: 12px; padding: 18px 15px; text-align: left; box-shadow: 0 10px 30px rgba(0,0,0,0.06); position: relative; }
         #activity-wrapper { transition: opacity 0.5s ease-in-out; opacity: 1; }
         .activity-title { font-size: 12px; color: #8c8c8c; text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 15px; font-weight: 600; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; text-align: center; display: flex; justify-content: center; align-items: center; gap: 8px; }
@@ -101,9 +110,9 @@
         .pulse-dot { width: 6px; height: 6px; background-color: #00a2df; border-radius: 50%; animation: pulse-dot 1.5s infinite; }
         @keyframes pulse-dot { 0% { box-shadow: 0 0 0 0 rgba(0, 162, 223, 0.4); } 70% { box-shadow: 0 0 0 4px rgba(0, 162, 223, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 162, 223, 0); } }
 
-        /* Tablolar */
-        .alacarte-table th, .alacarte-table td { border: 1px solid #e5e7eb; padding: 6px; text-align: center; font-size: 10px; font-weight: 600; }
-        .alacarte-table th { background-color: #fef08a; color: #374151; }
+        .alacarte-table-new { border-collapse: separate; border-spacing: 0; }
+        .alacarte-table-new th, .alacarte-table-new td { text-align: center; vertical-align: middle; }
+        .alacarte-table-new td i { font-size: 13px; }
         
         .hide-scroll::-webkit-scrollbar { display: none; }
         .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
@@ -111,15 +120,38 @@
 </head>
 <body>
 
-<!-- 1. ANA MENÜ EKRANI -->
-<div id="main-menu-screen" class="app-container">
+<!-- 0. OTEL SEÇİM (GİRİŞ) EKRANI -->
+<div id="hotel-selection-screen" class="app-container scrollable-content z-30">
+    <div class="sticky top-0 bg-white/95 backdrop-blur z-10 pt-8 pb-4 px-6 border-b border-gray-100 shadow-sm text-center">
+        <img src="logo.png" alt="Crystal Hotels" onerror="this.style.display='none'" class="h-16 mx-auto object-contain">
+        <p class="text-xs text-gray-500 mt-2 font-medium tracking-wide">PLEASE SELECT YOUR HOTEL</p>
+    </div>
     
-    <!-- Üst Bar ve Dil Seçimi -->
+    <div class="px-5 py-6 space-y-3 pb-12">
+        <div onclick="selectHotel('Prestige')" class="hotel-select-btn"><span class="hotel-name">CRYSTAL PRESTIGE PEARL COLLECTION</span><i class="fa-solid fa-chevron-right text-gray-300 text-xs"></i></div>
+        <div onclick="selectHotel('Flora')" class="hotel-select-btn"><span class="hotel-name">CRYSTAL FLORA PEARL COLLECTION</span><i class="fa-solid fa-chevron-right text-gray-300 text-xs"></i></div>
+        <div onclick="selectHotel('Centro')" class="hotel-select-btn"><span class="hotel-name">CRYSTAL CENTRO PEARL COLLECTION</span><i class="fa-solid fa-chevron-right text-gray-300 text-xs"></i></div>
+        <div onclick="selectHotel('TatBeach')" class="hotel-select-btn"><span class="hotel-name">CRYSTAL TAT BEACH PEARL COLLECTION</span><i class="fa-solid fa-chevron-right text-gray-300 text-xs"></i></div>
+        <div onclick="selectHotel('Sunset')" class="hotel-select-btn border-sky-300 bg-sky-50"><span class="hotel-name text-sky-700">CRYSTAL SUNSET PEARL COLLECTION</span><i class="fa-solid fa-chevron-right text-sky-400 text-xs"></i></div>
+        <div onclick="selectHotel('Aura')" class="hotel-select-btn"><span class="hotel-name">CRYSTAL AURA AQUA COLLECTION</span><i class="fa-solid fa-chevron-right text-gray-300 text-xs"></i></div>
+        <div onclick="selectHotel('Waterworld')" class="hotel-select-btn"><span class="hotel-name">CRYSTAL WATERWORLD AQUA COLLECTION</span><i class="fa-solid fa-chevron-right text-gray-300 text-xs"></i></div>
+        <div onclick="selectHotel('Paraiso')" class="hotel-select-btn"><span class="hotel-name">CRYSTAL PARAISO AQUA COLLECTION</span><i class="fa-solid fa-chevron-right text-gray-300 text-xs"></i></div>
+        <div onclick="selectHotel('Admiral')" class="hotel-select-btn"><span class="hotel-name">CRYSTAL ADMIRAL AQUA COLLECTION</span><i class="fa-solid fa-chevron-right text-gray-300 text-xs"></i></div>
+        <div onclick="selectHotel('DeLuxe')" class="hotel-select-btn"><span class="hotel-name">CRYSTAL DE LUXE COMFORT COLLECTION</span><i class="fa-solid fa-chevron-right text-gray-300 text-xs"></i></div>
+        <div onclick="selectHotel('Family')" class="hotel-select-btn"><span class="hotel-name">CRYSTAL FAMILY COMFORT COLLECTION</span><i class="fa-solid fa-chevron-right text-gray-300 text-xs"></i></div>
+        <div onclick="selectHotel('Boutique')" class="hotel-select-btn"><span class="hotel-name">CRYSTAL BOUTIQUE COMFORT COLLECTION</span><i class="fa-solid fa-chevron-right text-gray-300 text-xs"></i></div>
+        <div onclick="selectHotel('WorldOfColours')" class="hotel-select-btn"><span class="hotel-name">CRYSTAL WORLD OF COLOURS COMFORT</span><i class="fa-solid fa-chevron-right text-gray-300 text-xs"></i></div>
+    </div>
+</div>
+
+<!-- 1. ANA MENÜ EKRANI -->
+<div id="main-menu-screen" class="app-container hidden">
+    
     <div class="flex justify-between items-center px-6 pt-4 shrink-0 relative z-20">
         
         <!-- Dil Uyarı Baloncuğu -->
         <div class="flex-1 flex justify-end pr-3">
-            <div id="lang-tooltip" class="bg-gray-800 text-white text-[10px] py-1.5 px-3 rounded shadow-lg transition-opacity duration-700 opacity-100 relative whitespace-nowrap flex items-center">
+            <div id="lang-tooltip" class="hidden bg-gray-800 text-white text-[10px] py-1.5 px-3 rounded shadow-lg transition-opacity duration-700 opacity-0 relative whitespace-nowrap flex items-center">
                 🌍 Dil / Language
                 <div class="absolute top-1/2 -right-1 w-2 h-2 bg-gray-800 rotate-45 transform -translate-y-1/2"></div>
             </div>
@@ -134,31 +166,43 @@
     </div>
 
     <div class="text-center px-6 mt-2 shrink-0">
-        <h2 class="serif-title text-2xl font-semibold text-gray-800 mb-1">CRYSTAL HOTELS</h2>
+        <h2 id="hotel-header-title" class="serif-title text-2xl font-semibold text-gray-800 mb-1">CRYSTAL HOTELS</h2>
         <p id="welcome-text" class="text-[11px] text-gray-500 leading-tight max-w-sm mx-auto">
             Konaklamanız boyunca tüm otel bilgilerine zahmetsizce erişin. Restoran saatleri, harita ve AI asistan tek noktada.
         </p>
     </div>
 
-    <!-- 6'lı Grid Menü -->
+    <!-- ARKASI GÖRSELLİ 6'LI MENÜ (Linear Gradient Mavi Filtre ile Kaplı) -->
     <div class="dashed-border-y py-3 mt-3 mb-2 grid grid-cols-2 gap-2 px-6 shrink-0">
-        <button onclick="openPage('room')" class="crystal-btn flex flex-col items-center justify-center py-3">
-            <i class="fa-solid fa-bed text-xl mb-1"></i><span id="btn-room" class="font-bold text-[11px]">Oda Rehberi</span>
+        <button onclick="openPage('room')" class="crystal-menu-btn flex flex-col items-center justify-center py-4 relative" style="background-image: linear-gradient(rgba(73, 186, 213, 0.85), rgba(73, 186, 213, 0.85)), url('bg-room.jpg');">
+            <div class="relative z-10 flex flex-col items-center text-white drop-shadow-md">
+                <i class="fa-solid fa-bed text-2xl mb-1"></i><span id="btn-room" class="font-bold text-[11px]">Oda Rehberi</span>
+            </div>
         </button>
-        <button onclick="openPage('food')" class="crystal-btn flex flex-col items-center justify-center py-3">
-            <i class="fa-solid fa-utensils text-xl mb-1"></i><span id="btn-food" class="font-bold text-[11px]">Yiyecek & İçecek</span>
+        <button onclick="openPage('food')" class="crystal-menu-btn flex flex-col items-center justify-center py-4 relative" style="background-image: linear-gradient(rgba(73, 186, 213, 0.85), rgba(73, 186, 213, 0.85)), url('bg-food.jpg');">
+            <div class="relative z-10 flex flex-col items-center text-white drop-shadow-md">
+                <i class="fa-solid fa-utensils text-2xl mb-1"></i><span id="btn-food" class="font-bold text-[11px]">Yiyecek & İçecek</span>
+            </div>
         </button>
-        <button onclick="openPage('map')" class="crystal-btn flex flex-col items-center justify-center py-3">
-            <i class="fa-solid fa-map-location-dot text-xl mb-1"></i><span id="btn-map" class="font-bold text-[11px]">Tesis Haritası</span>
+        <button onclick="openPage('map')" class="crystal-menu-btn flex flex-col items-center justify-center py-4 relative" style="background-image: linear-gradient(rgba(73, 186, 213, 0.85), rgba(73, 186, 213, 0.85)), url('bg-map.jpg');">
+            <div class="relative z-10 flex flex-col items-center text-white drop-shadow-md">
+                <i class="fa-solid fa-map-location-dot text-2xl mb-1"></i><span id="btn-map" class="font-bold text-[11px]">Tesis Haritası</span>
+            </div>
         </button>
-        <button onclick="openPage('activities')" class="crystal-btn flex flex-col items-center justify-center py-3">
-            <i class="fa-solid fa-icons text-xl mb-1"></i><span id="btn-activities" class="font-bold text-[11px]">Aktiviteler</span>
+        <button onclick="openPage('activities')" class="crystal-menu-btn flex flex-col items-center justify-center py-4 relative" style="background-image: linear-gradient(rgba(73, 186, 213, 0.85), rgba(73, 186, 213, 0.85)), url('bg-act.jpg');">
+            <div class="relative z-10 flex flex-col items-center text-white drop-shadow-md">
+                <i class="fa-solid fa-icons text-2xl mb-1"></i><span id="btn-activities" class="font-bold text-[11px]">Aktiviteler</span>
+            </div>
         </button>
-        <button onclick="openPage('menus')" class="crystal-btn flex flex-col items-center justify-center py-3">
-            <i class="fa-solid fa-book-open-reader text-xl mb-1"></i><span id="btn-menus" class="font-bold text-[11px]">Menüler</span>
+        <button onclick="openPage('menus')" class="crystal-menu-btn flex flex-col items-center justify-center py-4 relative" style="background-image: linear-gradient(rgba(73, 186, 213, 0.85), rgba(73, 186, 213, 0.85)), url('bg-menus.jpg');">
+            <div class="relative z-10 flex flex-col items-center text-white drop-shadow-md">
+                <i class="fa-solid fa-book-open-reader text-2xl mb-1"></i><span id="btn-menus" class="font-bold text-[11px]">Menüler</span>
+            </div>
         </button>
-        <button onclick="openPage('transfer')" class="crystal-btn flex flex-col items-center justify-center py-3">
-            <i class="fa-solid fa-plane-departure text-xl mb-1"></i><span id="btn-transfer" class="font-bold text-[11px]">Transfer Bilgileri</span>
+        <button onclick="openPage('transfer')" class="crystal-menu-btn flex flex-col items-center justify-center py-4 relative" style="background-image: linear-gradient(rgba(73, 186, 213, 0.85), rgba(73, 186, 213, 0.85)), url('bg-transfer.jpg');">
+            <div class="relative z-10 flex flex-col items-center text-white drop-shadow-md">
+                <i class="fa-solid fa-plane-departure text-2xl mb-1"></i><span id="btn-transfer" class="font-bold text-[11px]">Transfer Bilgileri</span>
+            </div>
         </button>
     </div>
 
@@ -169,7 +213,7 @@
         </a>
     </div>
 
-    <!-- Ana Sayfa: Yeme-İçme Canlı Widget -->
+    <!-- Yeme İçme Canlı Widget -->
     <div class="px-6 flex-grow flex flex-col justify-start overflow-hidden pb-3">
         <div class="now-box w-full">
             <div id="content-wrapper">
@@ -185,14 +229,11 @@
 
 <!-- 2. İÇERİK (ALT SAYFA) EKRANLARI -->
 <div id="content-screen" class="scrollable-content hidden flex-col relative pb-10">
-    
     <div class="sticky top-0 bg-white/90 backdrop-blur-md z-10 px-6 py-4 flex items-center border-b border-gray-100 shadow-sm">
         <button onclick="goBackToMenu()" class="text-gray-800 text-xl mr-4"><i class="fa-solid fa-arrow-left"></i></button>
         <h2 id="page-title" class="font-bold text-gray-800 text-lg tracking-wide"></h2>
     </div>
-
     <div id="page-content" class="p-6"></div>
-
     <div class="mt-auto pt-6 pb-2 flex justify-center opacity-50">
         <img src="mainlogo.png" alt="Logo" onerror="this.style.display='none'" class="h-6">
     </div>
@@ -223,69 +264,109 @@
             tr: `<div class="crystal-panel mb-6 text-sm leading-relaxed">
                     A'la carte restoranlarımız her gün <b>18:30 - 23:00</b> saatleri arasında hizmet vermektedir.<br><br>Rezervasyon gerekli değildir; misafirlerimiz konaklamaları boyunca bu deneyimin tadını çıkarabilirler.
                  </div>
-                 <h3 class="font-bold text-gray-700 text-center mb-3 text-sm uppercase"><i class="fa-regular fa-calendar-xmark text-red-500 mr-1"></i> Kapalı Günler</h3>
-                 <div class="space-y-2 mb-8">
-                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">ÖZ RESTORAN</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Cumartesi Kapalı</span></div>
-                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">MEDITERRANEAN BREEZE</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Salı Kapalı</span></div>
-                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">LATİN AMERİKA</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Çarşamba Kapalı</span></div>
-                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">ORIENTAL EXPRESS</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Cuma Kapalı</span></div>
-                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">FISH BONE</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Perşembe Kapalı</span></div>
+                 <h3 class="font-bold text-gray-700 text-center mb-3 text-sm uppercase">A'la Carte Programı</h3>
+                 <div class="overflow-x-auto hide-scroll rounded-xl border border-gray-200 mb-2 shadow-sm">
+                    <table class="w-full text-left text-sm text-gray-500 alacarte-table-new">
+                        <thead class="text-[9px] text-gray-700 uppercase bg-gray-50">
+                            <tr>
+                                <th class="p-2 sticky left-0 bg-gray-50 z-10 border-r border-b border-gray-200">Restoran</th>
+                                <th class="p-2 border-b border-gray-200 text-center">Pts</th><th class="p-2 border-b border-gray-200 text-center">Sal</th><th class="p-2 border-b border-gray-200 text-center">Çar</th><th class="p-2 border-b border-gray-200 text-center">Per</th><th class="p-2 border-b border-gray-200 text-center">Cum</th><th class="p-2 border-b border-gray-200 text-center">Cts</th><th class="p-2 border-b border-gray-200 text-center">Paz</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-[10px]">
+                            <tr class="bg-white border-b border-gray-100"><th class="p-2 font-bold text-gray-800 sticky left-0 bg-white border-r border-gray-200 text-[9px] whitespace-nowrap">ÖZ REST.</th><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-red-500 bg-red-50"><i class="fa-solid fa-xmark"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td></tr>
+                            <tr class="bg-white border-b border-gray-100"><th class="p-2 font-bold text-gray-800 sticky left-0 bg-white border-r border-gray-200 text-[9px] whitespace-nowrap">MED. BREEZE</th><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-red-500 bg-red-50"><i class="fa-solid fa-xmark"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td></tr>
+                            <tr class="bg-white border-b border-gray-100"><th class="p-2 font-bold text-gray-800 sticky left-0 bg-white border-r border-gray-200 text-[9px] whitespace-nowrap">LATİN AM.</th><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-red-500 bg-red-50"><i class="fa-solid fa-xmark"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td></tr>
+                            <tr class="bg-white border-b border-gray-100"><th class="p-2 font-bold text-gray-800 sticky left-0 bg-white border-r border-gray-200 text-[9px] whitespace-nowrap">ORIENTAL E.</th><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-red-500 bg-red-50"><i class="fa-solid fa-xmark"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td></tr>
+                            <tr class="bg-white"><th class="p-2 font-bold text-gray-800 sticky left-0 bg-white border-r border-gray-200 text-[9px] whitespace-nowrap">FISH BONE</th><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-red-500 bg-red-50"><i class="fa-solid fa-xmark"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td></tr>
+                        </tbody>
+                    </table>
                  </div>
-                 <div class="crystal-panel mb-6 text-sm leading-relaxed">
-                    Oda servisimiz <b>24 saat</b> hizmetinizdedir (Ekstra ücrete tabidir).
+                 <div class="text-center text-[10px] text-gray-500 mb-6 font-semibold">
+                    <i class="fa-solid fa-check text-green-500 mr-1"></i>Açık      <i class="fa-solid fa-xmark text-red-500 mr-1"></i>Kapalı
                  </div>
+                 <div class="crystal-panel mb-6 text-sm leading-relaxed">Oda servisimiz <b>24 saat</b> hizmetinizdedir (Ekstra ücrete tabidir).</div>
                  <a href="http://wa.me/905497844996" target="_blank" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg bg-green-500 border-green-600"><i class="fa-brands fa-whatsapp text-2xl mr-2"></i> Oda Servisi Siparişi Ver</a>`,
             en: `<div class="crystal-panel mb-6 text-sm leading-relaxed">
-                    Our à la carte restaurants welcome you daily between <b>18:30 and 23:00</b>.<br><br>No reservation is required, guests can enjoy these experiences throughout their stay.
+                    Our à la carte restaurants welcome you daily between <b>18:30 and 23:00</b>.<br><br>No reservation is required.
                  </div>
-                 <h3 class="font-bold text-gray-700 text-center mb-3 text-sm uppercase"><i class="fa-regular fa-calendar-xmark text-red-500 mr-1"></i> Closed Days</h3>
-                 <div class="space-y-2 mb-8">
-                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">ÖZ RESTORAN</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Closed Saturdays</span></div>
-                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">MEDITERRANEAN BREEZE</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Closed Tuesdays</span></div>
-                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">LATIN AMERICA</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Closed Wednesdays</span></div>
-                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">ORIENTAL EXPRESS</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Closed Fridays</span></div>
-                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">FISH BONE</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Closed Thursdays</span></div>
+                 <h3 class="font-bold text-gray-700 text-center mb-3 text-sm uppercase">A'la Carte Schedule</h3>
+                 <div class="overflow-x-auto hide-scroll rounded-xl border border-gray-200 mb-2 shadow-sm">
+                    <table class="w-full text-left text-sm text-gray-500 alacarte-table-new">
+                        <thead class="text-[9px] text-gray-700 uppercase bg-gray-50">
+                            <tr>
+                                <th class="p-2 sticky left-0 bg-gray-50 z-10 border-r border-b border-gray-200">Restaurant</th>
+                                <th class="p-2 border-b border-gray-200 text-center">Mon</th><th class="p-2 border-b border-gray-200 text-center">Tue</th><th class="p-2 border-b border-gray-200 text-center">Wed</th><th class="p-2 border-b border-gray-200 text-center">Thu</th><th class="p-2 border-b border-gray-200 text-center">Fri</th><th class="p-2 border-b border-gray-200 text-center">Sat</th><th class="p-2 border-b border-gray-200 text-center">Sun</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-[10px]">
+                            <tr class="bg-white border-b border-gray-100"><th class="p-2 font-bold text-gray-800 sticky left-0 bg-white border-r border-gray-200 text-[9px] whitespace-nowrap">ÖZ REST.</th><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-red-500 bg-red-50"><i class="fa-solid fa-xmark"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td></tr>
+                            <tr class="bg-white border-b border-gray-100"><th class="p-2 font-bold text-gray-800 sticky left-0 bg-white border-r border-gray-200 text-[9px] whitespace-nowrap">MED. BREEZE</th><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-red-500 bg-red-50"><i class="fa-solid fa-xmark"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td></tr>
+                            <tr class="bg-white border-b border-gray-100"><th class="p-2 font-bold text-gray-800 sticky left-0 bg-white border-r border-gray-200 text-[9px] whitespace-nowrap">LATIN AM.</th><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-red-500 bg-red-50"><i class="fa-solid fa-xmark"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td></tr>
+                            <tr class="bg-white border-b border-gray-100"><th class="p-2 font-bold text-gray-800 sticky left-0 bg-white border-r border-gray-200 text-[9px] whitespace-nowrap">ORIENTAL E.</th><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-red-500 bg-red-50"><i class="fa-solid fa-xmark"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td></tr>
+                            <tr class="bg-white"><th class="p-2 font-bold text-gray-800 sticky left-0 bg-white border-r border-gray-200 text-[9px] whitespace-nowrap">FISH BONE</th><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-red-500 bg-red-50"><i class="fa-solid fa-xmark"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td></tr>
+                        </tbody>
+                    </table>
                  </div>
-                 <div class="crystal-panel mb-6 text-sm leading-relaxed">
-                    Our room service is available <b>24 hours</b> (subject to additional charge).
+                 <div class="text-center text-[10px] text-gray-500 mb-6 font-semibold">
+                    <i class="fa-solid fa-check text-green-500 mr-1"></i>Open      <i class="fa-solid fa-xmark text-red-500 mr-1"></i>Closed
                  </div>
+                 <div class="crystal-panel mb-6 text-sm leading-relaxed">Our room service is available <b>24 hours</b> (subject to additional charge).</div>
                  <a href="http://wa.me/905497844996" target="_blank" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg bg-green-500 border-green-600"><i class="fa-brands fa-whatsapp text-2xl mr-2"></i> Order Room Service</a>`,
-            de: `<div class="crystal-panel mb-6 text-sm leading-relaxed">
-                    Unsere À-la-carte-Restaurants begrüßen Sie täglich von <b>18:30 bis 23:00 Uhr</b>.<br><br>Keine Reservierung erforderlich.
+            de: `<div class="crystal-panel mb-6 text-sm leading-relaxed">Unsere À-la-carte-Restaurants begrüßen Sie täglich von <b>18:30 bis 23:00 Uhr</b>.</div>
+                 <h3 class="font-bold text-gray-700 text-center mb-3 text-sm uppercase">Programm</h3>
+                 <div class="overflow-x-auto hide-scroll rounded-xl border border-gray-200 mb-2 shadow-sm">
+                    <table class="w-full text-left text-sm text-gray-500 alacarte-table-new">
+                        <thead class="text-[9px] text-gray-700 uppercase bg-gray-50">
+                            <tr>
+                                <th class="p-2 sticky left-0 bg-gray-50 z-10 border-r border-b border-gray-200">Restaurant</th>
+                                <th class="p-2 border-b border-gray-200 text-center">Mo</th><th class="p-2 border-b border-gray-200 text-center">Di</th><th class="p-2 border-b border-gray-200 text-center">Mi</th><th class="p-2 border-b border-gray-200 text-center">Do</th><th class="p-2 border-b border-gray-200 text-center">Fr</th><th class="p-2 border-b border-gray-200 text-center">Sa</th><th class="p-2 border-b border-gray-200 text-center">So</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-[10px]">
+                            <tr class="bg-white border-b border-gray-100"><th class="p-2 font-bold text-gray-800 sticky left-0 bg-white border-r border-gray-200 text-[9px] whitespace-nowrap">ÖZ REST.</th><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-red-500 bg-red-50"><i class="fa-solid fa-xmark"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td></tr>
+                            <tr class="bg-white border-b border-gray-100"><th class="p-2 font-bold text-gray-800 sticky left-0 bg-white border-r border-gray-200 text-[9px] whitespace-nowrap">MED. BREEZE</th><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-red-500 bg-red-50"><i class="fa-solid fa-xmark"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td></tr>
+                            <tr class="bg-white border-b border-gray-100"><th class="p-2 font-bold text-gray-800 sticky left-0 bg-white border-r border-gray-200 text-[9px] whitespace-nowrap">LATIN AM.</th><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-red-500 bg-red-50"><i class="fa-solid fa-xmark"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td></tr>
+                            <tr class="bg-white border-b border-gray-100"><th class="p-2 font-bold text-gray-800 sticky left-0 bg-white border-r border-gray-200 text-[9px] whitespace-nowrap">ORIENTAL E.</th><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-red-500 bg-red-50"><i class="fa-solid fa-xmark"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td></tr>
+                            <tr class="bg-white"><th class="p-2 font-bold text-gray-800 sticky left-0 bg-white border-r border-gray-200 text-[9px] whitespace-nowrap">FISH BONE</th><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-red-500 bg-red-50"><i class="fa-solid fa-xmark"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td></tr>
+                        </tbody>
+                    </table>
                  </div>
-                 <h3 class="font-bold text-gray-700 text-center mb-3 text-sm uppercase"><i class="fa-regular fa-calendar-xmark text-red-500 mr-1"></i> Ruhetage</h3>
-                 <div class="space-y-2 mb-8">
-                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">ÖZ RESTORAN</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Samstags geschlossen</span></div>
-                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">MEDITERRANEAN BREEZE</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Dienstags geschlossen</span></div>
-                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">LATIN AMERICA</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Mittwochs geschlossen</span></div>
-                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">ORIENTAL EXPRESS</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Freitags geschlossen</span></div>
-                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">FISH BONE</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Donnerstags geschlossen</span></div>
+                 <div class="text-center text-[10px] text-gray-500 mb-6 font-semibold">
+                    <i class="fa-solid fa-check text-green-500 mr-1"></i>Geöffnet      <i class="fa-solid fa-xmark text-red-500 mr-1"></i>Geschlossen
                  </div>
-                 <div class="crystal-panel mb-6 text-sm leading-relaxed">
-                    Zimmerservice ist <b>24 Stunden</b> verfügbar (gegen Aufpreis).
-                 </div>
+                 <div class="crystal-panel mb-6 text-sm leading-relaxed">Zimmerservice ist <b>24 Stunden</b> verfügbar (gegen Aufpreis).</div>
                  <a href="http://wa.me/905497844996" target="_blank" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg bg-green-500 border-green-600"><i class="fa-brands fa-whatsapp text-2xl mr-2"></i> Zimmerservice Bestellen</a>`,
-            ru: `<div class="crystal-panel mb-6 text-sm leading-relaxed">
-                    Наши рестораны A'la Carte открыты ежедневно с <b>18:30 до 23:00</b>.<br><br>Бронирование не требуется.
+            ru: `<div class="crystal-panel mb-6 text-sm leading-relaxed">Наши рестораны A'la Carte открыты ежедневно с <b>18:30 до 23:00</b>.</div>
+                 <h3 class="font-bold text-gray-700 text-center mb-3 text-sm uppercase">Расписание</h3>
+                 <div class="overflow-x-auto hide-scroll rounded-xl border border-gray-200 mb-2 shadow-sm">
+                    <table class="w-full text-left text-sm text-gray-500 alacarte-table-new">
+                        <thead class="text-[9px] text-gray-700 uppercase bg-gray-50">
+                            <tr>
+                                <th class="p-2 sticky left-0 bg-gray-50 z-10 border-r border-b border-gray-200">Ресторан</th>
+                                <th class="p-2 border-b border-gray-200 text-center">Пн</th><th class="p-2 border-b border-gray-200 text-center">Вт</th><th class="p-2 border-b border-gray-200 text-center">Ср</th><th class="p-2 border-b border-gray-200 text-center">Чт</th><th class="p-2 border-b border-gray-200 text-center">Пт</th><th class="p-2 border-b border-gray-200 text-center">Сб</th><th class="p-2 border-b border-gray-200 text-center">Вс</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-[10px]">
+                            <tr class="bg-white border-b border-gray-100"><th class="p-2 font-bold text-gray-800 sticky left-0 bg-white border-r border-gray-200 text-[9px] whitespace-nowrap">ÖZ REST.</th><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-red-500 bg-red-50"><i class="fa-solid fa-xmark"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td></tr>
+                            <tr class="bg-white border-b border-gray-100"><th class="p-2 font-bold text-gray-800 sticky left-0 bg-white border-r border-gray-200 text-[9px] whitespace-nowrap">MED. BREEZE</th><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-red-500 bg-red-50"><i class="fa-solid fa-xmark"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td></tr>
+                            <tr class="bg-white border-b border-gray-100"><th class="p-2 font-bold text-gray-800 sticky left-0 bg-white border-r border-gray-200 text-[9px] whitespace-nowrap">LATIN AM.</th><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-red-500 bg-red-50"><i class="fa-solid fa-xmark"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td></tr>
+                            <tr class="bg-white border-b border-gray-100"><th class="p-2 font-bold text-gray-800 sticky left-0 bg-white border-r border-gray-200 text-[9px] whitespace-nowrap">ORIENTAL E.</th><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-red-500 bg-red-50"><i class="fa-solid fa-xmark"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td></tr>
+                            <tr class="bg-white"><th class="p-2 font-bold text-gray-800 sticky left-0 bg-white border-r border-gray-200 text-[9px] whitespace-nowrap">FISH BONE</th><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-red-500 bg-red-50"><i class="fa-solid fa-xmark"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td><td class="text-green-500"><i class="fa-solid fa-check"></i></td></tr>
+                        </tbody>
+                    </table>
                  </div>
-                 <h3 class="font-bold text-gray-700 text-center mb-3 text-sm uppercase"><i class="fa-regular fa-calendar-xmark text-red-500 mr-1"></i> Закрытые дни</h3>
-                 <div class="space-y-2 mb-8">
-                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">ÖZ RESTORAN</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Закрыто (Суббота)</span></div>
-                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">MEDITERRANEAN BREEZE</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Закрыто (Вторник)</span></div>
-                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">LATIN AMERICA</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Закрыто (Среда)</span></div>
-                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">ORIENTAL EXPRESS</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Закрыто (Пятница)</span></div>
-                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">FISH BONE</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Закрыто (Четверг)</span></div>
+                 <div class="text-center text-[10px] text-gray-500 mb-6 font-semibold">
+                    <i class="fa-solid fa-check text-green-500 mr-1"></i>Открыто      <i class="fa-solid fa-xmark text-red-500 mr-1"></i>Закрыто
                  </div>
-                 <div class="crystal-panel mb-6 text-sm leading-relaxed">
-                    Обслуживание номеров доступно <b>24 часа</b> (за дополнительную плату).
-                 </div>
+                 <div class="crystal-panel mb-6 text-sm leading-relaxed">Обслуживание номеров доступно <b>24 часа</b> (за дополнительную плату).</div>
                  <a href="http://wa.me/905497844996" target="_blank" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg bg-green-500 border-green-600"><i class="fa-brands fa-whatsapp text-2xl mr-2"></i> Заказать Обслуживание</a>`
         },
         room: {
             tr: `<div class="space-y-5 text-gray-700 text-sm">
                     <div><h3 class="font-bold text-gray-800"><i class="fa-regular fa-clock text-sky-500 mr-2"></i> Çıkış Saati (Check-out)</h3><p class="mt-1">Çıkış saati <b>12:00</b>'dir. 12:00'den sonra tesis kullanımına devam edilmesi ekstra ücrete tabidir.</p></div>
                     <hr>
-                    <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-broom text-sky-500 mr-2"></i> Oda Temizliği & Doğa Koruması</h3><p class="mt-1">Temizlik her gün 09:00 - 16:00 arası yapılır. ("Rahatsız Etmeyin" kartı olan odalara hizmet verilemez.)<br><br>Doğayı korumak için:<br>• Havluyu tekrar kullanmak için: Asılı bırakın.<br>• Havluyu değiştirmek için: Yere bırakın.</p></div>
+                    <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-broom text-sky-500 mr-2"></i> Oda Temizliği & Doğa Koruması</h3><p class="mt-1">Temizlik her gün 09:00 - 16:00 arası yapılır. ("Rahatsız Etmeyin" kartı olan odalara hizmet verilemez.)</p></div>
                     <hr>
                     <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-bottle-water text-sky-500 mr-2"></i> Minibar & Çay/Kahve Seti</h3><p class="mt-1">Minibar ve çay/kahve setiniz günde bir kez ücretsiz olarak yenilenir.</p></div>
                     <hr>
@@ -298,7 +379,7 @@
             en: `<div class="space-y-5 text-gray-700 text-sm">
                     <div><h3 class="font-bold text-gray-800"><i class="fa-regular fa-clock text-sky-500 mr-2"></i> Check-out Time</h3><p class="mt-1">Check-out time is <b>12:00</b>. Use of facility services after 12:00 is subject to an extra fee.</p></div>
                     <hr>
-                    <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-broom text-sky-500 mr-2"></i> Room Cleaning & Nature Conservation</h3><p class="mt-1">Daily 09:00 – 16:00. (Rooms with a "Do Not Disturb" sign cannot be serviced.)<br><br>To support nature:<br>• Reuse towel: Leave hanging.<br>• Replace towel: Place on the floor.</p></div>
+                    <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-broom text-sky-500 mr-2"></i> Room Cleaning & Nature Conservation</h3><p class="mt-1">Daily 09:00 – 16:00. (Rooms with a "Do Not Disturb" sign cannot be serviced.)</p></div>
                     <hr>
                     <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-bottle-water text-sky-500 mr-2"></i> Minibar & Tea/Coffee</h3><p class="mt-1">Replenished once daily, free of charge.</p></div>
                     <hr>
@@ -306,7 +387,7 @@
                     <hr>
                     <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-bed text-sky-500 mr-2"></i> Pillow Options & Guest Relations</h3><p class="mt-1">For any requests, pillow changes or malfunction reports, please dial <b>6666</b>.</p></div>
                     <hr>
-                    <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-lock text-sky-500 mr-2"></i> Safe Deposit Box</h3><p class="mt-1">We recommend storing valuables in the safe. The hotel is not responsible for items outside.</p></div>
+                    <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-lock text-sky-500 mr-2"></i> Safe Deposit Box</h3><p class="mt-1">We recommend storing valuables in the safe.</p></div>
                  </div>`,
             de: `<div class="text-sm text-gray-700 text-center py-10">Zimmerinformationen werden übersetzt...</div>`, 
             ru: `<div class="text-sm text-gray-700 text-center py-10">Информация о номере переводится...</div>`
@@ -320,7 +401,6 @@
                     <a href="https://play.google.com/store/apps/details?id=com.epigra.crystal_hotels&pli=1" target="_blank" class="crystal-btn flex-1 py-3 text-xs text-center block leading-tight"><i class="fa-brands fa-google-play text-[28px] block mb-1"></i> Android İndir</a>
                  </div>
                  
-                 <!-- GÜNLÜK AKTİVİTELER BUTONU VE WİDGET'I -->
                  <button onclick="document.getElementById('live-schedule-container').classList.remove('hidden'); this.style.display='none'; renderActivities();" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg mb-8"><i class="fa-solid fa-calendar-day mr-2"></i> Canlı Programı Gör!</button>
                  <div id="live-schedule-container" class="hidden mb-8">
                     <div class="activity-box">
@@ -337,14 +417,13 @@
                     <a href="https://crystalhotels.com.tr/oteller/crystal-sunset" target="_blank" class="hover:text-sky-600 transition transform hover:scale-110"><i class="fa-solid fa-globe"></i></a>
                  </div>`,
             en: `<div class="crystal-panel mb-8 text-sm leading-relaxed">
-                    The <b>Crystal Hotels App</b> provides centralized access to daily activities, show schedules, and essential stay information, supporting a smooth guest experience.
+                    The <b>Crystal Hotels App</b> provides centralized access to daily activities, show schedules, and essential stay information.
                  </div>
                  <div class="flex space-x-3 mb-8">
                     <a href="https://apps.apple.com/tr/app/crystal-hotels/id6744818940" target="_blank" class="crystal-btn flex-1 py-3 text-xs text-center block leading-tight"><i class="fa-brands fa-apple text-[28px] block mb-1"></i> iOS App</a>
                     <a href="https://play.google.com/store/apps/details?id=com.epigra.crystal_hotels&pli=1" target="_blank" class="crystal-btn flex-1 py-3 text-xs text-center block leading-tight"><i class="fa-brands fa-google-play text-[28px] block mb-1"></i> Android App</a>
                  </div>
                  
-                 <!-- GÜNLÜK AKTİVİTELER BUTONU VE WİDGET'I -->
                  <button onclick="document.getElementById('live-schedule-container').classList.remove('hidden'); this.style.display='none'; renderActivities();" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg mb-8"><i class="fa-solid fa-calendar-day mr-2"></i> View Live Schedule!</button>
                  <div id="live-schedule-container" class="hidden mb-8">
                     <div class="activity-box">
@@ -365,8 +444,6 @@
                     <a href="https://apps.apple.com/tr/app/crystal-hotels/id6744818940" target="_blank" class="crystal-btn flex-1 py-3 text-xs text-center block leading-tight"><i class="fa-brands fa-apple text-[28px] block mb-1"></i> iOS App</a>
                     <a href="https://play.google.com/store/apps/details?id=com.epigra.crystal_hotels&pli=1" target="_blank" class="crystal-btn flex-1 py-3 text-xs text-center block leading-tight"><i class="fa-brands fa-google-play text-[28px] block mb-1"></i> Android App</a>
                  </div>
-                 
-                 <!-- GÜNLÜK AKTİVİTELER BUTONU VE WİDGET'I -->
                  <button onclick="document.getElementById('live-schedule-container').classList.remove('hidden'); this.style.display='none'; renderActivities();" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg mb-8"><i class="fa-solid fa-calendar-day mr-2"></i> Live-Programm Ansehen!</button>
                  <div id="live-schedule-container" class="hidden mb-8">
                     <div class="activity-box">
@@ -380,8 +457,6 @@
                     <a href="https://apps.apple.com/tr/app/crystal-hotels/id6744818940" target="_blank" class="crystal-btn flex-1 py-3 text-xs text-center block leading-tight"><i class="fa-brands fa-apple text-[28px] block mb-1"></i> iOS App</a>
                     <a href="https://play.google.com/store/apps/details?id=com.epigra.crystal_hotels&pli=1" target="_blank" class="crystal-btn flex-1 py-3 text-xs text-center block leading-tight"><i class="fa-brands fa-google-play text-[28px] block mb-1"></i> Android App</a>
                  </div>
-                 
-                 <!-- GÜNLÜK AKTİVİTELER BUTONU VE WİDGET'I -->
                  <button onclick="document.getElementById('live-schedule-container').classList.remove('hidden'); this.style.display='none'; renderActivities();" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg mb-8"><i class="fa-solid fa-calendar-day mr-2"></i> Посмотреть расписание!</button>
                  <div id="live-schedule-container" class="hidden mb-8">
                     <div class="activity-box">
@@ -409,7 +484,6 @@
         }
     };
 
-    // --- TEMEL DİL VERİLERİ ---
     const translations = {
         tr: {
             welcome: "Konaklamanız boyunca tüm otel bilgilerine zahmetsizce erişin. Restoran saatleri, harita ve AI asistan tek noktada.",
@@ -434,15 +508,32 @@
     };
 
     let currentLang = 'tr'; 
+    let tooltipTimer;
 
-    setTimeout(() => {
+    // OTEL SEÇİMİ YAPILDIĞINDA ÇALIŞAN FONKSİYON
+    function selectHotel(hotelKey) {
+        document.getElementById('hotel-selection-screen').classList.add('hidden');
+        document.getElementById('main-menu-screen').classList.remove('hidden');
+        
+        // (İsteğe bağlı: Seçilen otelin ismini başlığa yansıtabiliriz. Şimdilik sabit tuttuk)
+        
+        // Menü ekranı açıldığında dil uyarı baloncuğunu göster ve 4 sn sonra kaybet
         const tooltip = document.getElementById('lang-tooltip');
         if (tooltip) {
-            tooltip.classList.remove('opacity-100');
-            tooltip.classList.add('opacity-0');
-            setTimeout(() => tooltip.style.display = 'none', 700); 
+            tooltip.classList.remove('hidden', 'opacity-0');
+            tooltip.classList.add('opacity-100');
+            clearTimeout(tooltipTimer);
+            tooltipTimer = setTimeout(() => {
+                tooltip.classList.remove('opacity-100');
+                tooltip.classList.add('opacity-0');
+                setTimeout(() => tooltip.classList.add('hidden'), 700); 
+            }, 4000);
         }
-    }, 4000);
+        
+        // Türkçe varsayılan olarak başlat
+        changeLang('tr');
+        renderMainContent();
+    }
 
     function changeLang(lang) {
         currentLang = lang;
@@ -487,14 +578,13 @@
         document.getElementById('main-menu-screen').classList.remove('hidden');
     }
 
-    // --- 1. ANA SAYFA "ŞU AN AÇIK" WIDGET MANTIĞI (Yeme İçme) ---
+    // --- WIDGET VERİLERİ (Yeme İçme) ---
     const uiTextsMain = {
         en: { title: "OPEN RIGHT NOW", until: "until", weather: "(Subject to weather conditions)" },
         tr: { title: "ŞU AN AÇIK", until: "kapanış", weather: "(Hava şartlarına bağlı değişebilir)" },
         ru: { title: "ОТКРЫТО СЕЙЧАС", until: "до", weather: "(Зависит от погодных условий)" },
         de: { title: "JETZT GEÖFFNET", until: "bis", weather: "(Wetterbedingt variabel)" }
     };
-
     const mainSchedule = [
         { name: { en: "🍳 Breakfast", tr: "🍳 Kahvaltı", ru: "🍳 Завтрак", de: "🍳 Frühstück" }, start: "07:00", end: "11:00" },
         { name: { en: "🍟 Food Court", tr: "🍟 Food Court", ru: "🍟 Food Court", de: "🍟 Food Court" }, start: "11:00", end: "12:00" },
@@ -543,15 +633,13 @@
         }
     }
 
-
-    // --- 2. AKTİVİTELER SAYFASI "GÜNLÜK AKTİVİTELER" MANTIĞI ---
+    // --- WIDGET VERİLERİ (Aktiviteler) ---
     const uiTextsAct = {
         en: { title: "DAILY ACTIVITIES", now: "NOW", weather: "(Activities are subject to change due to weather conditions.)" },
         tr: { title: "GÜNLÜK AKTİVİTELER", now: "ŞU AN", weather: "(Aktivitelerimiz hava koşullarına bağlı değişiklikler gösterebilir.)" },
         ru: { title: "ДНЕВНЫЕ МЕРОПРИЯТИЯ", now: "СЕЙЧАС", weather: "(Программа может меняться в зависимости от погодных условий.)" },
         de: { title: "TÄGLICHE AKTIVITÄTEN", now: "JETZT", weather: "(Aktivitäten können sich wetterbedingt ändern.)" }
     };
-
     const baseActivities = [
         { name: { en: "☀️ Good Morning & Music", tr: "☀️ Günaydın & Müzik", ru: "☀️ Доброе Утро и Музыка", de: "☀️ Guten Morgen & Info" }, start: "10:00", end: "10:30" },
         { name: { en: "🤸‍♀️ Morning Gym", tr: "🤸‍♀️ Sabah Jimnastiği", ru: "🤸‍♀️ Утренняя Гимнастика", de: "🤸‍♀️ Morgengymnastik" }, start: "10:30", end: "11:00" },
@@ -618,13 +706,17 @@
     let currentLangIndex = 0;
     setInterval(() => { 
         currentLangIndex = (currentLangIndex + 1) % 4; 
-        renderMainContent(); 
-        renderActivities(); 
+        
+        // Sadece ekranda olan menüyü güncelle ki boşuna kasmasın
+        if (!document.getElementById('main-menu-screen').classList.contains('hidden')) {
+            renderMainContent(); 
+        }
+        if (!document.getElementById('content-screen').classList.contains('hidden') && 
+            document.getElementById('content-screen').getAttribute('data-active-page') === 'activities') {
+            renderActivities(); 
+        }
     }, 4000);
     
-    // İlk Renderlar
-    renderMainContent();
-    changeLang('tr'); 
 </script>
 
 </body>
