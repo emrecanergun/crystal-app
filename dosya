@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crystal Hotels Guide</title>
+    <!-- Tailwind CSS (Tasarım için) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome (İkonlar için) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Mobil uygulama hissi ve yatay kaydırma ayarları */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f3f4f6; }
+        .app-container { max-width: 480px; margin: 0 auto; background-color: #ffffff; min-height: 100vh; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
+        .hide-scroll::-webkit-scrollbar { display: none; }
+        .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+        .glass-btn { background: linear-gradient(135deg, #38bdf8, #0ea5e9); color: white; transition: transform 0.2s; }
+        .glass-btn:active { transform: scale(0.95); }
+    </style>
+</head>
+<body>
+
+<div class="app-container pb-10">
+    <!-- Dil Seçimi -->
+    <div class="flex justify-end p-4 space-x-2 text-sm">
+        <button onclick="changeLang('tr')" class="px-2 py-1 bg-gray-200 rounded">🇹🇷 TR</button>
+        <button onclick="changeLang('en')" class="px-2 py-1 bg-gray-200 rounded">🇬🇧 EN</button>
+        <button onclick="changeLang('de')" class="px-2 py-1 bg-gray-200 rounded">🇩🇪 DE</button>
+        <button onclick="changeLang('ru')" class="px-2 py-1 bg-gray-200 rounded">🇷🇺 RU</button>
+    </div>
+
+    <!-- Başlık ve Karşılama -->
+    <div class="px-6 text-center">
+        <h1 class="text-2xl font-bold text-gray-800 mb-2">Crystal Hotels'e Hoş Geldiniz!</h1>
+        <p id="welcome-text" class="text-sm text-gray-600 mb-6 italic">
+            Konaklamanız boyunca tüm otel bilgilerine zahmetsizce erişin. Restoran ve bar saatleri, etkinlikler, oda olanakları, harita ve yapay zeka asistanı tek noktada.<br>📱 QR kodu okutun ve keşfedin.
+        </p>
+    </div>
+
+    <!-- Ana Menü (6'lı Izgara) -->
+    <div class="grid grid-cols-2 gap-4 px-6 mb-6">
+        <button class="glass-btn flex flex-col items-center justify-center p-4 rounded-xl shadow-md">
+            <i class="fa-solid fa-bed text-2xl mb-2"></i>
+            <span id="btn-room" class="font-semibold text-sm">Oda Rehberi</span>
+        </button>
+        <button class="glass-btn flex flex-col items-center justify-center p-4 rounded-xl shadow-md">
+            <i class="fa-solid fa-utensils text-2xl mb-2"></i>
+            <span id="btn-food" class="font-semibold text-sm">Yiyecek & İçecek</span>
+        </button>
+        <button onclick="scrollToOutlets()" class="glass-btn flex flex-col items-center justify-center p-4 rounded-xl shadow-md border-2 border-yellow-300">
+            <i class="fa-solid fa-map-location-dot text-2xl mb-2"></i>
+            <span id="btn-map" class="font-semibold text-sm">Harita & Mağazalar</span>
+        </button>
+        <button class="glass-btn flex flex-col items-center justify-center p-4 rounded-xl shadow-md">
+            <i class="fa-solid fa-bowling-ball text-2xl mb-2"></i>
+            <span id="btn-activities" class="font-semibold text-sm">Aktiviteler</span>
+        </button>
+        <button class="glass-btn flex flex-col items-center justify-center p-4 rounded-xl shadow-md">
+            <i class="fa-solid fa-book-open text-2xl mb-2"></i>
+            <span id="btn-menus" class="font-semibold text-sm">Menüler</span>
+        </button>
+        <button class="glass-btn flex flex-col items-center justify-center p-4 rounded-xl shadow-md">
+            <i class="fa-solid fa-plane-arrival text-2xl mb-2"></i>
+            <span id="btn-transfer" class="font-semibold text-sm">Transfer Bilgileri</span>
+        </button>
+    </div>
+
+    <!-- AI Asistan Butonu -->
+    <div class="px-6 mb-8">
+        <button class="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold py-4 rounded-xl shadow-lg flex items-center justify-center space-x-2 transition transform active:scale-95">
+            <i class="fa-solid fa-robot text-xl"></i>
+            <span id="btn-ai">AI Asistan'a Sorun!</span>
+        </button>
+    </div>
+
+    <hr class="mx-6 mb-8 border-gray-300">
+
+    <!-- Harita & Outlets Bölümü -->
+    <div id="outlets-section" class="px-6 mb-4 text-center">
+        <h2 id="outlets-title" class="text-xl font-bold text-gray-800 mb-4">Harita ve Mağazalar</h2>
+        
+        <!-- Yönlendirme Banner'ı -->
+        <div class="bg-gray-100 p-3 rounded-lg text-gray-700 font-semibold text-sm mb-4 inline-block shadow-inner w-full">
+            <i class="fa-solid fa-shopping-bag text-sky-500 mr-2"></i>
+            <span id="banner-text">Otel İçi Alışveriş ve Hizmetler İçin Tıklayın</span> ⬇
+        </div>
+    </div>
+
+    <!-- Yatay Kaydırmalı Carousel (Rulo) -->
+    <div class="flex overflow-x-auto hide-scroll space-x-4 px-6 pb-6 snap-x snap-mandatory">
+        
+        <!-- Fotoğrafçı -->
+        <div class="snap-center shrink-0 w-48 bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+            <div class="h-32 bg-gray-200 flex items-center justify-center text-gray-400">
+                <i class="fa-solid fa-camera text-3xl"></i> <!-- Buraya img etiketi gelecek -->
+            </div>
+            <div class="p-3 text-center">
+                <h3 id="out-photo" class="font-bold text-gray-800 text-sm">Fotoğrafçı</h3>
+                <p id="out-photo-floor" class="text-xs text-gray-500">-2. Katta</p>
+            </div>
+        </div>
+
+        <!-- Derici -->
+        <div class="snap-center shrink-0 w-48 bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+            <div class="h-32 bg-gray-200 flex items-center justify-center text-gray-400">
+                <i class="fa-solid fa-vest text-3xl"></i>
+            </div>
+            <div class="p-3 text-center">
+                <h3 id="out-leather" class="font-bold text-gray-800 text-sm">Derici</h3>
+                <p id="out-leather-floor" class="text-xs text-gray-500">-2. Katta</p>
+            </div>
+        </div>
+
+        <!-- Butik -->
+        <div class="snap-center shrink-0 w-48 bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+            <div class="h-32 bg-gray-200 flex items-center justify-center text-gray-400">
+                <i class="fa-solid fa-shirt text-3xl"></i>
+            </div>
+            <div class="p-3 text-center">
+                <h3 id="out-boutique" class="font-bold text-gray-800 text-sm">Butik</h3>
+                <p id="out-boutique-floor" class="text-xs text-gray-500">-2. Katta</p>
+            </div>
+        </div>
+
+        <!-- Market -->
+        <div class="snap-center shrink-0 w-48 bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+            <div class="h-32 bg-gray-200 flex items-center justify-center text-gray-400">
+                <i class="fa-solid fa-store text-3xl"></i>
+            </div>
+            <div class="p-3 text-center">
+                <h3 id="out-market" class="font-bold text-gray-800 text-sm">Market</h3>
+                <p id="out-market-floor" class="text-xs text-gray-500">-2. Katta</p>
+            </div>
+        </div>
+
+        <!-- Spa Merkezi -->
+        <div class="snap-center shrink-0 w-48 bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+            <div class="h-32 bg-gray-200 flex items-center justify-center text-gray-400">
+                <i class="fa-solid fa-spa text-3xl"></i>
+            </div>
+            <div class="p-3 text-center">
+                <h3 id="out-spa" class="font-bold text-gray-800 text-sm">Spa Merkezi</h3>
+                <p id="out-spa-floor" class="text-xs text-gray-500">-2. Katta</p>
+            </div>
+        </div>
+
+        <!-- Kuaför -->
+        <div class="snap-center shrink-0 w-48 bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+            <div class="h-32 bg-gray-200 flex items-center justify-center text-gray-400">
+                <i class="fa-solid fa-scissors text-3xl"></i>
+            </div>
+            <div class="p-3 text-center">
+                <h3 id="out-hair" class="font-bold text-gray-800 text-sm">Kuaför</h3>
+                <p id="out-hair-floor" class="text-xs text-gray-500">-2. Katta</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // 4 Dil İçin Çeviri Veritabanı
+    const translations = {
+        tr: {
+            welcome: "Konaklamanız boyunca tüm otel bilgilerine zahmetsizce erişin. Restoran ve bar saatleri, etkinlikler, oda olanakları, harita ve yapay zeka asistanı tek noktada. 📱 QR kodu okutun ve keşfedin.",
+            room: "Oda Rehberi", food: "Yiyecek & İçecek", map: "Harita & Mağazalar", act: "Aktiviteler", menus: "Menüler", transfer: "Transfer Bilgileri", ai: "AI Asistan'a Sorun!",
+            outletsTitle: "Harita ve Mağazalar", banner: "Otel İçi Alışveriş ve Hizmetler İçin Tıklayın",
+            photo: "Fotoğrafçı", leather: "Derici", boutique: "Butik", market: "Market", spa: "Spa Merkezi", hair: "Kuaför", floor: "-2. Katta"
+        },
+        en: {
+            welcome: "Effortlessly access all hotel information during your stay. Restaurant and bar hours, events, room amenities, a map, and an AI assistant, all in one place. 📱 Scan the QR code and explore.",
+            room: "Room Guide", food: "Food & Beverage", map: "Map & Shops", act: "Activities", menus: "Menus", transfer: "Transfer Info", ai: "Ask AI Assistant!",
+            outletsTitle: "Map & Shops", banner: "Click Here for Hotel Shops & Services",
+            photo: "Photographer", leather: "Leather Shop", boutique: "Boutique", market: "Market", spa: "Spa Center", hair: "Hairdresser", floor: "Floor -2"
+        },
+        de: {
+            welcome: "Erhalten Sie während Ihres Aufenthalts mühelos Zugriff auf alle Hotelinformationen. Restaurant- und Barzeiten, Veranstaltungen, Zimmerausstattung, eine Karte und ein KI-Assistent an einem Ort. 📱 Scannen Sie den QR-Code und entdecken Sie mehr.",
+            room: "Zimmerleitfaden", food: "Essen & Trinken", map: "Karte & Shops", act: "Aktivitäten", menus: "Menüs", transfer: "Transfer Info", ai: "KI-Assistent fragen!",
+            outletsTitle: "Karte & Shops", banner: "Hier klicken für Hotelshops & Services",
+            photo: "Fotograf", leather: "Ledergeschäft", boutique: "Boutique", market: "Markt", spa: "Spa Center", hair: "Friseur", floor: "Etage -2"
+        },
+        ru: {
+            welcome: "Легко получайте доступ ко всей информации об отеле во время вашего пребывания. Часы работы ресторанов и баров, мероприятия, удобства в номере, карта и ИИ-ассистент — всё в одном месте. 📱 Отсканируйте QR-код и исследуйте.",
+            room: "Гид по номеру", food: "Еда и Напитки", map: "Карта и Магазины", act: "Мероприятия", menus: "Меню", transfer: "Трансфер", ai: "Спросить ИИ-ассистента!",
+            outletsTitle: "Карта и Магазины", banner: "Нажмите для просмотра магазинов и услуг отеля",
+            photo: "Фотограф", leather: "Магазин кожи", boutique: "Бутик", market: "Маркет", spa: "Спа-центр", hair: "Парикмахерская", floor: "Этаж -2"
+        }
+    };
+
+    function changeLang(lang) {
+        const t = translations[lang];
+        document.getElementById('welcome-text').innerText = t.welcome;
+        document.getElementById('btn-room').innerText = t.room;
+        document.getElementById('btn-food').innerText = t.food;
+        document.getElementById('btn-map').innerText = t.map;
+        document.getElementById('btn-activities').innerText = t.act;
+        document.getElementById('btn-menus').innerText = t.menus;
+        document.getElementById('btn-transfer').innerText = t.transfer;
+        document.getElementById('btn-ai').innerText = t.ai;
+        document.getElementById('outlets-title').innerText = t.outletsTitle;
+        document.getElementById('banner-text').innerText = t.banner;
+        
+        document.getElementById('out-photo').innerText = t.photo;
+        document.getElementById('out-leather').innerText = t.leather;
+        document.getElementById('out-boutique').innerText = t.boutique;
+        document.getElementById('out-market').innerText = t.market;
+        document.getElementById('out-spa').innerText = t.spa;
+        document.getElementById('out-hair').innerText = t.hair;
+
+        ['photo', 'leather', 'boutique', 'market', 'spa', 'hair'].forEach(item => {
+            document.getElementById(`out-${item}-floor`).innerText = t.floor;
+        });
+    }
+
+    function scrollToOutlets() {
+        document.getElementById('outlets-section').scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
