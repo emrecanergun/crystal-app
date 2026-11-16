@@ -6,7 +6,7 @@
     <title>Crystal Hotels - Guest Information Hub</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome (İkonlar için) -->
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,6 +14,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
         body { 
             font-family: 'Poppins', sans-serif; 
             background-color: #ffffff; 
@@ -36,7 +38,6 @@
         .serif-sub {
             font-family: 'Playfair Display', serif;
         }
-        /* Grid ve Bölüm Kesikli Çizgileri */
         .dashed-border-y {
             border-top: 1px dashed #d1d5db;
             border-bottom: 1px dashed #d1d5db;
@@ -44,7 +45,8 @@
         .dashed-border-b {
             border-bottom: 1px dashed #d1d5db;
         }
-        /* İstediğiniz Özel 3D Turkuaz Buton Tasarımı */
+
+        /* Orijinal 3D Turkuaz Buton Tasarımları Korundu */
         .3d-turkuaz-btn {
             background: linear-gradient(to bottom, #4fc3f7, #0288d1);
             border: 2px solid #01579b;
@@ -62,12 +64,8 @@
         }
         .3d-turkuaz-btn:active {
             transform: translateY(3px);
-            box-shadow: 
-                0 1px 0 #01579b,
-                0 3px 6px rgba(0,0,0,0.2),
-                inset 0 1px 1px rgba(255,255,255,0.2);
+            box-shadow: 0 1px 0 #01579b, 0 3px 6px rgba(0,0,0,0.2), inset 0 1px 1px rgba(255,255,255,0.2);
         }
-        /* İkinci Menüdeki Küçük Butonlar İçin Uyumlu 3D */
         .3d-small-btn {
             background: linear-gradient(to bottom, #4fc3f7, #0288d1);
             border: 1px solid #01579b;
@@ -82,19 +80,78 @@
         }
         .3d-small-btn:active {
             transform: translateY(2px);
-            box-shadow: 
-                0 1px 0 #01579b,
-                0 2px 4px rgba(0,0,0,0.15);
+            box-shadow: 0 1px 0 #01579b, 0 2px 4px rgba(0,0,0,0.15);
         }
-        /* Şu Anda Açık Bilgi Kartı */
-        .info-card {
-            background: #ffffff;
-            border: 1.5px solid #f3f4f6;
-            border-radius: 20px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+
+        /* Dinamik Dönüşümlü Kutu Stilleri */
+        .now-box {
+            background: linear-gradient(145deg, #ffffff, #fdfdfd); 
+            border: 1px solid #eaeaea; 
+            border-radius: 12px; 
+            padding: 18px 15px; 
+            text-align: left; 
+            font-family: 'Montserrat', sans-serif; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06); 
+            position: relative;
         }
-        .hide-scroll::-webkit-scrollbar { display: none; }
-        .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+        #content-wrapper {
+            transition: opacity 0.6s ease-in-out; 
+            opacity: 1;
+        }
+        .fade-out {
+            opacity: 0 !important;
+        }
+        .now-title {
+            font-size: 12px; 
+            color: #8c8c8c; 
+            text-transform: uppercase;
+            letter-spacing: 2.5px; 
+            margin-bottom: 15px; 
+            font-weight: 600;
+            border-bottom: 1px solid #f0f0f0; 
+            padding-bottom: 10px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+        .event-item {
+            font-size: 13px; 
+            font-weight: 600;
+            color: #2c3e50; 
+            margin-bottom: 10px; 
+            display: flex;
+            justify-content: space-between; 
+            align-items: center;
+            border-bottom: 1px solid #f8f8f8; 
+            padding-bottom: 8px;
+        }
+        .event-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .event-time {
+            font-size: 10px; 
+            font-weight: 700;
+            color: #00a2df; 
+            background-color: transparent; 
+            border: 1px solid #00a2df; 
+            padding: 3px 10px; 
+            border-radius: 20px; 
+            white-space: nowrap;
+            margin-left: 10px;
+            letter-spacing: 0.5px;
+        }
+        .weather-note {
+            font-size: 10px;
+            color: #a0a0a0;
+            text-align: center;
+            margin-top: 15px;
+            font-style: italic;
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
@@ -102,24 +159,19 @@
 <div class="app-container">
     
     <!-- En Üst İnce Grid Çizgileri -->
-    <div class="w-full flex justify-between px-4 border-b border-gray-100 py-1 mb-8">
-        <span class="w-[1px] h-2 bg-gray-200"></span>
-        <span class="w-[1px] h-2 bg-gray-200"></span>
-        <span class="w-[1px] h-2 bg-gray-200"></span>
-        <span class="w-[1px] h-2 bg-gray-200"></span>
-        <span class="w-[1px] h-2 bg-gray-200"></span>
-        <span class="w-[1px] h-2 bg-gray-200"></span>
+    <div class="w-full flex justify-between px-4 border-b border-gray-100 py-1 mb-6">
+        <span class="w-[1px] h-2 bg-gray-200"></span><span class="w-[1px] h-2 bg-gray-200"></span><span class="w-[1px] h-2 bg-gray-200"></span>
+        <span class="w-[1px] h-2 bg-gray-200"></span><span class="w-[1px] h-2 bg-gray-200"></span><span class="w-[1px] h-2 bg-gray-200"></span>
     </div>
 
-    <!-- 1. BÖLÜM: ANA GİRİŞ / DİL SEÇİM EKRANI (Lobi) -->
+    <!-- 1. BÖLÜM: DİL SEÇİM VE DİNAMİK BİLGİ EKRANI -->
     <div id="landing-screen" class="flex-1 flex flex-col justify-between px-6">
-        <!-- Logo & Başlık -->
-        <div class="text-center">
+        
+        <div class="text-center mt-2">
             <h1 class="serif-title text-4xl font-semibold text-gray-800 mb-2 mt-4 tracking-wider">CRYSTAL HOTELS</h1>
             <p class="serif-sub text-lg text-gray-700 italic tracking-wide">Guest Information Hub</p>
         </div>
 
-        <!-- 3D Dil Seçim Butonları -->
         <div class="dashed-border-y py-6 my-6 grid grid-cols-2 gap-x-4 gap-y-5">
             <button onclick="selectLanguage('en')" class="3d-turkuaz-btn py-4 w-full">English</button>
             <button onclick="selectLanguage('tr')" class="3d-turkuaz-btn py-4 w-full">Türkçe</button>
@@ -127,56 +179,19 @@
             <button onclick="selectLanguage('ru')" class="3d-turkuaz-btn py-4 w-full">Русский</button>
         </div>
 
-        <!-- Canlı Durum Kartı (Açık Mekanlar) -->
-        <div class="info-card p-5 mb-8">
-            <div class="text-center mb-4">
-                <span id="card-badge" class="text-[10px] font-bold tracking-widest text-gray-400 uppercase">DE JETZT GEÖFFNET DE</span>
+        <!-- YENİ DİNAMİK "ŞU AN AÇIK" KUTUSU -->
+        <div class="now-box mb-6">
+            <div id="content-wrapper">
+                <div style="text-align:center; color:#888; font-family:'Montserrat', sans-serif;">Loading...</div>
             </div>
-            
-            <div class="space-y-4 text-xs font-medium text-gray-600">
-                <div class="flex items-center justify-between border-b border-gray-50 pb-2">
-                    <div class="flex items-center space-x-2">
-                        <span>🍔</span>
-                        <span id="venue-1">Snack-Restaurants (-2. Etage)</span>
-                    </div>
-                    <span class="px-3 py-1 border border-sky-300 text-sky-500 rounded-full text-[10px] font-bold bg-sky-50">bis 16:00</span>
-                </div>
-                
-                <div class="flex items-center justify-between border-b border-gray-50 pb-2">
-                    <div class="flex items-center space-x-2">
-                        <span>🏖️</span>
-                        <span id="venue-2">Strandsnack (-1. Etage)</span>
-                    </div>
-                    <span class="px-3 py-1 border border-sky-300 text-sky-500 rounded-full text-[10px] font-bold bg-sky-50">bis 18:00</span>
-                </div>
-                
-                <div class="flex items-center justify-between border-b border-gray-50 pb-2">
-                    <div class="flex items-center space-x-2">
-                        <span>🌮</span>
-                        <span id="venue-3">Fladenbrot (-1. Etage)</span>
-                    </div>
-                    <span class="px-3 py-1 border border-sky-300 text-sky-500 rounded-full text-[10px] font-bold bg-sky-50">bis 18:00</span>
-                </div>
-                
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center space-x-2">
-                        <span>🍕</span>
-                        <span id="venue-4">Ital. Snack A'la Carte (-1. Etage)</span>
-                    </div>
-                    <span class="px-3 py-1 border border-sky-300 text-sky-500 rounded-full text-[10px] font-bold bg-sky-50">bis 18:00</span>
-                </div>
-            </div>
-
-            <p id="card-foot" class="text-center text-[10px] text-gray-400 italic mt-4">(Aktivitäten können sich wetterbedingt ändern.)</p>
         </div>
     </div>
 
 
-    <!-- 2. BÖLÜM: ANA MENÜ & HARİTA/MAĞAZALAR EKRANI (Seçilen Dile Göre Açılır) -->
-    <div id="main-menu-screen" class="hidden flex-1 flex flex-col justify-between px-6 pt-4">
+    <!-- 2. BÖLÜM: ANA MENÜ EKRANI -->
+    <div id="main-menu-screen" class="hidden flex-1 flex flex-col px-6 pt-4">
         
-        <!-- Üst Dil Göstergesi & Geri Dönüş -->
-        <div class="flex justify-between items-center mb-6">
+        <div class="flex justify-between items-center mb-4">
             <button onclick="goBackToLanguages()" class="text-sky-600 font-semibold text-xs flex items-center space-x-1">
                 <i class="fa-solid fa-chevron-left"></i> <span id="back-lbl">Geri Dön</span>
             </button>
@@ -188,215 +203,73 @@
             </div>
         </div>
 
-        <!-- Karşılama ve Açıklama -->
         <div class="text-center mb-6">
-            <h2 class="serif-title text-2xl font-semibold text-gray-800 mb-2">CRYSTAL HOTELS</h2>
+            <h2 class="serif-title text-2xl font-semibold text-gray-800 mb-2 mt-2">CRYSTAL HOTELS</h2>
             <p id="welcome-text" class="text-xs text-gray-500 leading-relaxed max-w-sm mx-auto">
                 Konaklamanız boyunca tüm otel bilgilerine zahmetsizce erişin. Restoran ve bar saatleri, etkinlikler, oda olanakları, harita ve yapay zeka asistanı tek noktada.<br>📱 QR kodu okutun ve keşfedin.
             </p>
         </div>
 
-        <!-- 6'lı 3D Tasarımlı Grid Menü -->
         <div class="dashed-border-y py-6 grid grid-cols-2 gap-x-4 gap-y-4 mb-6">
             <button class="3d-small-btn flex flex-col items-center justify-center p-4">
-                <i class="fa-solid fa-bed text-xl mb-2"></i>
-                <span id="btn-room" class="font-bold text-xs">Oda Rehberi</span>
+                <i class="fa-solid fa-bed text-xl mb-2"></i><span id="btn-room" class="font-bold text-xs">Oda Rehberi</span>
             </button>
             <button class="3d-small-btn flex flex-col items-center justify-center p-4">
-                <i class="fa-solid fa-utensils text-xl mb-2"></i>
-                <span id="btn-food" class="font-bold text-xs">Yiyecek & İçecek</span>
-            </button>
-            <button onclick="scrollToOutlets()" class="3d-small-btn flex flex-col items-center justify-center p-4 border-2 border-yellow-300">
-                <i class="fa-solid fa-map-location-dot text-xl mb-2"></i>
-                <span id="btn-map" class="font-bold text-xs">Harita & Mağazalar</span>
+                <i class="fa-solid fa-utensils text-xl mb-2"></i><span id="btn-food" class="font-bold text-xs">Yiyecek & İçecek</span>
             </button>
             <button class="3d-small-btn flex flex-col items-center justify-center p-4">
-                <i class="fa-solid fa-icons text-xl mb-2"></i>
-                <span id="btn-activities" class="font-bold text-xs">Crystal Aktiviteleri</span>
+                <i class="fa-solid fa-map-location-dot text-xl mb-2"></i><span id="btn-map" class="font-bold text-xs">Tesis Haritası</span>
             </button>
             <button class="3d-small-btn flex flex-col items-center justify-center p-4">
-                <i class="fa-solid fa-book-open-reader text-xl mb-2"></i>
-                <span id="btn-menus" class="font-bold text-xs">Menüler</span>
+                <i class="fa-solid fa-icons text-xl mb-2"></i><span id="btn-activities" class="font-bold text-xs">Aktiviteler</span>
             </button>
             <button class="3d-small-btn flex flex-col items-center justify-center p-4">
-                <i class="fa-solid fa-plane-departure text-xl mb-2"></i>
-                <span id="btn-transfer" class="font-bold text-xs">Transfer Bilgileri</span>
+                <i class="fa-solid fa-book-open-reader text-xl mb-2"></i><span id="btn-menus" class="font-bold text-xs">Menüler</span>
+            </button>
+            <button class="3d-small-btn flex flex-col items-center justify-center p-4">
+                <i class="fa-solid fa-plane-departure text-xl mb-2"></i><span id="btn-transfer" class="font-bold text-xs">Transfer Bilgileri</span>
             </button>
         </div>
 
-        <!-- AI Asistan -->
         <div class="mb-8">
             <button class="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold py-4 rounded-2xl shadow-lg flex items-center justify-center space-x-2 transition transform active:scale-95">
-                <i class="fa-solid fa-robot text-lg"></i>
-                <span id="btn-ai" class="text-sm">AI Asistan'a Sorun!</span>
+                <i class="fa-solid fa-robot text-lg"></i><span id="btn-ai" class="text-sm">AI Asistan'a Sorun!</span>
             </button>
-        </div>
-
-        <!-- Harita & Outlets Bölümü -->
-        <div id="outlets-section" class="scroll-mt-4 pt-4 border-t border-gray-100 mb-4 text-center">
-            <h3 id="outlets-title" class="text-lg font-bold text-gray-800 mb-3">Harita ve Mağazalar</h3>
-            
-            <!-- Sizlerin İstediği Yatay Yönlendirme Bannerı -->
-            <div class="bg-gray-50 border border-gray-100 p-3.5 rounded-xl text-gray-600 font-semibold text-xs mb-5 inline-block shadow-inner w-full cursor-pointer hover:bg-gray-100 transition">
-                <i class="fa-solid fa-store text-sky-500 mr-2"></i>
-                <span id="banner-text">Otel İçi Alışveriş ve Hizmetler İçin Tıklayın</span> ⬇
-            </div>
-        </div>
-
-        <!-- Yatay Kaydırmalı Carousel (Rulo) -->
-        <div class="flex overflow-x-auto hide-scroll space-x-4 pb-12 snap-x snap-mandatory">
-            
-            <!-- Fotoğrafçı -->
-            <div class="snap-center shrink-0 w-40 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                <div class="h-28 bg-sky-50 flex items-center justify-center text-sky-300">
-                    <i class="fa-solid fa-camera-retro text-3xl"></i>
-                </div>
-                <div class="p-3 text-center">
-                    <h4 id="out-photo" class="font-bold text-gray-800 text-xs">Fotoğrafçı</h4>
-                    <p id="out-photo-floor" class="text-[10px] text-gray-400 mt-1 font-medium">-2. Katta</p>
-                </div>
-            </div>
-
-            <!-- Derici -->
-            <div class="snap-center shrink-0 w-40 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                <div class="h-28 bg-sky-50 flex items-center justify-center text-sky-300">
-                    <i class="fa-solid fa-vest text-3xl"></i>
-                </div>
-                <div class="p-3 text-center">
-                    <h4 id="out-leather" class="font-bold text-gray-800 text-xs">Derici</h4>
-                    <p id="out-leather-floor" class="text-[10px] text-gray-400 mt-1 font-medium">-2. Katta</p>
-                </div>
-            </div>
-
-            <!-- Butik -->
-            <div class="snap-center shrink-0 w-40 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                <div class="h-28 bg-sky-50 flex items-center justify-center text-sky-300">
-                    <i class="fa-solid fa-shirt text-3xl"></i>
-                </div>
-                <div class="p-3 text-center">
-                    <h4 id="out-boutique" class="font-bold text-gray-800 text-xs">Butik</h4>
-                    <p id="out-boutique-floor" class="text-[10px] text-gray-400 mt-1 font-medium">-2. Katta</p>
-                </div>
-            </div>
-
-            <!-- Market -->
-            <div class="snap-center shrink-0 w-40 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                <div class="h-28 bg-sky-50 flex items-center justify-center text-sky-300">
-                    <i class="fa-solid fa-basket-shopping text-3xl"></i>
-                </div>
-                <div class="p-3 text-center">
-                    <h4 id="out-market" class="font-bold text-gray-800 text-xs">Market</h4>
-                    <p id="out-market-floor" class="text-[10px] text-gray-400 mt-1 font-medium">-2. Katta</p>
-                </div>
-            </div>
-
-            <!-- Spa Center -->
-            <div class="snap-center shrink-0 w-40 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                <div class="h-28 bg-sky-50 flex items-center justify-center text-sky-300">
-                    <i class="fa-solid fa-spa text-3xl"></i>
-                </div>
-                <div class="p-3 text-center">
-                    <h4 id="out-spa" class="font-bold text-gray-800 text-xs">Spa Center</h4>
-                    <p id="out-spa-floor" class="text-[10px] text-gray-400 mt-1 font-medium">-2. Katta</p>
-                </div>
-            </div>
-
-            <!-- Kuaför -->
-            <div class="snap-center shrink-0 w-40 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                <div class="h-28 bg-sky-50 flex items-center justify-center text-sky-300">
-                    <i class="fa-solid fa-scissors text-3xl"></i>
-                </div>
-                <div class="p-3 text-center">
-                    <h4 id="out-hair" class="font-bold text-gray-800 text-xs">Kuaför</h4>
-                    <p id="out-hair-floor" class="text-[10px] text-gray-400 mt-1 font-medium">-2. Katta</p>
-                </div>
-            </div>
-
         </div>
     </div>
 
-    <!-- ALT KISIM: MEŞHUR ÜÇLÜ LOGOLAR -->
+    <!-- ALT KISIM: YATAY ANA LOGO (Her iki ekranda da sabit footer) -->
     <div class="dashed-border-b mt-auto py-6 flex justify-center items-center bg-white px-4 border-t border-gray-100">
-        <div class="flex items-center space-x-4 h-10">
-            <!-- KHG Logo -->
-            <div class="flex flex-col justify-center items-center leading-none text-gray-800">
-                <span class="font-extrabold text-[22px] tracking-tighter">KHG</span>
-                <span class="text-[5.5px] font-semibold tracking-[0.01em] text-gray-500 whitespace-nowrap">KILIT HOSPITALITY GROUP</span>
-            </div>
-            
-            <div class="w-[1.5px] h-full bg-gray-200"></div>
-            
-            <!-- Crystal Logo -->
-            <div class="flex flex-col items-center justify-center">
-                <div class="flex space-x-0.5 mb-0.5">
-                    <span class="w-2.5 h-2.5 rounded-full bg-sky-400"></span>
-                    <span class="w-1.5 h-1.5 rounded-full bg-sky-300 mt-1"></span>
-                    <span class="w-2.5 h-2.5 rounded-full bg-sky-500"></span>
-                </div>
-                <span class="font-bold text-[8px] tracking-[0.15em] text-sky-900 leading-none">CRYSTAL</span>
-                <span class="text-[5px] text-gray-400 tracking-wider">HOTELS</span>
-            </div>
-            
-            <div class="w-[1.5px] h-full bg-gray-200"></div>
-            
-            <!-- Nirvana Logo -->
-            <div class="flex flex-col items-center justify-center text-gray-700">
-                <span class="serif-title font-medium text-lg leading-none">N</span>
-                <span class="text-[6px] tracking-widest font-semibold">NIRVANA</span>
-                <span class="text-[4px] text-gray-400 tracking-wider">HOTELS</span>
-            </div>
-        </div>
+        <img src="mainlogo.png" alt="Crystal Hotels" class="h-10 object-contain">
     </div>
 
 </div>
 
 <script>
-    // 4 Dil İçin Veri Bankası
+    // --- 1. ANA MENÜ VE SAYFA İÇİ ÇEVİRİ YÖNETİMİ ---
     const translations = {
         tr: {
             back: "Giriş Ekranı",
             welcome: "Konaklamanız boyunca tüm otel bilgilerine zahmetsizce erişin. Restoran ve bar saatleri, etkinlikler, oda olanakları, harita ve yapay zeka asistanı tek noktada. 📱 QR kodu okutun ve keşfedin.",
-            room: "Oda Rehberi", food: "Yiyecek & İçecek", map: "Harita & Mağazalar", act: "Crystal Aktiviteleri", menus: "Menüler", transfer: "Transfer Bilgileri", ai: "AI Asistan'a Sorun!",
-            outletsTitle: "Harita ve Mağazalar", banner: "Otel İçi Alışveriş ve Hizmetler İçin Tıklayın",
-            photo: "Fotoğrafçı", leather: "Derici", boutique: "Butik", market: "Market", spa: "Spa Center", hair: "Kuaför", floor: "-2. Katta",
-            // Açık Yerler Kartı Çevirileri
-            badge: "DE JETZT GEÖFFNET DE",
-            v1: "Snack-Restaurants (-2. Kat)", v2: "Strandsnack (-1. Kat)", v3: "Fladenbrot (-1. Kat)", v4: "Ital. Snack A'la Carte (-1. Kat)",
-            cardFoot: "(Aktiviteler hava şartlarına göre değişiklik gösterebilir.)"
+            room: "Oda Rehberi", food: "Yiyecek & İçecek", map: "Tesis Haritası", act: "Aktiviteler", menus: "Menüler", transfer: "Transfer Bilgileri", ai: "AI Asistan'a Sorun!"
         },
         en: {
             back: "Home",
             welcome: "Effortlessly access all hotel information during your stay. Restaurant and bar hours, events, room amenities, a map, and an AI assistant, all in one place. 📱 Scan the QR code and explore.",
-            room: "Room Guide", food: "Food & Beverage", map: "Map & Shops", act: "Crystal Activities", menus: "Menus", transfer: "Transfer Info", ai: "Ask AI Assistant!",
-            outletsTitle: "Map & Shops", banner: "Click Here for Hotel Shops & Services",
-            photo: "Photographer", leather: "Leather Shop", boutique: "Boutique", market: "Market", spa: "Spa Center", hair: "Hairdresser", floor: "Floor -2",
-            badge: "EN NOW OPEN EN",
-            v1: "Snack-Restaurants (Floor -2)", v2: "Beach Snack (Floor -1)", v3: "Flatbread (Floor -1)", v4: "Ital. Snack A'la Carte (Floor -1)",
-            cardFoot: "(Activities may vary depending on weather conditions.)"
+            room: "Room Guide", food: "Food & Beverage", map: "Hotel Map", act: "Activities", menus: "Menus", transfer: "Transfer Info", ai: "Ask AI Assistant!"
         },
         de: {
             back: "Startseite",
             welcome: "Erhalten Sie während Ihres Aufenthalts mühelos Zugriff auf alle Hotelinformationen. Restaurant- und Barzeiten, Veranstaltungen, Zimmerausstattung, eine Karte und ein KI-Assistent an einem Ort. 📱 Scannen Sie den QR-Code und entdecken Sie mehr.",
-            room: "Zimmerleitfaden", food: "Essen & Trinken", map: "Karte & Shops", act: "Crystal Aktivitäten", menus: "Menüs", transfer: "Transfer Info", ai: "KI-Assistent fragen!",
-            outletsTitle: "Karte & Shops", banner: "Hier klicken für Hotelshops & Services",
-            photo: "Fotograf", leather: "Ledergeschäft", boutique: "Boutique", market: "Markt", spa: "Spa Center", hair: "Friseur", floor: "Etage -2",
-            badge: "DE JETZT GEÖFFNET DE",
-            v1: "Snack-Restaurants (-2. Etage)", v2: "Strandsnack (-1. Etage)", v3: "Fladenbrot (-1. Etage)", v4: "Ital. Snack A'la Carte (-1. Etage)",
-            cardFoot: "(Aktivitäten können sich wetterbedingt ändern.)"
+            room: "Zimmerleitfaden", food: "Essen & Trinken", map: "Lageplan", act: "Aktivitäten", menus: "Menüs", transfer: "Transfer Info", ai: "KI-Assistent fragen!"
         },
         ru: {
             back: "Назад",
             welcome: "Легко получайте доступ ко всей информации об отеле во время вашего пребывания. Часы работы ресторанов и баров, мероприятия, удобства в номере, карта и ИИ-ассистент — всё в одном месте. 📱 Отсканируйте QR-код и исследуйте.",
-            room: "Гид по номеру", food: "Еда и Напитки", map: "Карта и Магазины", act: "Кристал Активити", menus: "Меню", transfer: "Трансфер", ai: "Спросить ИИ-ассистента!",
-            outletsTitle: "Карта и Магазины", banner: "Нажмите для просмотра магазинов и услуг отеля",
-            photo: "Фотограф", leather: "Магазин кожи", boutique: "Бутик", market: "Маркет", spa: "Спа-центр", hair: "Парикмахерская", floor: "Этаж -2",
-            badge: "RU СЕЙЧАС ОТКРЫТО RU",
-            v1: "Снэк-рестораны (Этаж -2)", v2: "Пляжный снэк (Этаж -1)", v3: "Лепешки (Этаж -1)", v4: "Итал. Снэк А-ля Карт (Этаж -1)",
-            cardFoot: "(Мероприятия могут быть изменены в зависимости от погодных условий.)"
+            room: "Гид по номеру", food: "Еда и Напитки", map: "Карта Отеля", act: "Мероприятия", menus: "Меню", transfer: "Трансфер", ai: "Спросить ИИ-ассистента!"
         }
     };
 
-    // Dil Seçimi Yapıldığında Tetiklenen Fonksiyon
     function selectLanguage(lang) {
         changeLang(lang);
         document.getElementById('landing-screen').classList.add('hidden');
@@ -404,22 +277,16 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Ana Dil Seçim Ekranına Geri Dönüş
     function goBackToLanguages() {
         document.getElementById('main-menu-screen').classList.add('hidden');
         document.getElementById('landing-screen').classList.remove('hidden');
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Seçilen Dile Göre İçeriği Değiştirme
     function changeLang(lang) {
         const t = translations[lang];
-        
-        // Geri Dön Butonu ve Karşılama
         document.getElementById('back-lbl').innerText = t.back;
         document.getElementById('welcome-text').innerHTML = t.welcome;
-        
-        // Ana Menü Butonları
         document.getElementById('btn-room').innerText = t.room;
         document.getElementById('btn-food').innerText = t.food;
         document.getElementById('btn-map').innerText = t.map;
@@ -427,36 +294,113 @@
         document.getElementById('btn-menus').innerText = t.menus;
         document.getElementById('btn-transfer').innerText = t.transfer;
         document.getElementById('btn-ai').innerText = t.ai;
-        
-        // Mağazalar Bölümü
-        document.getElementById('outlets-title').innerText = t.outletsTitle;
-        document.getElementById('banner-text').innerText = t.banner;
-        
-        // Mağazalar
-        document.getElementById('out-photo').innerText = t.photo;
-        document.getElementById('out-leather').innerText = t.leather;
-        document.getElementById('out-boutique').innerText = t.boutique;
-        document.getElementById('out-market').innerText = t.market;
-        document.getElementById('out-spa').innerText = t.spa;
-        document.getElementById('out-hair').innerText = t.hair;
+    }
 
-        ['photo', 'leather', 'boutique', 'market', 'spa', 'hair'].forEach(item => {
-            document.getElementById(`out-${item}-floor`).innerText = t.floor;
+    // --- 2. DİNAMİK "ŞU AN AÇIK" WIDGET'I (Sizin Kodunuz) ---
+    const uiTexts = {
+        en: { title: "OPEN RIGHT NOW", until: "until", weather: "(Activities are subject to change due to weather conditions.)" },
+        tr: { title: "ŞU AN AÇIK", until: "kapanış", weather: "(Aktivitelerimiz hava koşullarına bağlı değişiklikler gösterebilir.)" },
+        ru: { title: "ОТКРЫТО СЕЙЧАС", until: "до", weather: "(Программа может меняться в зависимости от погодных условий.)" },
+        de: { title: "JETZT GEÖFFNET", until: "bis", weather: "(Aktivitäten können sich wetterbedingt ändern.)" }
+    };
+
+    const baseSchedule = [
+        { name: { en: "🍳 Main Rest. Breakfast (-1. Floor)", tr: "🍳 Ana Restoran Kahvaltı (-1. Kat)", ru: "🍳 Главный Ресторан Завтрак (-1. Этаж)", de: "🍳 Hauptrest. Frühstück (-1. Etage)" }, start: "07:00", end: "11:00" },
+        { name: { en: "🍟 Food Court Snack (-2. Floor)", tr: "🍟 Food Court Snack (-2. Kat)", ru: "🍟 Food Court Снэк (-2. Этаж)", de: "🍟 Food Court Snack (-2. Etage)" }, start: "11:00", end: "12:00" },
+        { name: { en: "🍔 Snack Restaurants (-2. Floor)", tr: "🍔 Snack Restoranlar (-2. Kat)", ru: "🍔 Снэк-рестораны (-2. Этаж)", de: "🍔 Snack-Restaurants (-2. Etage)" }, start: "12:00", end: "16:00" },
+        
+        { name: { en: "🏖️ Beach Snack (-1. Floor)", tr: "🏖️ Sahil Snack (-1. Kat)", ru: "🏖️ Пляжный Снэк (-1. Этаж)", de: "🏖️ Strandsnack (-1. Etage)" }, start: "11:00", end: "18:00" },
+        { name: { en: "🥙 Flatbread (-1. Floor)", tr: "🥙 Gözleme (-1. Kat)", ru: "🥙 Гёзлеме (-1. Этаж)", de: "🥙 Fladenbrot (-1. Etage)" }, start: "11:00", end: "18:00" },
+        
+        { name: { en: "🍝 Italian A'la Carte Snack (-1. Floor)", tr: "🍝 İtalyan A'la Carte Snack (-1. Kat)", ru: "🍝 Итальянский Снэк (-1. Этаж)", de: "🍝 Ital. Snack A'la Carte (-1. Etage)" }, start: "12:00", end: "18:00" },
+        { name: { en: "🌊 Waterworld Rest. (-1. Floor)", tr: "🌊 Waterworld Restoran (-1. Kat)", ru: "🌊 Ресторан Waterworld (-1. Этаж)", de: "🌊 Waterworld Restaurant (-1. Etage)" }, start: "16:00", end: "18:30" },
+        { name: { en: "🍷 Main Rest. Dinner (-1. Floor)", tr: "🍷 Ana Restoran Akşam (-1. Kat)", ru: "🍷 Главный Ресторан Ужин (-1. Этаж)", de: "🍷 Hauptrest. Abendessen (-1. Etage)" }, start: "18:30", end: "21:30" },
+        { name: { en: "🌊 Waterworld Night (-1. Floor)", tr: "🌊 Waterworld Gece (-1. Kat)", ru: "🌊 Waterworld Ночной (-1. Этаж)", de: "🌊 Waterworld Nacht (-1. Etage)" }, start: "21:30", end: "08:00" },
+        { name: { en: "🍻 Irish Pub (-1. Floor)", tr: "🍻 Irish Pub (-1. Kat)", ru: "🍻 Ирландский Паб (-1. Этаж)", de: "🍻 Irish Pub (-1. Etage)" }, start: "18:00", end: "08:00" },
+        
+        { name: { en: "🎈 Kids Show", tr: "🎈 Çocuk Şovu (Kids Show)", ru: "🎈 Детское шоу", de: "🎈 Kinder Show" }, start: "20:30", end: "21:15" },
+        { name: { en: "🎪 Evening Show", tr: "🎪 Akşam Şovu (Evening Show)", ru: "🎪 Вечернее Шоу", de: "🎪 Abendshow" }, start: "21:15", end: "22:30" },
+        { name: { en: "🪩 Disco (-2. Floor)", tr: "🪩 Disko (-2. Kat)", ru: "🪩 Дискотека (-2. Этаж)", de: "🪩 Disco (-2. Etage)" }, start: "23:00", end: "01:30" }
+    ];
+
+    const dailyAlacarteMsg = {
+        0: { en: "🍽️ All A'la Carte Restaurants are open!", tr: "🍽️ Tüm A'la Carte Restoranlarımız açık!", ru: "🍽️ Все рестораны A'la Carte открыты!", de: "🍽️ Alle A-la-carte-Restaurants sind geöffnet!" },
+        1: { en: "🍽️ All A'la Carte Restaurants are open!", tr: "🍽️ Tüm A'la Carte Restoranlarımız açık!", ru: "🍽️ Все рестораны A'la Carte открыты!", de: "🍽️ Alle A-la-carte-Restaurants sind geöffnet!" },
+        2: { en: "🍽️ All open except Mediterranean Breeze!", tr: "🍽️ Mediterranean Breeze hariç tüm A'la Cartelar açık!", ru: "🍽️ Открыты все рестораны, кроме Mediterranean Breeze!", de: "🍽️ Alle geöffnet außer Mediterranean Breeze!" },
+        3: { en: "🍽️ All open except Latin America!", tr: "🍽️ Latin Amerika hariç tüm A'la Cartelar açık!", ru: "🍽️ Открыты все рестораны, кроме Latin America!", de: "🍽️ Alle geöffnet außer Latin America!" },
+        4: { en: "🍽️ All open except Fish Bone!", tr: "🍽️ Fish Bone hariç tüm A'la Cartelar açık!", ru: "🍽️ Открыты все рестораны, кроме Fish Bone!", de: "🍽️ Alle geöffnet außer Fish Bone!" },
+        5: { en: "🍽️ All open except Oriental Express!", tr: "🍽️ Oriental Express hariç tüm A'la Cartelar açık!", ru: "🍽️ Открыты все рестораны, кроме Oriental Express!", de: "🍽️ Alle geöffnet außer Oriental Express!" },
+        6: { en: "🍽️ All open except ÖZ Restoran!", tr: "🍽️ ÖZ Restoran hariç tüm A'la Cartelar açık!", ru: "🍽️ Открыты все рестораны, кроме ÖZ Restoran!", de: "🍽️ Alle geöffnet außer ÖZ Restoran!" }
+    };
+
+    function timeToMinutes(timeStr) {
+        let parts = timeStr.split(':');
+        return parseInt(parts[0]) * 60 + parseInt(parts[1]);
+    }
+
+    function renderContent() {
+        let d = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
+        let currentMinutes = d.getHours() * 60 + d.getMinutes();
+        let currentDayIndex = d.getDay(); 
+
+        let todaySchedule = [...baseSchedule];
+        let todayAlacarte = dailyAlacarteMsg[currentDayIndex];
+        if (todayAlacarte) {
+            todaySchedule.push({ name: todayAlacarte, start: "18:30", end: "23:00" });
+        }
+
+        let activeEvents = [];
+        todaySchedule.forEach(item => {
+            let startMin = timeToMinutes(item.start);
+            let endMin = timeToMinutes(item.end);
+            let isActive = false;
+
+            if (startMin > endMin) { 
+                if (currentMinutes >= startMin || currentMinutes < endMin) isActive = true;
+            } else {
+                if (currentMinutes >= startMin && currentMinutes < endMin) isActive = true;
+            }
+
+            if (isActive) {
+                let diff = endMin - currentMinutes;
+                if (diff <= 0) diff += 1440;
+                activeEvents.push({ ...item, timeLeft: diff });
+            }
         });
 
-        // Açık Olanlar Kartı Güncellemesi
-        document.getElementById('card-badge').innerText = t.badge;
-        document.getElementById('venue-1').innerText = t.v1;
-        document.getElementById('venue-2').innerText = t.v2;
-        document.getElementById('venue-3').innerText = t.v3;
-        document.getElementById('venue-4').innerText = t.v4;
-        document.getElementById('card-foot').innerText = t.cardFoot;
+        activeEvents.sort((a, b) => a.timeLeft - b.timeLeft);
+
+        const languages = ['en', 'tr', 'ru', 'de'];
+        const flags = { en: "🇬🇧", tr: "🇹🇷", ru: "🇷🇺", de: "🇩🇪" }; 
+        let lang = languages[currentLangIndex];
+
+        let activeEventsHTML = "";
+        activeEvents.forEach(event => {
+            let timeLabel = uiTexts[lang].until + " " + event.end;
+            activeEventsHTML += '<div class="event-item"><span>' + event.name[lang] + 
+                                '</span> <span class="event-time">' + timeLabel + '</span></div>';
+        });
+
+        let finalHTML = '<div class="now-title">' + flags[lang] + ' ' + uiTexts[lang].title + ' ' + flags[lang] + '</div>' + 
+                        '<div id="active-events">' + (activeEventsHTML || '<div class="no-event text-center text-gray-500 font-semibold text-sm py-4">Check schedule.</div>') + '</div>' +
+                        '<div class="weather-note">' + uiTexts[lang].weather + '</div>';
+
+        let wrapper = document.getElementById('content-wrapper');
+        wrapper.classList.add('fade-out');
+        
+        setTimeout(() => {
+            wrapper.innerHTML = finalHTML;
+            wrapper.classList.remove('fade-out');
+        }, 600); 
     }
 
-    // Butona basıldığında Outlets bölümüne kaydırma
-    function scrollToOutlets() {
-        document.getElementById('outlets-section').scrollIntoView({ behavior: 'smooth' });
-    }
+    let currentLangIndex = 0;
+    setInterval(() => {
+        currentLangIndex = (currentLangIndex + 1) % 4;
+        renderContent();
+    }, 4000);
+
+    renderContent();
 </script>
 
 </body>
