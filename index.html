@@ -71,29 +71,39 @@
         }
         .crystal-panel a { text-decoration: underline; font-weight: bold; }
 
-        /* Şuan Açık Widget Stilleri */
+        /* "Şuan Açık" Widget Stilleri (Ana Sayfa) */
         .now-box {
             background: linear-gradient(145deg, #ffffff, #fdfdfd); 
             border: 1px solid #eaeaea; 
             border-radius: 12px; 
-            padding: 10px 15px; 
+            padding: 16px 15px;
             text-align: left; 
             box-shadow: 0 5px 20px rgba(0,0,0,0.04); 
             height: 100%;
         }
         #content-wrapper { transition: opacity 0.4s ease-in-out; opacity: 1; }
         .fade-out { opacity: 0 !important; }
-        .now-title { font-size: 11px; color: #8c8c8c; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; font-weight: 600; border-bottom: 1px solid #f0f0f0; padding-bottom: 6px; display: flex; justify-content: center; align-items: center; gap: 8px; }
-        .event-item { font-size: 12px; font-weight: 600; color: #2c3e50; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f8f8f8; padding-bottom: 4px; }
-        .event-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-        .event-time { font-size: 10px; font-weight: 700; color: #49bad5; background-color: transparent; border: 1px solid #49bad5; padding: 2px 8px; border-radius: 20px; white-space: nowrap; margin-left: 10px; }
-        .weather-note { font-size: 9px; color: #a0a0a0; text-align: center; margin-top: 8px; font-style: italic; font-weight: 500; }
+        .now-title { font-size: 11px; color: #8c8c8c; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; font-weight: 600; border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; display: flex; justify-content: center; align-items: center; gap: 8px; }
+        .event-item-main { font-size: 13px; font-weight: 600; color: #2c3e50; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f8f8f8; padding-bottom: 8px; }
+        .event-item-main:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .event-time-main { font-size: 11px; font-weight: 700; color: #49bad5; background-color: transparent; border: 1px solid #49bad5; padding: 3px 10px; border-radius: 20px; white-space: nowrap; margin-left: 10px; }
+        .weather-note { font-size: 9px; color: #a0a0a0; text-align: center; margin-top: 12px; font-style: italic; font-weight: 500; }
         
-        /* A'la Carte Tablosu */
+        /* "Günlük Aktiviteler" Widget Stilleri (Alt Sayfa) */
+        .activity-box { background: linear-gradient(145deg, #ffffff, #fdfdfd); border: 1px solid #eaeaea; border-radius: 12px; padding: 18px 15px; text-align: left; box-shadow: 0 10px 30px rgba(0,0,0,0.06); position: relative; }
+        #activity-wrapper { transition: opacity 0.5s ease-in-out; opacity: 1; }
+        .activity-title { font-size: 12px; color: #8c8c8c; text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 15px; font-weight: 600; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; text-align: center; display: flex; justify-content: center; align-items: center; gap: 8px; }
+        .activity-item { font-size: 13px; font-weight: 600; color: #2c3e50; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; padding: 10px 8px; border-radius: 8px; border-left: 3px solid transparent; transition: all 0.3s ease; }
+        .activity-item.active-now { background: linear-gradient(90deg, #f4fbff 0%, #ffffff 100%); border-left: 3px solid #00a2df; box-shadow: 0 4px 15px rgba(0, 162, 223, 0.05); }
+        .activity-time { font-size: 11px; font-weight: 700; color: #8c8c8c; white-space: nowrap; margin-left: 10px; letter-spacing: 0.5px; }
+        .activity-item.active-now .activity-time { color: #00a2df; }
+        .now-badge { font-size: 9px; color: #00a2df; font-weight: 700; display: flex; align-items: center; gap: 4px; margin-right: 8px; letter-spacing: 1px; border: 1px solid rgba(0, 162, 223, 0.3); padding: 3px 8px; border-radius: 12px; background-color: rgba(0, 162, 223, 0.05); }
+        .pulse-dot { width: 6px; height: 6px; background-color: #00a2df; border-radius: 50%; animation: pulse-dot 1.5s infinite; }
+        @keyframes pulse-dot { 0% { box-shadow: 0 0 0 0 rgba(0, 162, 223, 0.4); } 70% { box-shadow: 0 0 0 4px rgba(0, 162, 223, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 162, 223, 0); } }
+
+        /* Tablolar */
         .alacarte-table th, .alacarte-table td { border: 1px solid #e5e7eb; padding: 6px; text-align: center; font-size: 10px; font-weight: 600; }
         .alacarte-table th { background-color: #fef08a; color: #374151; }
-        .bg-open { background-color: #38bdf8; color: white; }
-        .bg-closed { background-color: #f87171; color: white; }
         
         .hide-scroll::-webkit-scrollbar { display: none; }
         .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
@@ -106,15 +116,16 @@
     
     <!-- Üst Bar ve Dil Seçimi -->
     <div class="flex justify-between items-center px-6 pt-4 shrink-0 relative z-20">
-        <div class="w-10"></div> <!-- Simetri için boş div -->
         
-        <!-- Dil Uyarı Baloncuğu (Tooltip) -->
-        <div id="lang-tooltip" class="absolute top-12 right-6 bg-gray-800 text-white text-[10px] py-1.5 px-3 rounded shadow-lg transition-opacity duration-700 opacity-100 flex flex-col items-center">
-            🌍 Dil Seçimi / Language
-            <div class="absolute -top-1 right-6 w-2.5 h-2.5 bg-gray-800 rotate-45"></div>
+        <!-- Dil Uyarı Baloncuğu -->
+        <div class="flex-1 flex justify-end pr-3">
+            <div id="lang-tooltip" class="bg-gray-800 text-white text-[10px] py-1.5 px-3 rounded shadow-lg transition-opacity duration-700 opacity-100 relative whitespace-nowrap flex items-center">
+                🌍 Dil / Language
+                <div class="absolute top-1/2 -right-1 w-2 h-2 bg-gray-800 rotate-45 transform -translate-y-1/2"></div>
+            </div>
         </div>
 
-        <div class="flex space-x-1">
+        <div class="flex space-x-1 shrink-0">
             <button onclick="changeLang('tr')" class="px-2 py-0.5 bg-gray-100 border border-gray-200 rounded text-[10px] font-bold text-gray-700 hover:bg-gray-200">🇹🇷 TR</button>
             <button onclick="changeLang('en')" class="px-2 py-0.5 bg-gray-100 border border-gray-200 rounded text-[10px] font-bold text-gray-700 hover:bg-gray-200">🇬🇧 EN</button>
             <button onclick="changeLang('de')" class="px-2 py-0.5 bg-gray-100 border border-gray-200 rounded text-[10px] font-bold text-gray-700 hover:bg-gray-200">🇩🇪 DE</button>
@@ -151,14 +162,14 @@
         </button>
     </div>
 
-    <!-- AI Asistan (Hemen Grid'in Altına Yaslandı) -->
+    <!-- AI Asistan -->
     <div class="px-6 shrink-0 mb-2">
         <a id="ai-link" href="http://crystalsunset.otai.app/tr" target="_blank" class="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold py-3 rounded-xl shadow-md flex items-center justify-center space-x-2 transition transform active:scale-95">
             <i class="fa-solid fa-robot text-lg"></i><span id="btn-ai" class="text-sm">AI Asistan'a Sorun!</span>
         </a>
     </div>
 
-    <!-- Şu An Açık Widget -->
+    <!-- Ana Sayfa: Yeme-İçme Canlı Widget -->
     <div class="px-6 flex-grow flex flex-col justify-start overflow-hidden pb-3">
         <div class="now-box w-full">
             <div id="content-wrapper">
@@ -175,10 +186,8 @@
 <!-- 2. İÇERİK (ALT SAYFA) EKRANLARI -->
 <div id="content-screen" class="scrollable-content hidden flex-col relative pb-10">
     
-    <!-- Sabit Üst Bar -->
     <div class="sticky top-0 bg-white/90 backdrop-blur-md z-10 px-6 py-4 flex items-center border-b border-gray-100 shadow-sm">
         <button onclick="goBackToMenu()" class="text-gray-800 text-xl mr-4"><i class="fa-solid fa-arrow-left"></i></button>
-        <!-- Başlık JS tarafından büyük/küçük harf kurallarına göre dinamik yazdırılacak -->
         <h2 id="page-title" class="font-bold text-gray-800 text-lg tracking-wide"></h2>
     </div>
 
@@ -196,71 +205,81 @@
             tr: `<div class="crystal-panel mb-6 text-sm leading-relaxed text-left">
                     <b>Sayın Misafirimiz,</b><br><br>Bu linkte yer alan transfer bilgileri acenteler tarafından doğrudan sistemimize yüklenmektedir. Transfer saatleri ve operasyonları ile ilgili otel yönetimimizin bir sorumluluğu bulunmamaktadır.<br><br>Oda çıkış saatimizin <b>12:00</b> olduğunu hatırlatır, iyi yolculuklar dileriz.
                  </div>
-                 <a href="https://drive.google.com/drive/folders/1zytCMcVdCUR4D6UtBvVWM9u_TGI5f_7K?usp=sharing" target="_blank" class="crystal-btn block w-full py-4 text-center text-lg"><i class="fa-solid fa-bus mr-2"></i> Transfer Saatini Görüntüle!</a>`,
+                 <a href="https://drive.google.com/drive/folders/1zytCMcVdCUR4D6UtBvVWM9u_TGI5f_7K?usp=sharing" target="_blank" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg"><i class="fa-solid fa-bus mr-2"></i> Transfer Saatini Görüntüle!</a>`,
             en: `<div class="crystal-panel mb-6 text-sm leading-relaxed text-left">
                     <b>Dear Guest,</b><br><br>The transfer information provided in this link is sent directly to us by the travel agencies and uploaded to our system. Please note that our hotel management holds no responsibility regarding the transfer operations or schedules.<br><br>We kindly remind you that our check-out time is <b>12:00 PM</b>. We wish you a safe and pleasant journey.
                  </div>
-                 <a href="https://drive.google.com/drive/folders/1zytCMcVdCUR4D6UtBvVWM9u_TGI5f_7K?usp=sharing" target="_blank" class="crystal-btn block w-full py-4 text-center text-lg"><i class="fa-solid fa-bus mr-2"></i> View Your Pick-up Time!</a>`,
+                 <a href="https://drive.google.com/drive/folders/1zytCMcVdCUR4D6UtBvVWM9u_TGI5f_7K?usp=sharing" target="_blank" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg"><i class="fa-solid fa-bus mr-2"></i> View Your Pick-up Time!</a>`,
             de: `<div class="crystal-panel mb-6 text-sm leading-relaxed text-left">
                     <b>Lieber Gast,</b><br><br>Die in diesem Link bereitgestellten Transferinformationen werden uns direkt von den Reisebüros übermittelt. Bitte beachten Sie, dass unser Hotelmanagement keine Verantwortung für die Transferabläufe oder -zeiten übernimmt.<br><br>Wir möchten Sie daran erinnern, dass unsere Check-out-Zeit <b>12:00 Uhr</b> ist. Wir wünschen Ihnen eine gute Reise.
                  </div>
-                 <a href="https://drive.google.com/drive/folders/1zytCMcVdCUR4D6UtBvVWM9u_TGI5f_7K?usp=sharing" target="_blank" class="crystal-btn block w-full py-4 text-center text-lg"><i class="fa-solid fa-bus mr-2"></i> Abholzeit anzeigen!</a>`,
+                 <a href="https://drive.google.com/drive/folders/1zytCMcVdCUR4D6UtBvVWM9u_TGI5f_7K?usp=sharing" target="_blank" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg"><i class="fa-solid fa-bus mr-2"></i> Abholzeit anzeigen!</a>`,
             ru: `<div class="crystal-panel mb-6 text-sm leading-relaxed text-left">
                     <b>Дорогой Гость,</b><br><br>Информация о трансфере, предоставленная по этой ссылке, отправляется нам напрямую туристическими агентствами. Обратите внимание, что руководство отеля не несет ответственности за операции или расписание трансферов.<br><br>Напоминаем, что время выезда — <b>12:00</b>. Желаем вам безопасного и приятного пути.
                  </div>
-                 <a href="https://drive.google.com/drive/folders/1zytCMcVdCUR4D6UtBvVWM9u_TGI5f_7K?usp=sharing" target="_blank" class="crystal-btn block w-full py-4 text-center text-lg"><i class="fa-solid fa-bus mr-2"></i> Посмотреть время трансфера!</a>`
+                 <a href="https://drive.google.com/drive/folders/1zytCMcVdCUR4D6UtBvVWM9u_TGI5f_7K?usp=sharing" target="_blank" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg"><i class="fa-solid fa-bus mr-2"></i> Посмотреть время трансфера!</a>`
         },
         menus: {
             tr: `<div class="crystal-panel mb-6 text-sm leading-relaxed">
                     A'la carte restoranlarımız her gün <b>18:30 - 23:00</b> saatleri arasında hizmet vermektedir.<br><br>Rezervasyon gerekli değildir; misafirlerimiz konaklamaları boyunca bu deneyimin tadını çıkarabilirler.
                  </div>
-                 <h3 class="font-bold text-gray-700 text-center mb-2 text-sm uppercase">A'la Carte Programı</h3>
-                 <div class="overflow-hidden rounded-xl border border-gray-200 mb-8 shadow-sm">
-                    <table class="w-full alacarte-table">
-                        <tr><th></th><th>Pts</th><th>Sal</th><th>Çar</th><th>Per</th><th>Cum</th><th>Cts</th><th>Paz</th></tr>
-                        <tr><td class="text-left font-bold bg-red-600 text-white text-[9px]">ÖZ REST.</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td><td class="bg-closed">KAPALI</td><td class="bg-open">AÇIK</td></tr>
-                        <tr><td class="text-left font-bold bg-red-600 text-white text-[9px]">MED. BREEZE</td><td class="bg-open">AÇIK</td><td class="bg-closed">KAPALI</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td></tr>
-                        <tr><td class="text-left font-bold bg-red-600 text-white text-[9px]">LATIN AM.</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td><td class="bg-closed">KAPALI</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td></tr>
-                        <tr><td class="text-left font-bold bg-red-600 text-white text-[9px]">ORIENTAL E.</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td><td class="bg-closed">KAPALI</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td></tr>
-                        <tr><td class="text-left font-bold bg-red-600 text-white text-[9px]">FISH BONE</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td><td class="bg-closed">KAPALI</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td><td class="bg-open">AÇIK</td></tr>
-                    </table>
+                 <h3 class="font-bold text-gray-700 text-center mb-3 text-sm uppercase"><i class="fa-regular fa-calendar-xmark text-red-500 mr-1"></i> Kapalı Günler</h3>
+                 <div class="space-y-2 mb-8">
+                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">ÖZ RESTORAN</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Cumartesi Kapalı</span></div>
+                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">MEDITERRANEAN BREEZE</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Salı Kapalı</span></div>
+                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">LATİN AMERİKA</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Çarşamba Kapalı</span></div>
+                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">ORIENTAL EXPRESS</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Cuma Kapalı</span></div>
+                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">FISH BONE</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Perşembe Kapalı</span></div>
                  </div>
                  <div class="crystal-panel mb-6 text-sm leading-relaxed">
                     Oda servisimiz <b>24 saat</b> hizmetinizdedir (Ekstra ücrete tabidir).
                  </div>
-                 <a href="http://wa.me/905497844996" target="_blank" class="crystal-btn block w-full py-4 text-center text-lg bg-green-500 border-green-600"><i class="fa-brands fa-whatsapp text-2xl mr-2 align-middle"></i> Oda Servisi Siparişi Ver</a>`,
+                 <a href="http://wa.me/905497844996" target="_blank" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg bg-green-500 border-green-600"><i class="fa-brands fa-whatsapp text-2xl mr-2"></i> Oda Servisi Siparişi Ver</a>`,
             en: `<div class="crystal-panel mb-6 text-sm leading-relaxed">
                     Our à la carte restaurants welcome you daily between <b>18:30 and 23:00</b>.<br><br>No reservation is required, guests can enjoy these experiences throughout their stay.
                  </div>
-                 <h3 class="font-bold text-gray-700 text-center mb-2 text-sm uppercase">A'la Carte Schedule</h3>
-                 <div class="overflow-hidden rounded-xl border border-gray-200 mb-8 shadow-sm">
-                    <table class="w-full alacarte-table">
-                        <tr><th></th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th></tr>
-                        <tr><td class="text-left font-bold bg-red-600 text-white text-[9px]">ÖZ REST.</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td><td class="bg-closed">CLOSED</td><td class="bg-open">OPEN</td></tr>
-                        <tr><td class="text-left font-bold bg-red-600 text-white text-[9px]">MED. BREEZE</td><td class="bg-open">OPEN</td><td class="bg-closed">CLOSED</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td></tr>
-                        <tr><td class="text-left font-bold bg-red-600 text-white text-[9px]">LATIN AM.</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td><td class="bg-closed">CLOSED</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td></tr>
-                        <tr><td class="text-left font-bold bg-red-600 text-white text-[9px]">ORIENTAL E.</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td><td class="bg-closed">CLOSED</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td></tr>
-                        <tr><td class="text-left font-bold bg-red-600 text-white text-[9px]">FISH BONE</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td><td class="bg-closed">CLOSED</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td><td class="bg-open">OPEN</td></tr>
-                    </table>
+                 <h3 class="font-bold text-gray-700 text-center mb-3 text-sm uppercase"><i class="fa-regular fa-calendar-xmark text-red-500 mr-1"></i> Closed Days</h3>
+                 <div class="space-y-2 mb-8">
+                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">ÖZ RESTORAN</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Closed Saturdays</span></div>
+                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">MEDITERRANEAN BREEZE</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Closed Tuesdays</span></div>
+                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">LATIN AMERICA</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Closed Wednesdays</span></div>
+                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">ORIENTAL EXPRESS</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Closed Fridays</span></div>
+                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">FISH BONE</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Closed Thursdays</span></div>
                  </div>
                  <div class="crystal-panel mb-6 text-sm leading-relaxed">
                     Our room service is available <b>24 hours</b> (subject to additional charge).
                  </div>
-                 <a href="http://wa.me/905497844996" target="_blank" class="crystal-btn block w-full py-4 text-center text-lg bg-green-500 border-green-600"><i class="fa-brands fa-whatsapp text-2xl mr-2 align-middle"></i> Order Room Service</a>`,
+                 <a href="http://wa.me/905497844996" target="_blank" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg bg-green-500 border-green-600"><i class="fa-brands fa-whatsapp text-2xl mr-2"></i> Order Room Service</a>`,
             de: `<div class="crystal-panel mb-6 text-sm leading-relaxed">
                     Unsere À-la-carte-Restaurants begrüßen Sie täglich von <b>18:30 bis 23:00 Uhr</b>.<br><br>Keine Reservierung erforderlich.
+                 </div>
+                 <h3 class="font-bold text-gray-700 text-center mb-3 text-sm uppercase"><i class="fa-regular fa-calendar-xmark text-red-500 mr-1"></i> Ruhetage</h3>
+                 <div class="space-y-2 mb-8">
+                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">ÖZ RESTORAN</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Samstags geschlossen</span></div>
+                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">MEDITERRANEAN BREEZE</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Dienstags geschlossen</span></div>
+                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">LATIN AMERICA</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Mittwochs geschlossen</span></div>
+                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">ORIENTAL EXPRESS</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Freitags geschlossen</span></div>
+                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">FISH BONE</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Donnerstags geschlossen</span></div>
                  </div>
                  <div class="crystal-panel mb-6 text-sm leading-relaxed">
                     Zimmerservice ist <b>24 Stunden</b> verfügbar (gegen Aufpreis).
                  </div>
-                 <a href="http://wa.me/905497844996" target="_blank" class="crystal-btn block w-full py-4 text-center text-lg bg-green-500 border-green-600"><i class="fa-brands fa-whatsapp mr-2"></i> Zimmerservice Bestellen</a>`,
+                 <a href="http://wa.me/905497844996" target="_blank" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg bg-green-500 border-green-600"><i class="fa-brands fa-whatsapp text-2xl mr-2"></i> Zimmerservice Bestellen</a>`,
             ru: `<div class="crystal-panel mb-6 text-sm leading-relaxed">
                     Наши рестораны A'la Carte открыты ежедневно с <b>18:30 до 23:00</b>.<br><br>Бронирование не требуется.
+                 </div>
+                 <h3 class="font-bold text-gray-700 text-center mb-3 text-sm uppercase"><i class="fa-regular fa-calendar-xmark text-red-500 mr-1"></i> Закрытые дни</h3>
+                 <div class="space-y-2 mb-8">
+                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">ÖZ RESTORAN</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Закрыто (Суббота)</span></div>
+                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">MEDITERRANEAN BREEZE</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Закрыто (Вторник)</span></div>
+                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">LATIN AMERICA</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Закрыто (Среда)</span></div>
+                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">ORIENTAL EXPRESS</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Закрыто (Пятница)</span></div>
+                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm"><span class="font-bold text-xs text-gray-700">FISH BONE</span><span class="text-[10px] font-semibold bg-red-100 text-red-600 px-2 py-1 rounded">Закрыто (Четверг)</span></div>
                  </div>
                  <div class="crystal-panel mb-6 text-sm leading-relaxed">
                     Обслуживание номеров доступно <b>24 часа</b> (за дополнительную плату).
                  </div>
-                 <a href="http://wa.me/905497844996" target="_blank" class="crystal-btn block w-full py-4 text-center text-lg bg-green-500 border-green-600"><i class="fa-brands fa-whatsapp mr-2"></i> Заказать Обслуживание</a>`
+                 <a href="http://wa.me/905497844996" target="_blank" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg bg-green-500 border-green-600"><i class="fa-brands fa-whatsapp text-2xl mr-2"></i> Заказать Обслуживание</a>`
         },
         room: {
             tr: `<div class="space-y-5 text-gray-700 text-sm">
@@ -293,28 +312,72 @@
             ru: `<div class="text-sm text-gray-700 text-center py-10">Информация о номере переводится...</div>`
         },
         activities: {
-            tr: `<div class="crystal-panel mb-6 text-sm leading-relaxed">
+            tr: `<div class="crystal-panel mb-8 text-sm leading-relaxed">
                     <b>Crystal Hotels App</b>, günlük aktivitelere, şov programlarına ve önemli konaklama bilgilerine merkezi erişim sağlayarak kusursuz bir misafir deneyimini destekler.
                  </div>
-                 <div class="flex space-x-4 mb-6">
-                    <button class="crystal-btn flex-1 py-3 text-xs"><i class="fa-brands fa-apple text-2xl block mb-1"></i> iOS için İndir</button>
-                    <button class="crystal-btn flex-1 py-3 text-xs"><i class="fa-brands fa-google-play text-2xl block mb-1"></i> Android için İndir</button>
+                 <div class="flex space-x-3 mb-8">
+                    <a href="https://apps.apple.com/tr/app/crystal-hotels/id6744818940" target="_blank" class="crystal-btn flex-1 py-3 text-xs text-center block leading-tight"><i class="fa-brands fa-apple text-[28px] block mb-1"></i> iOS İndir</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.epigra.crystal_hotels&pli=1" target="_blank" class="crystal-btn flex-1 py-3 text-xs text-center block leading-tight"><i class="fa-brands fa-google-play text-[28px] block mb-1"></i> Android İndir</a>
                  </div>
-                 <div class="flex justify-center space-x-4 text-sky-500 text-3xl">
-                    <i class="fa-brands fa-facebook"></i><i class="fa-brands fa-instagram"></i><i class="fa-solid fa-globe"></i>
+                 
+                 <!-- GÜNLÜK AKTİVİTELER WİDGET'I -->
+                 <div class="activity-box mb-8">
+                    <div id="activity-wrapper">
+                        <div style="text-align:center; color:#888; font-size: 12px;">Loading Activities...</div>
+                    </div>
+                 </div>
+
+                 <h3 class="font-bold text-gray-700 text-center mb-4 text-sm uppercase">Bizi Takip Edin</h3>
+                 <div class="flex justify-center items-center space-x-8 text-sky-500 text-4xl mb-4">
+                    <a href="https://www.facebook.com/crystalhotelscomtr/?locale=tr_TR" target="_blank" class="hover:text-sky-600 transition transform hover:scale-110"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/crystalhotels/" target="_blank" class="hover:text-sky-600 transition transform hover:scale-110"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://crystalhotels.com.tr/oteller/crystal-sunset" target="_blank" class="hover:text-sky-600 transition transform hover:scale-110"><i class="fa-solid fa-globe"></i></a>
                  </div>`,
-            en: `<div class="crystal-panel mb-6 text-sm leading-relaxed">
+            en: `<div class="crystal-panel mb-8 text-sm leading-relaxed">
                     The <b>Crystal Hotels App</b> provides centralized access to daily activities, show schedules, and essential stay information, supporting a smooth guest experience.
                  </div>
-                 <div class="flex space-x-4 mb-6">
-                    <button class="crystal-btn flex-1 py-3 text-xs"><i class="fa-brands fa-apple text-2xl block mb-1"></i> App for iOS</button>
-                    <button class="crystal-btn flex-1 py-3 text-xs"><i class="fa-brands fa-google-play text-2xl block mb-1"></i> App for Android</button>
+                 <div class="flex space-x-3 mb-8">
+                    <a href="https://apps.apple.com/tr/app/crystal-hotels/id6744818940" target="_blank" class="crystal-btn flex-1 py-3 text-xs text-center block leading-tight"><i class="fa-brands fa-apple text-[28px] block mb-1"></i> iOS App</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.epigra.crystal_hotels&pli=1" target="_blank" class="crystal-btn flex-1 py-3 text-xs text-center block leading-tight"><i class="fa-brands fa-google-play text-[28px] block mb-1"></i> Android App</a>
                  </div>
-                 <div class="flex justify-center space-x-4 text-sky-500 text-3xl">
-                    <i class="fa-brands fa-facebook"></i><i class="fa-brands fa-instagram"></i><i class="fa-solid fa-globe"></i>
+                 
+                 <!-- GÜNLÜK AKTİVİTELER WİDGET'I -->
+                 <div class="activity-box mb-8">
+                    <div id="activity-wrapper">
+                        <div style="text-align:center; color:#888; font-size: 12px;">Loading Activities...</div>
+                    </div>
+                 </div>
+
+                 <h3 class="font-bold text-gray-700 text-center mb-4 text-sm uppercase">Follow Us</h3>
+                 <div class="flex justify-center items-center space-x-8 text-sky-500 text-4xl mb-4">
+                    <a href="https://www.facebook.com/crystalhotelscomtr/?locale=tr_TR" target="_blank" class="hover:text-sky-600 transition transform hover:scale-110"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/crystalhotels/" target="_blank" class="hover:text-sky-600 transition transform hover:scale-110"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://crystalhotels.com.tr/oteller/crystal-sunset" target="_blank" class="hover:text-sky-600 transition transform hover:scale-110"><i class="fa-solid fa-globe"></i></a>
                  </div>`,
-            de: `<div class="crystal-panel mb-6 text-sm leading-relaxed">Die <b>Crystal Hotels App</b> bietet zentralen Zugriff auf tägliche Aktivitäten und Showprogramme.</div>`,
-            ru: `<div class="crystal-panel mb-6 text-sm leading-relaxed">Приложение <b>Crystal Hotels App</b> предоставляет доступ к ежедневным мероприятиям и расписаниям шоу.</div>`
+            de: `<div class="crystal-panel mb-8 text-sm leading-relaxed">Die <b>Crystal Hotels App</b> bietet zentralen Zugriff auf tägliche Aktivitäten und Showprogramme.</div>
+                 <div class="flex space-x-3 mb-8">
+                    <a href="https://apps.apple.com/tr/app/crystal-hotels/id6744818940" target="_blank" class="crystal-btn flex-1 py-3 text-xs text-center block leading-tight"><i class="fa-brands fa-apple text-[28px] block mb-1"></i> iOS App</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.epigra.crystal_hotels&pli=1" target="_blank" class="crystal-btn flex-1 py-3 text-xs text-center block leading-tight"><i class="fa-brands fa-google-play text-[28px] block mb-1"></i> Android App</a>
+                 </div>
+                 
+                 <!-- GÜNLÜK AKTİVİTELER WİDGET'I -->
+                 <div class="activity-box mb-8">
+                    <div id="activity-wrapper">
+                        <div style="text-align:center; color:#888; font-size: 12px;">Loading Activities...</div>
+                    </div>
+                 </div>`,
+            ru: `<div class="crystal-panel mb-8 text-sm leading-relaxed">Приложение <b>Crystal Hotels App</b> предоставляет доступ к ежедневным мероприятиям и расписаниям шоу.</div>
+                 <div class="flex space-x-3 mb-8">
+                    <a href="https://apps.apple.com/tr/app/crystal-hotels/id6744818940" target="_blank" class="crystal-btn flex-1 py-3 text-xs text-center block leading-tight"><i class="fa-brands fa-apple text-[28px] block mb-1"></i> iOS App</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.epigra.crystal_hotels&pli=1" target="_blank" class="crystal-btn flex-1 py-3 text-xs text-center block leading-tight"><i class="fa-brands fa-google-play text-[28px] block mb-1"></i> Android App</a>
+                 </div>
+                 
+                 <!-- GÜNLÜK AKTİVİTELER WİDGET'I -->
+                 <div class="activity-box mb-8">
+                    <div id="activity-wrapper">
+                        <div style="text-align:center; color:#888; font-size: 12px;">Loading Activities...</div>
+                    </div>
+                 </div>`
         },
         map: {
             tr: `<p class="text-xs text-gray-500 text-center mb-4">Görseli büyütmek için üzerine tıklayabilirsiniz.</p>
@@ -334,7 +397,7 @@
         }
     };
 
-    // --- TEMEL DİL VERİLERİ (Büyük I/İ Bug'ı için özel başlıklar tanımlandı) ---
+    // --- TEMEL DİL VERİLERİ ---
     const translations = {
         tr: {
             welcome: "Konaklamanız boyunca tüm otel bilgilerine zahmetsizce erişin. Restoran saatleri, harita ve AI asistan tek noktada.",
@@ -358,21 +421,20 @@
         }
     };
 
-    let currentLang = 'tr'; // Varsayılan dil
+    let currentLang = 'tr'; 
 
-    // Baloncuğu 5 Saniye Sonra Gizleme
     setTimeout(() => {
         const tooltip = document.getElementById('lang-tooltip');
         if (tooltip) {
             tooltip.classList.remove('opacity-100');
             tooltip.classList.add('opacity-0');
-            setTimeout(() => tooltip.style.display = 'none', 700); // Tamamen kaldır
+            setTimeout(() => tooltip.style.display = 'none', 700); 
         }
-    }, 5000);
+    }, 4000);
 
     function changeLang(lang) {
         currentLang = lang;
-        document.documentElement.lang = lang; // Tarayıcı dili güncellendi (İngilizce büyük harf sorununu önler)
+        document.documentElement.lang = lang; 
         const t = translations[lang];
         
         document.getElementById('welcome-text').innerHTML = t.welcome;
@@ -384,10 +446,8 @@
         document.getElementById('btn-transfer').innerText = t.transfer;
         document.getElementById('btn-ai').innerText = t.ai;
         
-        // AI Asistan linkini seçili dile göre güncelle
         document.getElementById('ai-link').href = `http://crystalsunset.otai.app/${lang}`;
         
-        // Eğer alt sayfadaysa başlığı o dile çevir
         if (!document.getElementById('content-screen').classList.contains('hidden')) {
             const activePage = document.getElementById('content-screen').getAttribute('data-active-page');
             if (activePage) openPage(activePage);
@@ -401,13 +461,17 @@
         contentScreen.classList.add('flex');
         contentScreen.setAttribute('data-active-page', pageKey);
         
-        // Başlığı özel obje (titles) içinden alıyoruz, böylece büyük "İ" sorunu yaşanmıyor.
         document.getElementById('page-title').innerText = translations[currentLang].titles[pageKey];
         
         let htmlData = pageData[pageKey][currentLang] || pageData[pageKey]['en'];
         document.getElementById('page-content').innerHTML = htmlData;
         
         contentScreen.scrollTop = 0; 
+        
+        // Eğer Aktiviteler sayfası açıldıysa, animasyonlu listeyi tetikle
+        if (pageKey === 'activities') {
+            renderActivities(); 
+        }
     }
 
     function goBackToMenu() {
@@ -416,30 +480,29 @@
         document.getElementById('main-menu-screen').classList.remove('hidden');
     }
 
-    // --- "ŞU AN AÇIK" WIDGET MANTIĞI ---
-    const uiTexts = {
+    // --- 1. ANA SAYFA "ŞU AN AÇIK" WIDGET MANTIĞI (Yeme İçme) ---
+    const uiTextsMain = {
         en: { title: "OPEN RIGHT NOW", until: "until", weather: "(Subject to weather conditions)" },
         tr: { title: "ŞU AN AÇIK", until: "kapanış", weather: "(Hava şartlarına bağlı değişebilir)" },
         ru: { title: "ОТКРЫТО СЕЙЧАС", until: "до", weather: "(Зависит от погодных условий)" },
         de: { title: "JETZT GEÖFFNET", until: "bis", weather: "(Wetterbedingt variabel)" }
     };
 
-    const baseSchedule = [
+    const mainSchedule = [
         { name: { en: "🍳 Breakfast", tr: "🍳 Kahvaltı", ru: "🍳 Завтрак", de: "🍳 Frühstück" }, start: "07:00", end: "11:00" },
         { name: { en: "🍟 Food Court", tr: "🍟 Food Court", ru: "🍟 Food Court", de: "🍟 Food Court" }, start: "11:00", end: "12:00" },
         { name: { en: "🍔 Snack Rest.", tr: "🍔 Snack Rest.", ru: "🍔 Снэк-рест.", de: "🍔 Snack Rest." }, start: "12:00", end: "16:00" },
         { name: { en: "🏖️ Beach Snack", tr: "🏖️ Sahil Snack", ru: "🏖️ Пляжный Снэк", de: "🏖️ Strandsnack" }, start: "11:00", end: "18:00" },
         { name: { en: "🥙 Flatbread", tr: "🥙 Gözleme", ru: "🥙 Гёзлеме", de: "🥙 Fladenbrot" }, start: "11:00", end: "18:00" },
-        { name: { en: "🍷 Dinner", tr: "🍷 Akşam Yemeği", ru: "🍷 Ужин", de: "🍷 Abendessen" }, start: "18:30", end: "21:30" },
-        { name: { en: "🎪 Evening Show", tr: "🎪 Akşam Şovu", ru: "🎪 Вечернее Шоу", de: "🎪 Abendshow" }, start: "21:15", end: "22:30" }
+        { name: { en: "🍷 Dinner", tr: "🍷 Akşam Yemeği", ru: "🍷 Ужин", de: "🍷 Abendessen" }, start: "18:30", end: "21:30" }
     ];
 
-    function renderContent() {
+    function renderMainContent() {
         let d = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
         let currentMinutes = d.getHours() * 60 + d.getMinutes();
 
         let activeEvents = [];
-        baseSchedule.forEach(item => {
+        mainSchedule.forEach(item => {
             let startMin = parseInt(item.start.split(':')[0])*60 + parseInt(item.start.split(':')[1]);
             let endMin = parseInt(item.end.split(':')[0])*60 + parseInt(item.end.split(':')[1]);
             let isActive = (startMin > endMin) ? (currentMinutes >= startMin || currentMinutes < endMin) : (currentMinutes >= startMin && currentMinutes < endMin);
@@ -451,8 +514,7 @@
             }
         });
         activeEvents.sort((a, b) => a.timeLeft - b.timeLeft);
-        
-        activeEvents = activeEvents.slice(0, 3); // Sadece aktif ilk 3 olayı göster ki ekran çok uzamasın.
+        activeEvents = activeEvents.slice(0, 3);
 
         const langs = ['en', 'tr', 'ru', 'de'];
         const flags = { en: "🇬🇧", tr: "🇹🇷", ru: "🇷🇺", de: "🇩🇪" }; 
@@ -460,22 +522,103 @@
 
         let activeEventsHTML = "";
         activeEvents.forEach(e => {
-            activeEventsHTML += `<div class="event-item"><span>${e.name[lang]}</span> <span class="event-time">${uiTexts[lang].until} ${e.end}</span></div>`;
+            activeEventsHTML += `<div class="event-item-main"><span>${e.name[lang]}</span> <span class="event-time-main">${uiTextsMain[lang].until} ${e.end}</span></div>`;
         });
 
-        let finalHTML = `<div class="now-title">${flags[lang]} ${uiTexts[lang].title} ${flags[lang]}</div>
-                         <div id="active-events">${activeEventsHTML || '<div class="text-center text-gray-400 font-semibold py-1 text-xs">No active service.</div>'}</div>
-                         <div class="weather-note">${uiTexts[lang].weather}</div>`;
+        let finalHTML = `<div class="now-title">${flags[lang]} ${uiTextsMain[lang].title} ${flags[lang]}</div>
+                         <div id="active-events">${activeEventsHTML || '<div class="text-center text-gray-400 font-semibold py-2 text-xs">No active service.</div>'}</div>
+                         <div class="weather-note">${uiTextsMain[lang].weather}</div>`;
 
         let wrapper = document.getElementById('content-wrapper');
+        if(wrapper) {
+            wrapper.classList.add('fade-out');
+            setTimeout(() => { wrapper.innerHTML = finalHTML; wrapper.classList.remove('fade-out'); }, 400); 
+        }
+    }
+
+
+    // --- 2. AKTİVİTELER SAYFASI "GÜNLÜK AKTİVİTELER" MANTIĞI (Sizin Animasyonlu Kodunuz) ---
+    const uiTextsAct = {
+        en: { title: "DAILY ACTIVITIES", now: "NOW", weather: "(Activities are subject to change due to weather conditions.)" },
+        tr: { title: "GÜNLÜK AKTİVİTELER", now: "ŞU AN", weather: "(Aktivitelerimiz hava koşullarına bağlı değişiklikler gösterebilir.)" },
+        ru: { title: "ДНЕВНЫЕ МЕРОПРИЯТИЯ", now: "СЕЙЧАС", weather: "(Программа может меняться в зависимости от погодных условий.)" },
+        de: { title: "TÄGLICHE AKTIVITÄTEN", now: "JETZT", weather: "(Aktivitäten können sich wetterbedingt ändern.)" }
+    };
+
+    const baseActivities = [
+        { name: { en: "☀️ Good Morning & Music", tr: "☀️ Günaydın & Müzik", ru: "☀️ Доброе Утро и Музыка", de: "☀️ Guten Morgen & Info" }, start: "10:00", end: "10:30" },
+        { name: { en: "🤸‍♀️ Morning Gym", tr: "🤸‍♀️ Sabah Jimnastiği", ru: "🤸‍♀️ Утренняя Гимнастика", de: "🤸‍♀️ Morgengymnastik" }, start: "10:30", end: "11:00" },
+        { name: { en: "🤽‍♂️ Water Polo", tr: "🤽‍♂️ Su Topu", ru: "🤽‍♂️ Водное Поло", de: "🤽‍♂️ Wasserball" }, start: "10:30", end: "11:00" },
+        { name: { en: "🥎 Boccia", tr: "🥎 Boccia", ru: "🥎 Бочча", de: "🥎 Boccia" }, start: "10:30", end: "11:00" },
+        { name: { en: "🎯 Dart Game", tr: "🎯 Dart Oyunu", ru: "🎯 Дартс", de: "🎯 Darts-Spiel" }, start: "11:00", end: "11:30" },
+        { name: { en: "💦 Water Gym", tr: "💦 Water Gym", ru: "💦 Аквааэробика", de: "💦 Wassergymnastik" }, start: "11:30", end: "12:00" },
+        { name: { en: "🏐 Volleyball", tr: "🏐 Voleybol", ru: "🏐 Волейбол", de: "🏐 Volleyball" }, start: "11:30", end: "12:00" },
+        { name: { en: "🤽‍♂️ Water Polo", tr: "🤽‍♂️ Su Topu", ru: "🤽‍♂️ Водное Поло", de: "🤽‍♂️ Wasserball" }, start: "15:00", end: "15:30" },
+        { name: { en: "🥎 Boccia", tr: "🥎 Boccia", ru: "🥎 Бочча", de: "🥎 Boccia" }, start: "15:45", end: "16:15" },
+        { name: { en: "🎯 Dart Game", tr: "🎯 Dart Oyunu", ru: "🎯 Дартс", de: "🎯 Darts-Spiel" }, start: "15:45", end: "16:15" },
+        { name: { en: "🤸‍♀️ Pilates", tr: "🤸‍♀️ Pilates", ru: "🤸‍♀️ Пилатес", de: "🤸‍♀️ Pilates" }, start: "16:00", end: "16:30" },
+        { name: { en: "🏐 Volleyball", tr: "🏐 Voleybol", ru: "🏐 Волейбол", de: "🏐 Beachvolleyball" }, start: "16:30", end: "17:00" },
+        { name: { en: "🎈 Kids Show", tr: "🎈 Çocuk Şovu", ru: "🎈 Детское Шоу", de: "🎈 Kinder Show" }, start: "20:30", end: "21:15" },
+        { name: { en: "🎪 Evening Show", tr: "🎪 Akşam Şovu", ru: "🎪 Вечернее Шоу", de: "🎪 Abendshow" }, start: "21:15", end: "22:30" },
+        { name: { en: "🪩 Disco", tr: "🪩 Disko", ru: "🪩 Дискотека", de: "🪩 Disco" }, start: "23:00", end: "01:30" }
+    ];
+
+    function renderActivities() {
+        let wrapper = document.getElementById('activity-wrapper');
+        if (!wrapper) return; // Sadece aktiviteler sayfasındaysa çalış
+
+        let now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
+        let currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+        let todaySchedule = [...baseActivities];
+        todaySchedule.sort((a, b) => (parseInt(a.start.split(':')[0])*60 + parseInt(a.start.split(':')[1])) - (parseInt(b.start.split(':')[0])*60 + parseInt(b.start.split(':')[1])));
+
+        const langs = ['en', 'tr', 'ru', 'de'];
+        const flags = { en: "🇬🇧", tr: "🇹🇷", ru: "🇷🇺", de: "🇩🇪" }; 
+        let lang = langs[currentLangIndex];
+
+        let htmlContent = "";
+
+        todaySchedule.forEach(item => {
+            let startMin = parseInt(item.start.split(':')[0])*60 + parseInt(item.start.split(':')[1]);
+            let endMin = parseInt(item.end.split(':')[0])*60 + parseInt(item.end.split(':')[1]);
+            
+            let isActive = false;
+            if (startMin > endMin) { 
+                if (currentMinutes >= startMin || currentMinutes < endMin) isActive = true;
+            } else {
+                if (currentMinutes >= startMin && currentMinutes < endMin) isActive = true;
+            }
+
+            let activeClass = isActive ? " active-now" : "";
+            let nowBadge = isActive ? '<span class="now-badge"><span class="pulse-dot"></span>' + uiTextsAct[lang].now + '</span>' : '';
+            
+            htmlContent += `<div class="activity-item${activeClass}">
+                                <div style="display:flex; align-items:center;">${nowBadge}<span>${item.name[lang]}</span></div>
+                                <span class="activity-time">${item.start} - ${item.end}</span>
+                            </div>`; 
+        });
+
+        let finalHTML = `<div class="activity-title">${flags[lang]} ${uiTextsAct[lang].title} ${flags[lang]}</div>
+                         <div id="activity-list">${htmlContent}</div>
+                         <div class="weather-note">${uiTextsAct[lang].weather}</div>`;
+
         wrapper.classList.add('fade-out');
         setTimeout(() => { wrapper.innerHTML = finalHTML; wrapper.classList.remove('fade-out'); }, 400); 
     }
 
+
+    // --- 3. DÖNGÜ (HER İKİ WIDGET İÇİN ORTAK) ---
     let currentLangIndex = 0;
-    setInterval(() => { currentLangIndex = (currentLangIndex + 1) % 4; renderContent(); }, 4000);
-    renderContent();
-    changeLang('tr'); // İlk açılışta dili tanımla (TR)
+    setInterval(() => { 
+        currentLangIndex = (currentLangIndex + 1) % 4; 
+        renderMainContent(); 
+        renderActivities(); // Açık olan sayfaya göre çalışanını tetikler
+    }, 4000);
+    
+    // İlk Renderlar
+    renderMainContent();
+    changeLang('tr'); 
 </script>
 
 </body>
