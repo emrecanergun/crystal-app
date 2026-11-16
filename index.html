@@ -57,10 +57,10 @@
         }
         .crystal-btn:active { transform: scale(0.97); }
         
-        /* Arkası Fotoğraflı Ana Menü Grid Butonları (Hızlı yüklenme korumalı) */
+        /* Arkası Fotoğraflı Ana Menü Grid Butonları (Daha Saydam) */
         .crystal-menu-btn {
             border-radius: 12px;
-            background-color: #49bad5; /* Resim yüklenene kadar duracak renk */
+            background-color: #49bad5; 
             background-size: cover;
             background-position: center;
             box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5), 0 4px 10px rgba(0,0,0,0.08);
@@ -70,6 +70,10 @@
             position: relative;
         }
         .crystal-menu-btn:active { transform: scale(0.96); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        /* Yazıları belirginleştirmek için güçlü gölge */
+        .crystal-menu-text {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.6), 0 0 10px rgba(0,0,0,0.4);
+        }
         
         /* CANLANDIRILMIŞ OTEL SEÇİM BUTONLARI */
         .hotel-select-btn {
@@ -131,7 +135,7 @@
 </head>
 <body>
 
-<!-- 0. YENİ OTEL SEÇİM (GİRİŞ) EKRANI (Premium Tasarım) -->
+<!-- 0. YENİ OTEL SEÇİM (GİRİŞ) EKRANI -->
 <div id="hotel-selection-screen" class="app-container scrollable-content z-30 bg-gradient-to-br from-sky-50 via-white to-sky-100">
     
     <div class="sticky top-0 bg-white/80 backdrop-blur-lg z-10 pt-10 pb-5 px-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] text-center">
@@ -161,13 +165,10 @@
             <div class="flex items-center"><i class="fa-solid fa-location-dot text-sky-400 mr-3 text-sm opacity-80"></i><span class="hotel-name">CRYSTAL TAT BEACH PEARL COLLECTION</span></div>
             <i class="fa-solid fa-chevron-right text-gray-300 text-[10px]"></i>
         </div>
-        
-        <!-- Sunset (Özel Vurgu) -->
         <div onclick="selectHotel('Sunset')" class="hotel-select-btn animate-fade-in-up border-sky-200 bg-gradient-to-r from-sky-50 to-white" style="animation-delay: 0.25s;">
             <div class="flex items-center"><i class="fa-solid fa-star text-sky-500 mr-3 text-sm"></i><span class="hotel-name text-sky-800">CRYSTAL SUNSET PEARL COLLECTION</span></div>
             <i class="fa-solid fa-chevron-right text-sky-400 text-[10px]"></i>
         </div>
-
         <div onclick="selectHotel('Aura')" class="hotel-select-btn animate-fade-in-up" style="animation-delay: 0.3s;">
             <div class="flex items-center"><i class="fa-solid fa-location-dot text-sky-400 mr-3 text-sm opacity-80"></i><span class="hotel-name">CRYSTAL AURA AQUA COLLECTION</span></div>
             <i class="fa-solid fa-chevron-right text-gray-300 text-[10px]"></i>
@@ -231,35 +232,35 @@
         </p>
     </div>
 
-    <!-- ARKASI GÖRSELLİ 6'LI MENÜ (Linear Gradient Mavi Filtre ile Kaplı) -->
+    <!-- ARKASI GÖRSELLİ 6'LI MENÜ (%65 Saydamlık ile Daha Belirgin Fotoğraflar) -->
     <div class="dashed-border-y py-3 mt-3 mb-2 grid grid-cols-2 gap-2 px-6 shrink-0">
-        <button onclick="openPage('room')" class="crystal-menu-btn flex flex-col items-center justify-center py-4 relative" style="background-image: linear-gradient(rgba(73, 186, 213, 0.85), rgba(73, 186, 213, 0.85)), url('bg-room.jpg');">
-            <div class="relative z-10 flex flex-col items-center text-white drop-shadow-md">
+        <button onclick="openPage('room')" class="crystal-menu-btn flex flex-col items-center justify-center py-4 relative" style="background-image: linear-gradient(rgba(73, 186, 213, 0.65), rgba(73, 186, 213, 0.65)), url('bg-room.jpg');">
+            <div class="relative z-10 flex flex-col items-center text-white crystal-menu-text">
                 <i class="fa-solid fa-bed text-2xl mb-1"></i><span id="btn-room" class="font-bold text-[11px]">Oda Rehberi</span>
             </div>
         </button>
-        <button onclick="openPage('food')" class="crystal-menu-btn flex flex-col items-center justify-center py-4 relative" style="background-image: linear-gradient(rgba(73, 186, 213, 0.85), rgba(73, 186, 213, 0.85)), url('bg-food.jpg');">
-            <div class="relative z-10 flex flex-col items-center text-white drop-shadow-md">
+        <button onclick="openPage('food')" class="crystal-menu-btn flex flex-col items-center justify-center py-4 relative" style="background-image: linear-gradient(rgba(73, 186, 213, 0.65), rgba(73, 186, 213, 0.65)), url('bg-food.jpg');">
+            <div class="relative z-10 flex flex-col items-center text-white crystal-menu-text">
                 <i class="fa-solid fa-utensils text-2xl mb-1"></i><span id="btn-food" class="font-bold text-[11px]">Yiyecek & İçecek</span>
             </div>
         </button>
-        <button onclick="openPage('map')" class="crystal-menu-btn flex flex-col items-center justify-center py-4 relative" style="background-image: linear-gradient(rgba(73, 186, 213, 0.85), rgba(73, 186, 213, 0.85)), url('bg-map.jpg');">
-            <div class="relative z-10 flex flex-col items-center text-white drop-shadow-md">
+        <button onclick="openPage('map')" class="crystal-menu-btn flex flex-col items-center justify-center py-4 relative" style="background-image: linear-gradient(rgba(73, 186, 213, 0.65), rgba(73, 186, 213, 0.65)), url('bg-map.jpg');">
+            <div class="relative z-10 flex flex-col items-center text-white crystal-menu-text">
                 <i class="fa-solid fa-map-location-dot text-2xl mb-1"></i><span id="btn-map" class="font-bold text-[11px]">Tesis Haritası</span>
             </div>
         </button>
-        <button onclick="openPage('activities')" class="crystal-menu-btn flex flex-col items-center justify-center py-4 relative" style="background-image: linear-gradient(rgba(73, 186, 213, 0.85), rgba(73, 186, 213, 0.85)), url('bg-act.jpg');">
-            <div class="relative z-10 flex flex-col items-center text-white drop-shadow-md">
+        <button onclick="openPage('activities')" class="crystal-menu-btn flex flex-col items-center justify-center py-4 relative" style="background-image: linear-gradient(rgba(73, 186, 213, 0.65), rgba(73, 186, 213, 0.65)), url('bg-act.jpg');">
+            <div class="relative z-10 flex flex-col items-center text-white crystal-menu-text">
                 <i class="fa-solid fa-icons text-2xl mb-1"></i><span id="btn-activities" class="font-bold text-[11px]">Aktiviteler</span>
             </div>
         </button>
-        <button onclick="openPage('menus')" class="crystal-menu-btn flex flex-col items-center justify-center py-4 relative" style="background-image: linear-gradient(rgba(73, 186, 213, 0.85), rgba(73, 186, 213, 0.85)), url('bg-menus.jpg');">
-            <div class="relative z-10 flex flex-col items-center text-white drop-shadow-md">
+        <button onclick="openPage('menus')" class="crystal-menu-btn flex flex-col items-center justify-center py-4 relative" style="background-image: linear-gradient(rgba(73, 186, 213, 0.65), rgba(73, 186, 213, 0.65)), url('bg-menus.jpg');">
+            <div class="relative z-10 flex flex-col items-center text-white crystal-menu-text">
                 <i class="fa-solid fa-book-open-reader text-2xl mb-1"></i><span id="btn-menus" class="font-bold text-[11px]">Menüler</span>
             </div>
         </button>
-        <button onclick="openPage('transfer')" class="crystal-menu-btn flex flex-col items-center justify-center py-4 relative" style="background-image: linear-gradient(rgba(73, 186, 213, 0.85), rgba(73, 186, 213, 0.85)), url('bg-transfer.jpg');">
-            <div class="relative z-10 flex flex-col items-center text-white drop-shadow-md">
+        <button onclick="openPage('transfer')" class="crystal-menu-btn flex flex-col items-center justify-center py-4 relative" style="background-image: linear-gradient(rgba(73, 186, 213, 0.65), rgba(73, 186, 213, 0.65)), url('bg-transfer.jpg');">
+            <div class="relative z-10 flex flex-col items-center text-white crystal-menu-text">
                 <i class="fa-solid fa-plane-departure text-2xl mb-1"></i><span id="btn-transfer" class="font-bold text-[11px]">Transfer Bilgileri</span>
             </div>
         </button>
@@ -763,6 +764,7 @@
     setInterval(() => { 
         currentLangIndex = (currentLangIndex + 1) % 4; 
         
+        // Sadece ekranda olan menüyü güncelle ki boşuna kasmasın
         if (!document.getElementById('main-menu-screen').classList.contains('hidden')) {
             renderMainContent(); 
         }
