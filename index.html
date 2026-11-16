@@ -320,10 +320,13 @@
                     <a href="https://play.google.com/store/apps/details?id=com.epigra.crystal_hotels&pli=1" target="_blank" class="crystal-btn flex-1 py-3 text-xs text-center block leading-tight"><i class="fa-brands fa-google-play text-[28px] block mb-1"></i> Android İndir</a>
                  </div>
                  
-                 <!-- GÜNLÜK AKTİVİTELER WİDGET'I -->
-                 <div class="activity-box mb-8">
-                    <div id="activity-wrapper">
-                        <div style="text-align:center; color:#888; font-size: 12px;">Loading Activities...</div>
+                 <!-- GÜNLÜK AKTİVİTELER BUTONU VE WİDGET'I -->
+                 <button onclick="document.getElementById('live-schedule-container').classList.remove('hidden'); this.style.display='none'; renderActivities();" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg mb-8"><i class="fa-solid fa-calendar-day mr-2"></i> Canlı Programı Gör!</button>
+                 <div id="live-schedule-container" class="hidden mb-8">
+                    <div class="activity-box">
+                        <div id="activity-wrapper">
+                            <div style="text-align:center; color:#888; font-size: 12px;">Loading Activities...</div>
+                        </div>
                     </div>
                  </div>
 
@@ -341,10 +344,13 @@
                     <a href="https://play.google.com/store/apps/details?id=com.epigra.crystal_hotels&pli=1" target="_blank" class="crystal-btn flex-1 py-3 text-xs text-center block leading-tight"><i class="fa-brands fa-google-play text-[28px] block mb-1"></i> Android App</a>
                  </div>
                  
-                 <!-- GÜNLÜK AKTİVİTELER WİDGET'I -->
-                 <div class="activity-box mb-8">
-                    <div id="activity-wrapper">
-                        <div style="text-align:center; color:#888; font-size: 12px;">Loading Activities...</div>
+                 <!-- GÜNLÜK AKTİVİTELER BUTONU VE WİDGET'I -->
+                 <button onclick="document.getElementById('live-schedule-container').classList.remove('hidden'); this.style.display='none'; renderActivities();" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg mb-8"><i class="fa-solid fa-calendar-day mr-2"></i> View Live Schedule!</button>
+                 <div id="live-schedule-container" class="hidden mb-8">
+                    <div class="activity-box">
+                        <div id="activity-wrapper">
+                            <div style="text-align:center; color:#888; font-size: 12px;">Loading Activities...</div>
+                        </div>
                     </div>
                  </div>
 
@@ -360,10 +366,13 @@
                     <a href="https://play.google.com/store/apps/details?id=com.epigra.crystal_hotels&pli=1" target="_blank" class="crystal-btn flex-1 py-3 text-xs text-center block leading-tight"><i class="fa-brands fa-google-play text-[28px] block mb-1"></i> Android App</a>
                  </div>
                  
-                 <!-- GÜNLÜK AKTİVİTELER WİDGET'I -->
-                 <div class="activity-box mb-8">
-                    <div id="activity-wrapper">
-                        <div style="text-align:center; color:#888; font-size: 12px;">Loading Activities...</div>
+                 <!-- GÜNLÜK AKTİVİTELER BUTONU VE WİDGET'I -->
+                 <button onclick="document.getElementById('live-schedule-container').classList.remove('hidden'); this.style.display='none'; renderActivities();" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg mb-8"><i class="fa-solid fa-calendar-day mr-2"></i> Live-Programm Ansehen!</button>
+                 <div id="live-schedule-container" class="hidden mb-8">
+                    <div class="activity-box">
+                        <div id="activity-wrapper">
+                            <div style="text-align:center; color:#888; font-size: 12px;">Loading Activities...</div>
+                        </div>
                     </div>
                  </div>`,
             ru: `<div class="crystal-panel mb-8 text-sm leading-relaxed">Приложение <b>Crystal Hotels App</b> предоставляет доступ к ежедневным мероприятиям и расписаниям шоу.</div>
@@ -372,10 +381,13 @@
                     <a href="https://play.google.com/store/apps/details?id=com.epigra.crystal_hotels&pli=1" target="_blank" class="crystal-btn flex-1 py-3 text-xs text-center block leading-tight"><i class="fa-brands fa-google-play text-[28px] block mb-1"></i> Android App</a>
                  </div>
                  
-                 <!-- GÜNLÜK AKTİVİTELER WİDGET'I -->
-                 <div class="activity-box mb-8">
-                    <div id="activity-wrapper">
-                        <div style="text-align:center; color:#888; font-size: 12px;">Loading Activities...</div>
+                 <!-- GÜNLÜK AKTİVİTELER BUTONU VE WİDGET'I -->
+                 <button onclick="document.getElementById('live-schedule-container').classList.remove('hidden'); this.style.display='none'; renderActivities();" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg mb-8"><i class="fa-solid fa-calendar-day mr-2"></i> Посмотреть расписание!</button>
+                 <div id="live-schedule-container" class="hidden mb-8">
+                    <div class="activity-box">
+                        <div id="activity-wrapper">
+                            <div style="text-align:center; color:#888; font-size: 12px;">Loading Activities...</div>
+                        </div>
                     </div>
                  </div>`
         },
@@ -467,11 +479,6 @@
         document.getElementById('page-content').innerHTML = htmlData;
         
         contentScreen.scrollTop = 0; 
-        
-        // Eğer Aktiviteler sayfası açıldıysa, animasyonlu listeyi tetikle
-        if (pageKey === 'activities') {
-            renderActivities(); 
-        }
     }
 
     function goBackToMenu() {
@@ -537,7 +544,7 @@
     }
 
 
-    // --- 2. AKTİVİTELER SAYFASI "GÜNLÜK AKTİVİTELER" MANTIĞI (Sizin Animasyonlu Kodunuz) ---
+    // --- 2. AKTİVİTELER SAYFASI "GÜNLÜK AKTİVİTELER" MANTIĞI ---
     const uiTextsAct = {
         en: { title: "DAILY ACTIVITIES", now: "NOW", weather: "(Activities are subject to change due to weather conditions.)" },
         tr: { title: "GÜNLÜK AKTİVİTELER", now: "ŞU AN", weather: "(Aktivitelerimiz hava koşullarına bağlı değişiklikler gösterebilir.)" },
@@ -565,7 +572,7 @@
 
     function renderActivities() {
         let wrapper = document.getElementById('activity-wrapper');
-        if (!wrapper) return; // Sadece aktiviteler sayfasındaysa çalış
+        if (!wrapper) return; 
 
         let now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
         let currentMinutes = now.getHours() * 60 + now.getMinutes();
@@ -607,13 +614,12 @@
         setTimeout(() => { wrapper.innerHTML = finalHTML; wrapper.classList.remove('fade-out'); }, 400); 
     }
 
-
     // --- 3. DÖNGÜ (HER İKİ WIDGET İÇİN ORTAK) ---
     let currentLangIndex = 0;
     setInterval(() => { 
         currentLangIndex = (currentLangIndex + 1) % 4; 
         renderMainContent(); 
-        renderActivities(); // Açık olan sayfaya göre çalışanını tetikler
+        renderActivities(); 
     }, 4000);
     
     // İlk Renderlar
