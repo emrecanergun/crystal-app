@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Crystal Hotels - Guest Information Hub</title>
     
-    <!-- YENİ: Kritik Logo Önyüklemesi (Hız için) -->
+    <!-- Kritik Logo Önyüklemesi (Hız için) -->
     <link rel="preload" as="image" href="logo.png">
     
-    <!-- Tailwind CSS (Script yüklendiği için yarım saniye gecikme yapar, bunu Splash Screen ile maskeledik) -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -26,7 +26,7 @@
             overflow-x: hidden;
         }
         
-        /* YENİ: UYGULAMA AÇILIŞ EKRANI (SPLASH SCREEN) */
+        /* UYGULAMA AÇILIŞ EKRANI (SPLASH SCREEN) */
         #splash-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 100%);
@@ -47,7 +47,7 @@
             display: flex;
             flex-direction: column;
             position: relative;
-            opacity: 0; /* Tailwind yüklenene kadar gizli */
+            opacity: 0; 
             animation: fadeInApp 0.5s forwards 0.3s;
         }
         @keyframes fadeInApp { to { opacity: 1; } }
@@ -58,19 +58,14 @@
         .dashed-border-y { border-top: 1px dashed #e5e7eb; border-bottom: 1px dashed #e5e7eb; }
         .dashed-border-b { border-bottom: 1px dashed #e5e7eb; }
 
+        /* Standart 3D Buton (En Hızlı Yüklenen Tasarım) */
         .crystal-btn {
             background-color: #49bad5; border-radius: 8px; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.6), 0 2px 4px rgba(0,0,0,0.05); 
             color: #ffffff; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.1); transition: all 0.15s ease; cursor: pointer; border: 1px solid #3ca5be;
         }
         .crystal-btn:active { transform: scale(0.97); }
         
-        .crystal-menu-btn {
-            border-radius: 12px; background-color: #49bad5; background-size: cover; background-position: center;
-            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5), 0 4px 10px rgba(0,0,0,0.08); transition: all 0.15s ease; cursor: pointer; border: 1px solid #3ca5be; position: relative;
-        }
-        .crystal-menu-btn:active { transform: scale(0.96); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .crystal-menu-text { text-shadow: 0 2px 4px rgba(0,0,0,0.6), 0 0 10px rgba(0,0,0,0.4); }
-        
+        /* CANLANDIRILMIŞ OTEL SEÇİM BUTONLARI */
         .hotel-select-btn {
             background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); border: 1px solid rgba(229, 231, 235, 0.5);
             border-radius: 14px; padding: 16px 18px; display: flex; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer;
@@ -84,6 +79,7 @@
         .crystal-panel { background-color: #49bad5; border-radius: 12px; padding: 1.5rem; color: #ffffff; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5), 0 4px 6px rgba(0,0,0,0.1); text-align: center; }
         .crystal-panel a { text-decoration: underline; font-weight: bold; }
 
+        /* Widget Stilleri */
         .now-box { background: linear-gradient(145deg, #ffffff, #fdfdfd); border: 1px solid #eaeaea; border-radius: 12px; padding: 16px 15px; text-align: left; box-shadow: 0 5px 20px rgba(0,0,0,0.04); height: 100%; }
         #content-wrapper { transition: opacity 0.4s ease-in-out; opacity: 1; }
         .fade-out { opacity: 0 !important; }
@@ -194,6 +190,7 @@
 <div id="main-menu-screen" class="app-container hidden bg-white">
     
     <div class="flex justify-between items-center px-6 pt-4 shrink-0 relative z-20">
+        
         <div class="flex-1 flex justify-end pr-3">
             <div id="lang-tooltip" class="hidden bg-gray-800 text-white text-[10px] py-1.5 px-3 rounded shadow-lg transition-opacity duration-700 opacity-0 relative whitespace-nowrap flex items-center">
                 🌍 Dil / Language
@@ -216,37 +213,25 @@
         </p>
     </div>
 
-    <!-- ARKASI GÖRSELLİ 6'LI MENÜ -->
+    <!-- DÜZ 3D MENÜ (Maksimum Hız) -->
     <div class="dashed-border-y py-3 mt-3 mb-2 grid grid-cols-2 gap-2 px-6 shrink-0">
-        <button onclick="openPage('room')" class="crystal-menu-btn flex flex-col items-center justify-center py-4 relative" style="background-image: linear-gradient(rgba(73, 186, 213, 0.65), rgba(73, 186, 213, 0.65)), url('bg-room.jpg');">
-            <div class="relative z-10 flex flex-col items-center text-white crystal-menu-text">
-                <i class="fa-solid fa-bed text-2xl mb-1"></i><span id="btn-room" class="font-bold text-[11px]">Oda Rehberi</span>
-            </div>
+        <button onclick="openPage('room')" class="crystal-btn flex flex-col items-center justify-center py-3">
+            <i class="fa-solid fa-bed text-xl mb-1"></i><span id="btn-room" class="font-bold text-[11px]">Oda Rehberi</span>
         </button>
-        <button onclick="openPage('food')" class="crystal-menu-btn flex flex-col items-center justify-center py-4 relative" style="background-image: linear-gradient(rgba(73, 186, 213, 0.65), rgba(73, 186, 213, 0.65)), url('bg-food.jpg');">
-            <div class="relative z-10 flex flex-col items-center text-white crystal-menu-text">
-                <i class="fa-solid fa-utensils text-2xl mb-1"></i><span id="btn-food" class="font-bold text-[11px]">Yiyecek & İçecek</span>
-            </div>
+        <button onclick="openPage('food')" class="crystal-btn flex flex-col items-center justify-center py-3">
+            <i class="fa-solid fa-utensils text-xl mb-1"></i><span id="btn-food" class="font-bold text-[11px]">Yiyecek & İçecek</span>
         </button>
-        <button onclick="openPage('map')" class="crystal-menu-btn flex flex-col items-center justify-center py-4 relative" style="background-image: linear-gradient(rgba(73, 186, 213, 0.65), rgba(73, 186, 213, 0.65)), url('bg-map.jpg');">
-            <div class="relative z-10 flex flex-col items-center text-white crystal-menu-text">
-                <i class="fa-solid fa-map-location-dot text-2xl mb-1"></i><span id="btn-map" class="font-bold text-[11px]">Tesis Haritası</span>
-            </div>
+        <button onclick="openPage('map')" class="crystal-btn flex flex-col items-center justify-center py-3">
+            <i class="fa-solid fa-map-location-dot text-xl mb-1"></i><span id="btn-map" class="font-bold text-[11px]">Tesis Haritası</span>
         </button>
-        <button onclick="openPage('activities')" class="crystal-menu-btn flex flex-col items-center justify-center py-4 relative" style="background-image: linear-gradient(rgba(73, 186, 213, 0.65), rgba(73, 186, 213, 0.65)), url('bg-act.jpg');">
-            <div class="relative z-10 flex flex-col items-center text-white crystal-menu-text">
-                <i class="fa-solid fa-icons text-2xl mb-1"></i><span id="btn-activities" class="font-bold text-[11px]">Aktiviteler</span>
-            </div>
+        <button onclick="openPage('activities')" class="crystal-btn flex flex-col items-center justify-center py-3">
+            <i class="fa-solid fa-icons text-xl mb-1"></i><span id="btn-activities" class="font-bold text-[11px]">Aktiviteler</span>
         </button>
-        <button onclick="openPage('menus')" class="crystal-menu-btn flex flex-col items-center justify-center py-4 relative" style="background-image: linear-gradient(rgba(73, 186, 213, 0.65), rgba(73, 186, 213, 0.65)), url('bg-menus.jpg');">
-            <div class="relative z-10 flex flex-col items-center text-white crystal-menu-text">
-                <i class="fa-solid fa-book-open-reader text-2xl mb-1"></i><span id="btn-menus" class="font-bold text-[11px]">Menüler</span>
-            </div>
+        <button onclick="openPage('menus')" class="crystal-btn flex flex-col items-center justify-center py-3">
+            <i class="fa-solid fa-book-open-reader text-xl mb-1"></i><span id="btn-menus" class="font-bold text-[11px]">Menüler</span>
         </button>
-        <button onclick="openPage('transfer')" class="crystal-menu-btn flex flex-col items-center justify-center py-4 relative" style="background-image: linear-gradient(rgba(73, 186, 213, 0.65), rgba(73, 186, 213, 0.65)), url('bg-transfer.jpg');">
-            <div class="relative z-10 flex flex-col items-center text-white crystal-menu-text">
-                <i class="fa-solid fa-plane-departure text-2xl mb-1"></i><span id="btn-transfer" class="font-bold text-[11px]">Transfer Bilgileri</span>
-            </div>
+        <button onclick="openPage('transfer')" class="crystal-btn flex flex-col items-center justify-center py-3">
+            <i class="fa-solid fa-plane-departure text-xl mb-1"></i><span id="btn-transfer" class="font-bold text-[11px]">Transfer Bilgileri</span>
         </button>
     </div>
 
@@ -293,7 +278,7 @@
                 splash.style.display = 'none';
                 document.getElementById('hotel-selection-screen').classList.remove('hidden');
             }, 600);
-        }, 500); // Tarayıcının tasarımları oturtması için yarım saniye bekler
+        }, 500); 
     });
 
     // --- SABİT METİNLER (Sayfalar İçin) ---
@@ -629,6 +614,7 @@
         document.getElementById('main-menu-screen').classList.remove('hidden');
     }
 
+    // --- WIDGET VERİLERİ (Yeme İçme) ---
     const uiTextsMain = {
         en: { title: "OPEN RIGHT NOW", until: "until", weather: "(Subject to weather conditions)" },
         tr: { title: "ŞU AN AÇIK", until: "kapanış", weather: "(Hava şartlarına bağlı değişebilir)" },
@@ -683,6 +669,7 @@
         }
     }
 
+    // --- WIDGET VERİLERİ (Aktiviteler) ---
     const uiTextsAct = {
         en: { title: "DAILY ACTIVITIES", now: "NOW", weather: "(Activities are subject to change due to weather conditions.)" },
         tr: { title: "GÜNLÜK AKTİVİTELER", now: "ŞU AN", weather: "(Aktivitelerimiz hava koşullarına bağlı değişiklikler gösterebilir.)" },
@@ -751,10 +738,12 @@
         setTimeout(() => { wrapper.innerHTML = finalHTML; wrapper.classList.remove('fade-out'); }, 400); 
     }
 
+    // --- 3. DÖNGÜ (HER İKİ WIDGET İÇİN ORTAK) ---
     let currentLangIndex = 0;
     setInterval(() => { 
         currentLangIndex = (currentLangIndex + 1) % 4; 
         
+        // Sadece ekranda olan menüyü güncelle ki boşuna kasmasın
         if (!document.getElementById('main-menu-screen').classList.contains('hidden')) {
             renderMainContent(); 
         }
