@@ -5,81 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Crystal Hotels - Guest Information Hub</title>
     
-    <!-- Kritik Logo Önyüklemesi (Hız için) -->
-    <link rel="preload" as="image" href="logo.png">
+    <link rel="preload" as="image" href="crystallogo.png">
+    <link rel="preload" as="image" href="sunsetlogo.png">
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        body { 
-            font-family: 'Montserrat', sans-serif; 
-            background-color: #ffffff; 
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
+        body { font-family: 'Montserrat', sans-serif; background-color: #ffffff; margin: 0; padding: 0; overflow-x: hidden; }
         
-        /* UYGULAMA AÇILIŞ EKRANI (SPLASH SCREEN) */
         #splash-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 100%);
-            z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            transition: opacity 0.6s ease-out, visibility 0.6s ease-out;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 100%);
+            z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.6s ease-out, visibility 0.6s ease-out;
         }
-        .spinner {
-            width: 40px; height: 40px; border: 3px solid rgba(73, 186, 213, 0.3); border-radius: 50%;
-            border-top-color: #49bad5; animation: spin 1s ease-in-out infinite; margin-top: 20px;
-        }
+        .spinner { width: 40px; height: 40px; border: 3px solid rgba(73, 186, 213, 0.3); border-radius: 50%; border-top-color: #49bad5; animation: spin 1s ease-in-out infinite; margin-top: 20px; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        .app-container { 
-            max-width: 480px; 
-            margin: 0 auto; 
-            background-color: #ffffff; 
-            height: 100dvh; 
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            opacity: 0; 
-            animation: fadeInApp 0.5s forwards 0.3s;
-        }
+        .app-container { max-width: 480px; margin: 0 auto; background-color: #ffffff; height: 100dvh; display: flex; flex-direction: column; position: relative; opacity: 0; animation: fadeInApp 0.5s forwards 0.3s; }
         @keyframes fadeInApp { to { opacity: 1; } }
 
         .scrollable-content { height: 100dvh; overflow-y: auto; max-width: 480px; margin: 0 auto; background-color: #f9fbfd; }
-        .serif-title { font-family: 'Cinzel', serif; letter-spacing: 1px; }
-        .serif-sub { font-family: 'Playfair Display', serif; }
         .dashed-border-y { border-top: 1px dashed #e5e7eb; border-bottom: 1px dashed #e5e7eb; }
         .dashed-border-b { border-bottom: 1px dashed #e5e7eb; }
 
-        /* Standart 3D Buton (En Hızlı Yüklenen Tasarım) */
         .crystal-btn {
             background-color: #49bad5; border-radius: 8px; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.6), 0 2px 4px rgba(0,0,0,0.05); 
             color: #ffffff; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.1); transition: all 0.15s ease; cursor: pointer; border: 1px solid #3ca5be;
         }
         .crystal-btn:active { transform: scale(0.97); }
-        
-        /* CANLANDIRILMIŞ OTEL SEÇİM BUTONLARI */
-        .hotel-select-btn {
-            background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); border: 1px solid rgba(229, 231, 235, 0.5);
-            border-radius: 14px; padding: 16px 18px; display: flex; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer;
-        }
-        .hotel-select-btn:active { background: #f0f9ff; transform: scale(0.97); box-shadow: 0 2px 8px rgba(0,162,223,0.1); border-color: #bae6fd; }
-        .hotel-name { font-size: 11px; font-weight: 700; color: #1f2937; letter-spacing: 0.5px; line-height: 1.3; }
 
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-fade-in-up { opacity: 0; animation: fadeInUp 0.5s ease-out forwards; }
+        /* AÇILIR KAPANIR (ACCORDION) OTEL SEÇİM MENÜSÜ */
+        .dropdown-wrapper { margin: 0 20px; border-radius: 12px; overflow: hidden; border: 1px solid #e5e7eb; box-shadow: 0 10px 25px rgba(0,0,0,0.05); background: white; }
+        .dropdown-header { background: linear-gradient(to right, #49bad5, #0288d1); color: white; padding: 18px 20px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+        .dropdown-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; background: #fafafa; }
+        .dropdown-content.open { max-height: 70vh; overflow-y: auto; }
+        .hotel-select-item { padding: 16px 20px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 700; color: #374151; cursor: pointer; transition: background 0.2s; }
+        .hotel-select-item:active { background: #e0f2fe; }
+        .hotel-select-item:last-child { border-bottom: none; }
 
         .crystal-panel { background-color: #49bad5; border-radius: 12px; padding: 1.5rem; color: #ffffff; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5), 0 4px 6px rgba(0,0,0,0.1); text-align: center; }
         .crystal-panel a { text-decoration: underline; font-weight: bold; }
 
-        /* Widget Stilleri */
         .now-box { background: linear-gradient(145deg, #ffffff, #fdfdfd); border: 1px solid #eaeaea; border-radius: 12px; padding: 16px 15px; text-align: left; box-shadow: 0 5px 20px rgba(0,0,0,0.04); height: 100%; }
         #content-wrapper { transition: opacity 0.4s ease-in-out; opacity: 1; }
         .fade-out { opacity: 0 !important; }
@@ -100,88 +69,44 @@
         .pulse-dot { width: 6px; height: 6px; background-color: #00a2df; border-radius: 50%; animation: pulse-dot 1.5s infinite; }
         @keyframes pulse-dot { 0% { box-shadow: 0 0 0 0 rgba(0, 162, 223, 0.4); } 70% { box-shadow: 0 0 0 4px rgba(0, 162, 223, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 162, 223, 0); } }
 
-        .alacarte-table-new { border-collapse: separate; border-spacing: 0; }
-        .alacarte-table-new th, .alacarte-table-new td { text-align: center; vertical-align: middle; }
-        .alacarte-table-new td i { font-size: 13px; }
-        
         .hide-scroll::-webkit-scrollbar { display: none; }
         .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body>
 
-<!-- SPLASH SCREEN (Yükleniyor Ekranı) -->
+<!-- SPLASH SCREEN -->
 <div id="splash-screen">
-    <img src="logo.png" alt="Crystal Hotels" onerror="this.style.display='none'" style="height: 80px; object-fit: contain;">
+    <img src="crystallogo.png" alt="Crystal Hotels" onerror="this.style.display='none'" style="height: 80px; object-fit: contain;">
     <div class="spinner"></div>
 </div>
 
-<!-- 0. YENİ OTEL SEÇİM (GİRİŞ) EKRANI -->
-<div id="hotel-selection-screen" class="app-container scrollable-content z-30 bg-gradient-to-br from-sky-50 via-white to-sky-100 hidden">
-    
-    <div class="sticky top-0 bg-white/80 backdrop-blur-lg z-10 pt-10 pb-5 px-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] text-center">
-        <img src="logo.png" alt="Crystal Hotels" onerror="this.style.display='none'" class="h-[70px] mx-auto object-contain">
-        <div class="flex items-center justify-center space-x-2 mt-4">
-            <div class="h-px bg-gray-300 w-8"></div>
-            <p class="text-[10px] text-gray-500 font-bold tracking-[0.15em] uppercase">Select Your Hotel</p>
-            <div class="h-px bg-gray-300 w-8"></div>
-        </div>
+<!-- 0. YENİ AÇILIR KAPANIR OTEL SEÇİM (GİRİŞ) EKRANI -->
+<div id="hotel-selection-screen" class="app-container bg-gradient-to-b from-sky-50 to-white hidden justify-center pb-20">
+    <div class="text-center mb-10">
+        <img src="crystallogo.png" alt="Crystal Hotels" onerror="this.style.display='none'" class="h-[80px] mx-auto object-contain drop-shadow-sm">
+        <p class="text-xs text-gray-500 mt-3 font-medium tracking-[0.2em]">GUEST INFORMATION HUB</p>
     </div>
     
-    <div class="px-5 py-6 space-y-4 pb-12">
-        <div onclick="selectHotel('Prestige')" class="hotel-select-btn animate-fade-in-up" style="animation-delay: 0.05s;">
-            <div class="flex items-center"><i class="fa-solid fa-location-dot text-sky-400 mr-3 text-sm opacity-80"></i><span class="hotel-name">CRYSTAL PRESTIGE PEARL COLLECTION</span></div>
-            <i class="fa-solid fa-chevron-right text-gray-300 text-[10px]"></i>
+    <div class="dropdown-wrapper">
+        <div class="dropdown-header" onclick="toggleHotelMenu()">
+            <span class="tracking-wide"><i class="fa-solid fa-building mr-2"></i> Lütfen Otelinizi Seçin</span>
+            <i id="dropdown-icon" class="fa-solid fa-chevron-down transition-transform duration-300"></i>
         </div>
-        <div onclick="selectHotel('Flora')" class="hotel-select-btn animate-fade-in-up" style="animation-delay: 0.1s;">
-            <div class="flex items-center"><i class="fa-solid fa-location-dot text-sky-400 mr-3 text-sm opacity-80"></i><span class="hotel-name">CRYSTAL FLORA PEARL COLLECTION</span></div>
-            <i class="fa-solid fa-chevron-right text-gray-300 text-[10px]"></i>
-        </div>
-        <div onclick="selectHotel('Centro')" class="hotel-select-btn animate-fade-in-up" style="animation-delay: 0.15s;">
-            <div class="flex items-center"><i class="fa-solid fa-location-dot text-sky-400 mr-3 text-sm opacity-80"></i><span class="hotel-name">CRYSTAL CENTRO PEARL COLLECTION</span></div>
-            <i class="fa-solid fa-chevron-right text-gray-300 text-[10px]"></i>
-        </div>
-        <div onclick="selectHotel('TatBeach')" class="hotel-select-btn animate-fade-in-up" style="animation-delay: 0.2s;">
-            <div class="flex items-center"><i class="fa-solid fa-location-dot text-sky-400 mr-3 text-sm opacity-80"></i><span class="hotel-name">CRYSTAL TAT BEACH PEARL COLLECTION</span></div>
-            <i class="fa-solid fa-chevron-right text-gray-300 text-[10px]"></i>
-        </div>
-        
-        <div onclick="selectHotel('Sunset')" class="hotel-select-btn animate-fade-in-up border-sky-200 bg-gradient-to-r from-sky-50 to-white" style="animation-delay: 0.25s;">
-            <div class="flex items-center"><i class="fa-solid fa-star text-sky-500 mr-3 text-sm"></i><span class="hotel-name text-sky-800">CRYSTAL SUNSET PEARL COLLECTION</span></div>
-            <i class="fa-solid fa-chevron-right text-sky-400 text-[10px]"></i>
-        </div>
-
-        <div onclick="selectHotel('Aura')" class="hotel-select-btn animate-fade-in-up" style="animation-delay: 0.3s;">
-            <div class="flex items-center"><i class="fa-solid fa-location-dot text-sky-400 mr-3 text-sm opacity-80"></i><span class="hotel-name">CRYSTAL AURA AQUA COLLECTION</span></div>
-            <i class="fa-solid fa-chevron-right text-gray-300 text-[10px]"></i>
-        </div>
-        <div onclick="selectHotel('Waterworld')" class="hotel-select-btn animate-fade-in-up" style="animation-delay: 0.35s;">
-            <div class="flex items-center"><i class="fa-solid fa-location-dot text-sky-400 mr-3 text-sm opacity-80"></i><span class="hotel-name">CRYSTAL WATERWORLD AQUA COLLECTION</span></div>
-            <i class="fa-solid fa-chevron-right text-gray-300 text-[10px]"></i>
-        </div>
-        <div onclick="selectHotel('Paraiso')" class="hotel-select-btn animate-fade-in-up" style="animation-delay: 0.4s;">
-            <div class="flex items-center"><i class="fa-solid fa-location-dot text-sky-400 mr-3 text-sm opacity-80"></i><span class="hotel-name">CRYSTAL PARAISO AQUA COLLECTION</span></div>
-            <i class="fa-solid fa-chevron-right text-gray-300 text-[10px]"></i>
-        </div>
-        <div onclick="selectHotel('Admiral')" class="hotel-select-btn animate-fade-in-up" style="animation-delay: 0.45s;">
-            <div class="flex items-center"><i class="fa-solid fa-location-dot text-sky-400 mr-3 text-sm opacity-80"></i><span class="hotel-name">CRYSTAL ADMIRAL AQUA COLLECTION</span></div>
-            <i class="fa-solid fa-chevron-right text-gray-300 text-[10px]"></i>
-        </div>
-        <div onclick="selectHotel('DeLuxe')" class="hotel-select-btn animate-fade-in-up" style="animation-delay: 0.5s;">
-            <div class="flex items-center"><i class="fa-solid fa-location-dot text-sky-400 mr-3 text-sm opacity-80"></i><span class="hotel-name">CRYSTAL DE LUXE COMFORT COLLECTION</span></div>
-            <i class="fa-solid fa-chevron-right text-gray-300 text-[10px]"></i>
-        </div>
-        <div onclick="selectHotel('Family')" class="hotel-select-btn animate-fade-in-up" style="animation-delay: 0.55s;">
-            <div class="flex items-center"><i class="fa-solid fa-location-dot text-sky-400 mr-3 text-sm opacity-80"></i><span class="hotel-name">CRYSTAL FAMILY COMFORT COLLECTION</span></div>
-            <i class="fa-solid fa-chevron-right text-gray-300 text-[10px]"></i>
-        </div>
-        <div onclick="selectHotel('Boutique')" class="hotel-select-btn animate-fade-in-up" style="animation-delay: 0.6s;">
-            <div class="flex items-center"><i class="fa-solid fa-location-dot text-sky-400 mr-3 text-sm opacity-80"></i><span class="hotel-name">CRYSTAL BOUTIQUE COMFORT COLLECTION</span></div>
-            <i class="fa-solid fa-chevron-right text-gray-300 text-[10px]"></i>
-        </div>
-        <div onclick="selectHotel('WorldOfColours')" class="hotel-select-btn animate-fade-in-up" style="animation-delay: 0.65s;">
-            <div class="flex items-center"><i class="fa-solid fa-location-dot text-sky-400 mr-3 text-sm opacity-80"></i><span class="hotel-name">CRYSTAL WORLD OF COLOURS COMFORT</span></div>
-            <i class="fa-solid fa-chevron-right text-gray-300 text-[10px]"></i>
+        <div id="hotel-dropdown" class="dropdown-content">
+            <div onclick="selectHotel('Prestige')" class="hotel-select-item">CRYSTAL PRESTIGE PEARL COLLECTION <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('Flora')" class="hotel-select-item">CRYSTAL FLORA PEARL COLLECTION <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('Centro')" class="hotel-select-item">CRYSTAL CENTRO PEARL COLLECTION <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('TatBeach')" class="hotel-select-item">CRYSTAL TAT BEACH PEARL COLLECTION <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('Sunset')" class="hotel-select-item bg-sky-50 text-sky-700">CRYSTAL SUNSET PEARL COLLECTION <i class="fa-solid fa-star text-sky-400"></i></div>
+            <div onclick="selectHotel('Aura')" class="hotel-select-item">CRYSTAL AURA AQUA COLLECTION <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('Waterworld')" class="hotel-select-item">CRYSTAL WATERWORLD AQUA COLLECTION <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('Paraiso')" class="hotel-select-item">CRYSTAL PARAISO AQUA COLLECTION <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('Admiral')" class="hotel-select-item">CRYSTAL ADMIRAL AQUA COLLECTION <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('DeLuxe')" class="hotel-select-item">CRYSTAL DE LUXE COMFORT COLLECTION <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('Family')" class="hotel-select-item">CRYSTAL FAMILY COMFORT COLLECTION <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('Boutique')" class="hotel-select-item">CRYSTAL BOUTIQUE COMFORT COLLECTION <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('WorldOfColours')" class="hotel-select-item">CRYSTAL WORLD OF COLOURS COMFORT <i class="fa-solid fa-angle-right text-gray-400"></i></div>
         </div>
     </div>
 </div>
@@ -189,32 +114,36 @@
 <!-- 1. ANA MENÜ EKRANI -->
 <div id="main-menu-screen" class="app-container hidden bg-white">
     
-    <div class="flex justify-between items-center px-6 pt-4 shrink-0 relative z-20">
+    <div class="flex justify-between items-center px-6 pt-5 shrink-0 relative z-20">
         
-        <div class="flex-1 flex justify-end pr-3">
-            <div id="lang-tooltip" class="hidden bg-gray-800 text-white text-[10px] py-1.5 px-3 rounded shadow-lg transition-opacity duration-700 opacity-0 relative whitespace-nowrap flex items-center">
-                🌍 Dil / Language
-                <div class="absolute top-1/2 -right-1 w-2 h-2 bg-gray-800 rotate-45 transform -translate-y-1/2"></div>
-            </div>
-        </div>
+        <!-- YENİ: Otel Seçimine Geri Dön Tuşu -->
+        <button onclick="goToHotelSelection()" class="text-gray-500 hover:text-sky-600 transition flex items-center bg-gray-50 px-3 py-1.5 rounded-full border border-gray-200 shadow-sm">
+            <i class="fa-solid fa-house text-[10px] mr-1.5"></i><span id="btn-back-home" class="text-[9px] font-bold tracking-wider uppercase">Geri Dön</span>
+        </button>
 
-        <div class="flex space-x-1 shrink-0">
-            <button onclick="changeLang('tr')" class="px-2 py-0.5 bg-gray-100 border border-gray-200 rounded text-[10px] font-bold text-gray-700 hover:bg-gray-200">🇹🇷 TR</button>
-            <button onclick="changeLang('en')" class="px-2 py-0.5 bg-gray-100 border border-gray-200 rounded text-[10px] font-bold text-gray-700 hover:bg-gray-200">🇬🇧 EN</button>
-            <button onclick="changeLang('de')" class="px-2 py-0.5 bg-gray-100 border border-gray-200 rounded text-[10px] font-bold text-gray-700 hover:bg-gray-200">🇩🇪 DE</button>
-            <button onclick="changeLang('ru')" class="px-2 py-0.5 bg-gray-100 border border-gray-200 rounded text-[10px] font-bold text-gray-700 hover:bg-gray-200">🇷🇺 RU</button>
+        <!-- Dil Seçimi Butonları -->
+        <div class="flex space-x-1 shrink-0 relative">
+            <div id="lang-tooltip" class="hidden absolute -top-8 right-0 bg-gray-800 text-white text-[10px] py-1 px-3 rounded shadow-lg transition-opacity duration-700 opacity-0 whitespace-nowrap">
+                🌍 Dil / Language
+                <div class="absolute -bottom-1 right-8 w-2 h-2 bg-gray-800 rotate-45"></div>
+            </div>
+            <button onclick="changeLang('tr')" class="px-2 py-1 bg-gray-100 border border-gray-200 rounded text-[10px] font-bold text-gray-700 hover:bg-gray-200">🇹🇷 TR</button>
+            <button onclick="changeLang('en')" class="px-2 py-1 bg-gray-100 border border-gray-200 rounded text-[10px] font-bold text-gray-700 hover:bg-gray-200">🇬🇧 EN</button>
+            <button onclick="changeLang('de')" class="px-2 py-1 bg-gray-100 border border-gray-200 rounded text-[10px] font-bold text-gray-700 hover:bg-gray-200">🇩🇪 DE</button>
+            <button onclick="changeLang('ru')" class="px-2 py-1 bg-gray-100 border border-gray-200 rounded text-[10px] font-bold text-gray-700 hover:bg-gray-200">🇷🇺 RU</button>
         </div>
     </div>
 
-    <div class="text-center px-6 mt-2 shrink-0">
-        <h2 id="hotel-header-title" class="serif-title text-2xl font-semibold text-gray-800 mb-1">CRYSTAL HOTELS</h2>
-        <p id="welcome-text" class="text-[11px] text-gray-500 leading-tight max-w-sm mx-auto">
-            Konaklamanız boyunca tüm otel bilgilerine zahmetsizce erişin. Restoran saatleri, harita ve AI asistan tek noktada.
+    <!-- Başlık YERİNE SUNSET LOGO -->
+    <div class="text-center px-6 mt-6 shrink-0">
+        <img src="sunsetlogo.png" alt="Crystal Sunset" onerror="this.outerHTML='<h2 class=\\'serif-title text-2xl font-semibold text-gray-800 mb-1\\'>CRYSTAL SUNSET</h2>'" class="h-[60px] mx-auto object-contain mb-2">
+        <p id="welcome-text" class="text-[11px] text-gray-500 leading-tight max-w-sm mx-auto italic">
+            Konaklamanız boyunca tüm otel bilgilerine zahmetsizce erişin.
         </p>
     </div>
 
-    <!-- DÜZ 3D MENÜ (Maksimum Hız) -->
-    <div class="dashed-border-y py-3 mt-3 mb-2 grid grid-cols-2 gap-2 px-6 shrink-0">
+    <!-- DÜZ 3D MENÜ -->
+    <div class="dashed-border-y py-4 mt-4 mb-3 grid grid-cols-2 gap-3 px-6 shrink-0">
         <button onclick="openPage('room')" class="crystal-btn flex flex-col items-center justify-center py-3">
             <i class="fa-solid fa-bed text-xl mb-1"></i><span id="btn-room" class="font-bold text-[11px]">Oda Rehberi</span>
         </button>
@@ -235,15 +164,13 @@
         </button>
     </div>
 
-    <!-- AI Asistan -->
-    <div class="px-6 shrink-0 mb-2">
+    <div class="px-6 shrink-0 mb-3">
         <a id="ai-link" href="http://crystalsunset.otai.app/tr" target="_blank" class="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold py-3 rounded-xl shadow-md flex items-center justify-center space-x-2 transition transform active:scale-95">
             <i class="fa-solid fa-robot text-lg"></i><span id="btn-ai" class="text-sm">AI Asistan'a Sorun!</span>
         </a>
     </div>
 
-    <!-- Yeme İçme Canlı Widget -->
-    <div class="px-6 flex-grow flex flex-col justify-start overflow-hidden pb-3">
+    <div class="px-6 flex-grow flex flex-col justify-start overflow-hidden pb-4">
         <div class="now-box w-full">
             <div id="content-wrapper">
                 <div style="text-align:center; color:#888; font-size: 12px; margin-top: 10px;">Loading...</div>
@@ -251,7 +178,7 @@
         </div>
     </div>
 
-    <div class="dashed-border-b py-2 flex justify-center items-center bg-white border-t border-gray-100 shrink-0">
+    <div class="dashed-border-b py-3 flex justify-center items-center bg-white border-t border-gray-100 shrink-0">
         <img src="mainlogo.png" alt="Main Logo" onerror="this.style.display='none'" class="h-8 object-contain">
     </div>
 </div>
@@ -269,7 +196,7 @@
 </div>
 
 <script>
-    // --- Yüklenme (Splash) Ekranını Kaldırma Mantığı ---
+    // --- Splash ve Dropdown ---
     window.addEventListener('load', () => {
         setTimeout(() => {
             const splash = document.getElementById('splash-screen');
@@ -277,11 +204,24 @@
             setTimeout(() => {
                 splash.style.display = 'none';
                 document.getElementById('hotel-selection-screen').classList.remove('hidden');
+                document.getElementById('hotel-selection-screen').classList.add('flex');
             }, 600);
         }, 500); 
     });
 
-    // --- SABİT METİNLER (Sayfalar İçin) ---
+    function toggleHotelMenu() {
+        const content = document.getElementById('hotel-dropdown');
+        const icon = document.getElementById('dropdown-icon');
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            icon.style.transform = 'rotate(0deg)';
+        } else {
+            content.classList.add('open');
+            icon.style.transform = 'rotate(180deg)';
+        }
+    }
+
+    // --- SABİT METİNLER (Rusça/Almanca Çeviriler Eklendi) ---
     const pageData = {
         transfer: {
             tr: `<div class="crystal-panel mb-6 text-sm leading-relaxed text-left">
@@ -293,13 +233,13 @@
                  </div>
                  <a href="https://drive.google.com/drive/folders/1zytCMcVdCUR4D6UtBvVWM9u_TGI5f_7K?usp=sharing" target="_blank" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg"><i class="fa-solid fa-bus mr-2"></i> View Your Pick-up Time!</a>`,
             de: `<div class="crystal-panel mb-6 text-sm leading-relaxed text-left">
-                    <b>Lieber Gast,</b><br><br>Die in diesem Link bereitgestellten Transferinformationen werden uns direkt von den Reisebüros übermittelt. Bitte beachten Sie, dass unser Hotelmanagement keine Verantwortung für die Transferabläufe oder -zeiten übernimmt.<br><br>Wir möchten Sie daran erinnern, dass unsere Check-out-Zeit <b>12:00 Uhr</b> ist. Wir wünschen Ihnen eine gute Reise.
+                    <b>Lieber Gast,</b><br><br>Die unter diesem Link bereitgestellten Transferinformationen werden uns direkt von den Reisebüros übermittelt und in unser System hochgeladen. Bitte beachten Sie, dass unser Hotelmanagement keine Haftung für die Transferabläufe oder -zeiten übernimmt.<br><br>Wir möchten Sie daran erinnern, dass unsere Check-out-Zeit <b>12:00 Uhr</b> ist. Wir wünschen Ihnen eine gute und sichere Heimreise.
                  </div>
-                 <a href="https://drive.google.com/drive/folders/1zytCMcVdCUR4D6UtBvVWM9u_TGI5f_7K?usp=sharing" target="_blank" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg"><i class="fa-solid fa-bus mr-2"></i> Abholzeit anzeigen!</a>`,
+                 <a href="https://drive.google.com/drive/folders/1zytCMcVdCUR4D6UtBvVWM9u_TGI5f_7K?usp=sharing" target="_blank" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg"><i class="fa-solid fa-bus mr-2"></i> Abholzeit Anzeigen!</a>`,
             ru: `<div class="crystal-panel mb-6 text-sm leading-relaxed text-left">
-                    <b>Дорогой Гость,</b><br><br>Информация о трансфере, предоставленная по этой ссылке, отправляется нам напрямую туристическими агентствами. Обратите внимание, что руководство отеля не несет ответственности за операции или расписание трансферов.<br><br>Напоминаем, что время выезда — <b>12:00</b>. Желаем вам безопасного и приятного пути.
+                    <b>Уважаемый гость,</b><br><br>Информация о трансфере, представленная по этой ссылке, передается нам напрямую туристическими агентствами и загружается в нашу систему. Обращаем ваше внимание, что администрация отеля не несет ответственности за организацию и время трансферов.<br><br>Напоминаем, что время выезда (check-out) из номера — <b>12:00</b>. Желаем вам счастливого пути!
                  </div>
-                 <a href="https://drive.google.com/drive/folders/1zytCMcVdCUR4D6UtBvVWM9u_TGI5f_7K?usp=sharing" target="_blank" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg"><i class="fa-solid fa-bus mr-2"></i> Посмотреть время трансфера!</a>`
+                 <a href="https://drive.google.com/drive/folders/1zytCMcVdCUR4D6UtBvVWM9u_TGI5f_7K?usp=sharing" target="_blank" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg"><i class="fa-solid fa-bus mr-2"></i> Посмотреть Время Трансфера!</a>`
         },
         menus: {
             tr: `<div class="crystal-panel mb-6 text-sm leading-relaxed">
@@ -326,7 +266,7 @@
                  <div class="text-center text-[10px] text-gray-500 mb-6 font-semibold">
                     <i class="fa-solid fa-check text-green-500 mr-1"></i>Açık      <i class="fa-solid fa-xmark text-red-500 mr-1"></i>Kapalı
                  </div>
-                 <div class="crystal-panel mb-6 text-sm leading-relaxed">Oda servisimiz <b>24 saat</b> hizmetinizdedir (Ekstra ücrete tabidir).</div>
+                 <div class="crystal-panel mb-6 text-sm leading-relaxed">Oda servisimiz <b>24 saat</b> hizmetinizdedir (Ekstra ücrete tabidir).<br><br>Sipariş vermek için menüden seçiminizi yapıp <b>6666</b>'yı tuşlayabilir veya alttaki butondan WhatsApp ile hızlıca sipariş verebilirsiniz.</div>
                  <a href="http://wa.me/905497844996" target="_blank" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg bg-green-500 border-green-600"><i class="fa-brands fa-whatsapp text-2xl mr-2"></i> Oda Servisi Siparişi Ver</a>`,
             en: `<div class="crystal-panel mb-6 text-sm leading-relaxed">
                     Our à la carte restaurants welcome you daily between <b>18:30 and 23:00</b>.<br><br>No reservation is required.
@@ -352,9 +292,9 @@
                  <div class="text-center text-[10px] text-gray-500 mb-6 font-semibold">
                     <i class="fa-solid fa-check text-green-500 mr-1"></i>Open      <i class="fa-solid fa-xmark text-red-500 mr-1"></i>Closed
                  </div>
-                 <div class="crystal-panel mb-6 text-sm leading-relaxed">Our room service is available <b>24 hours</b> (subject to additional charge).</div>
+                 <div class="crystal-panel mb-6 text-sm leading-relaxed">Our room service is available <b>24 hours</b> and is subject to an additional charge.<br><br>For your orders, please dial <b>6666</b> or click below to order via our WhatsApp service.</div>
                  <a href="http://wa.me/905497844996" target="_blank" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg bg-green-500 border-green-600"><i class="fa-brands fa-whatsapp text-2xl mr-2"></i> Order Room Service</a>`,
-            de: `<div class="crystal-panel mb-6 text-sm leading-relaxed">Unsere À-la-carte-Restaurants begrüßen Sie täglich von <b>18:30 bis 23:00 Uhr</b>.</div>
+            de: `<div class="crystal-panel mb-6 text-sm leading-relaxed">Unsere À-la-carte-Restaurants heißen Sie täglich zwischen <b>18:30 und 23:00 Uhr</b> willkommen.<br><br><u>Eine Reservierung ist nicht erforderlich</u>, und unsere Gäste können dieses Erlebnis während ihres gesamten Aufenthalts genießen. Die verfügbaren Speisekarten finden Sie unten.</div>
                  <h3 class="font-bold text-gray-700 text-center mb-3 text-sm uppercase">Programm</h3>
                  <div class="overflow-x-auto hide-scroll rounded-xl border border-gray-200 mb-2 shadow-sm">
                     <table class="w-full text-left text-sm text-gray-500 alacarte-table-new">
@@ -376,9 +316,9 @@
                  <div class="text-center text-[10px] text-gray-500 mb-6 font-semibold">
                     <i class="fa-solid fa-check text-green-500 mr-1"></i>Geöffnet      <i class="fa-solid fa-xmark text-red-500 mr-1"></i>Geschlossen
                  </div>
-                 <div class="crystal-panel mb-6 text-sm leading-relaxed">Zimmerservice ist <b>24 Stunden</b> verfügbar (gegen Aufpreis).</div>
+                 <div class="crystal-panel mb-6 text-sm leading-relaxed">Unser Zimmerservice steht Ihnen rund um die Uhr gegen Aufpreis zur Verfügung.<br><br>Für Ihre Bestellungen wählen Sie bitte die <b>6666</b> oder klicken Sie unten, um über unseren WhatsApp-Service zu bestellen.</div>
                  <a href="http://wa.me/905497844996" target="_blank" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg bg-green-500 border-green-600"><i class="fa-brands fa-whatsapp text-2xl mr-2"></i> Zimmerservice Bestellen</a>`,
-            ru: `<div class="crystal-panel mb-6 text-sm leading-relaxed">Наши рестораны A'la Carte открыты ежедневно с <b>18:30 до 23:00</b>.</div>
+            ru: `<div class="crystal-panel mb-6 text-sm leading-relaxed">Наши рестораны а-ля карт работают ежедневно с <b>18:30 до 23:00</b>.<br><br>Предварительное бронирование не требуется, поэтому вы можете наслаждаться этими уникальными гастрономическими впечатлениями в любое время на протяжении всего вашего пребывания. С нашими меню а-ля карт вы можете ознакомиться ниже.</div>
                  <h3 class="font-bold text-gray-700 text-center mb-3 text-sm uppercase">Расписание</h3>
                  <div class="overflow-x-auto hide-scroll rounded-xl border border-gray-200 mb-2 shadow-sm">
                     <table class="w-full text-left text-sm text-gray-500 alacarte-table-new">
@@ -400,14 +340,14 @@
                  <div class="text-center text-[10px] text-gray-500 mb-6 font-semibold">
                     <i class="fa-solid fa-check text-green-500 mr-1"></i>Открыто      <i class="fa-solid fa-xmark text-red-500 mr-1"></i>Закрыто
                  </div>
-                 <div class="crystal-panel mb-6 text-sm leading-relaxed">Обслуживание номеров доступно <b>24 часа</b> (за дополнительную плату).</div>
+                 <div class="crystal-panel mb-6 text-sm leading-relaxed">Наше обслуживание номеров работает круглосуточно и предоставляется за дополнительную плату.<br><br>Для оформления заказа, пожалуйста, наберите <b>6666</b> с телефона в вашем номере или нажмите ниже, чтобы сделать быстрый заказ через наш WhatsApp. С меню обслуживания номеров можно ознакомиться ниже.</div>
                  <a href="http://wa.me/905497844996" target="_blank" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg bg-green-500 border-green-600"><i class="fa-brands fa-whatsapp text-2xl mr-2"></i> Заказать Обслуживание</a>`
         },
         room: {
             tr: `<div class="space-y-5 text-gray-700 text-sm">
                     <div><h3 class="font-bold text-gray-800"><i class="fa-regular fa-clock text-sky-500 mr-2"></i> Çıkış Saati (Check-out)</h3><p class="mt-1">Çıkış saati <b>12:00</b>'dir. 12:00'den sonra tesis kullanımına devam edilmesi ekstra ücrete tabidir.</p></div>
                     <hr>
-                    <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-broom text-sky-500 mr-2"></i> Oda Temizliği & Doğa Koruması</h3><p class="mt-1">Temizlik her gün 09:00 - 16:00 arası yapılır. ("Rahatsız Etmeyin" kartı olan odalara hizmet verilemez.)</p></div>
+                    <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-broom text-sky-500 mr-2"></i> Oda Temizliği & Doğa Koruması</h3><p class="mt-1">Temizlik her gün 09:00 - 16:00 arası yapılır. ("Rahatsız Etmeyin" kartı olan odalara hizmet verilemez.)<br><br>Doğayı korumak için:<br>• Havluyu tekrar kullanmak için: Asılı bırakın.<br>• Havluyu değiştirmek için: Yere bırakın.</p></div>
                     <hr>
                     <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-bottle-water text-sky-500 mr-2"></i> Minibar & Çay/Kahve Seti</h3><p class="mt-1">Minibar ve çay/kahve setiniz günde bir kez ücretsiz olarak yenilenir.</p></div>
                     <hr>
@@ -420,7 +360,7 @@
             en: `<div class="space-y-5 text-gray-700 text-sm">
                     <div><h3 class="font-bold text-gray-800"><i class="fa-regular fa-clock text-sky-500 mr-2"></i> Check-out Time</h3><p class="mt-1">Check-out time is <b>12:00</b>. Use of facility services after 12:00 is subject to an extra fee.</p></div>
                     <hr>
-                    <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-broom text-sky-500 mr-2"></i> Room Cleaning & Nature Conservation</h3><p class="mt-1">Daily 09:00 – 16:00. (Rooms with a "Do Not Disturb" sign cannot be serviced.)</p></div>
+                    <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-broom text-sky-500 mr-2"></i> Room Cleaning & Nature Conservation</h3><p class="mt-1">Daily 09:00 – 16:00. (Rooms with a "Do Not Disturb" sign cannot be serviced.)<br><br>To support nature:<br>• Reuse towel: Leave hanging.<br>• Replace towel: Place on the floor.</p></div>
                     <hr>
                     <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-bottle-water text-sky-500 mr-2"></i> Minibar & Tea/Coffee</h3><p class="mt-1">Replenished once daily, free of charge.</p></div>
                     <hr>
@@ -430,8 +370,32 @@
                     <hr>
                     <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-lock text-sky-500 mr-2"></i> Safe Deposit Box</h3><p class="mt-1">We recommend storing valuables in the safe.</p></div>
                  </div>`,
-            de: `<div class="text-sm text-gray-700 text-center py-10">Zimmerinformationen werden übersetzt...</div>`, 
-            ru: `<div class="text-sm text-gray-700 text-center py-10">Информация о номере переводится...</div>`
+            de: `<div class="space-y-5 text-gray-700 text-sm">
+                    <div><h3 class="font-bold text-gray-800"><i class="fa-regular fa-clock text-sky-500 mr-2"></i> CHECK-OUT-ZEIT</h3><p class="mt-1">Der Check-out ist um <b>12:00 Uhr</b>. Auch bei pünktlicher Zimmerübergabe ist die Nutzung der Hotelanlagen nach 12:00 Uhr gebührenpflichtig.</p></div>
+                    <hr>
+                    <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-broom text-sky-500 mr-2"></i> ZIMMERREINIGUNG & UMWELTSCHUTZ</h3><p class="mt-1">Zimmerreinigung: Täglich 09:00 – 16:00 Uhr. (Zimmer mit „Bitte nicht stören“-Schild können <b>nicht gereinigt werden</b>.)<br><br>Der Umwelt zuliebe:<br>• Handtücher wiederverwenden: Hängen lassen.<br>• Handtücher austauschen: Auf den Boden legen.</p></div>
+                    <hr>
+                    <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-bottle-water text-sky-500 mr-2"></i> MINIBAR & TEE-/KAFFEESET</h3><p class="mt-1">Ihre Minibar und das Tee-/Kaffeeset werden einmal täglich kostenlos aufgefüllt.</p></div>
+                    <hr>
+                    <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-snowflake text-sky-500 mr-2"></i> KLIMAANLAGE</h3><p class="mt-1">Die zentrale Klimaanlage wird über das Bedienfeld an der Wand gesteuert. Bitte beachten Sie, dass die Anlage bei geöffneter Balkontür nicht funktioniert.</p></div>
+                    <hr>
+                    <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-bed text-sky-500 mr-2"></i> KISSENAUSWAHL</h3><p class="mt-1">Wenn Sie ein anderes Kissen wünschen, kontaktieren Sie bitte unsere Gästebetreuung unter der Nummer <b>6666</b>.</p></div>
+                    <hr>
+                    <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-lock text-sky-500 mr-2"></i> ZIMMERSAFE</h3><p class="mt-1">Wir empfehlen Ihnen, Ihre Wertsachen im Zimmersafe aufzubewahren. Das Hotel haftet nicht für Gegenstände, die nicht im Safe eingeschlossen sind. Die Bedienungsanleitung finden Sie direkt am Safe.</p></div>
+                 </div>`, 
+            ru: `<div class="space-y-5 text-gray-700 text-sm">
+                    <div><h3 class="font-bold text-gray-800"><i class="fa-regular fa-clock text-sky-500 mr-2"></i> ВРЕМЯ ВЫЕЗДА</h3><p class="mt-1">Время выезда — <b>12:00</b>. Даже если номер освобожден вовремя, использование услуг отеля после 12:00 осуществляется за дополнительную плату.</p></div>
+                    <hr>
+                    <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-broom text-sky-500 mr-2"></i> УБОРКА НОМЕРОВ И ЗАБОТА О ПРИРОДЕ</h3><p class="mt-1">Уборка номеров: ежедневно с 09:00 до 16:00. (Номера с табличкой «<b>Не беспокоить</b>» не обслуживаются.)<br><br>В целях заботы об окружающей среде:<br>• Полотенца для повторного использования: оставьте висеть.<br>• Полотенца для замены: бросьте на пол.</p></div>
+                    <hr>
+                    <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-bottle-water text-sky-500 mr-2"></i> МИНИ-БАР И ЧАЙНЫЙ/КОФЕЙНЫЙ НАБОР</h3><p class="mt-1">Ваш мини-бар и набор для приготовления чая/кофе пополняются один раз в день бесплатно.</p></div>
+                    <hr>
+                    <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-snowflake text-sky-500 mr-2"></i> КОНДИЦИОНЕР</h3><p class="mt-1">Центральная система кондиционирования управляется с помощью настенной панели. Обратите внимание, что система не работает при открытой балконной двери.</p></div>
+                    <hr>
+                    <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-bed text-sky-500 mr-2"></i> ВЫБОР ПОДУШЕК</h3><p class="mt-1">Если вы хотите поменять подушку, пожалуйста, свяжитесь с отделом по работе с гостями, набрав <b>6666</b>.</p></div>
+                    <hr>
+                    <div><h3 class="font-bold text-gray-800"><i class="fa-solid fa-lock text-sky-500 mr-2"></i> СЕЙФ</h3><p class="mt-1">Мы рекомендуем хранить ценные вещи в сейфе в номере. Отель не несет ответственности за вещи, не оставленные в сейфе. Инструкция по использованию находится на самом сейфе.</p></div>
+                 </div>`
         },
         activities: {
             tr: `<div class="crystal-panel mb-8 text-sm leading-relaxed">
@@ -441,7 +405,6 @@
                     <a href="https://apps.apple.com/tr/app/crystal-hotels/id6744818940" target="_blank" class="crystal-btn flex-1 py-3 text-xs text-center block leading-tight"><i class="fa-brands fa-apple text-[28px] block mb-1"></i> iOS İndir</a>
                     <a href="https://play.google.com/store/apps/details?id=com.epigra.crystal_hotels&pli=1" target="_blank" class="crystal-btn flex-1 py-3 text-xs text-center block leading-tight"><i class="fa-brands fa-google-play text-[28px] block mb-1"></i> Android İndir</a>
                  </div>
-                 
                  <button onclick="document.getElementById('live-schedule-container').classList.remove('hidden'); this.style.display='none'; renderActivities();" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg mb-8"><i class="fa-solid fa-calendar-day mr-2"></i> Canlı Programı Gör!</button>
                  <div id="live-schedule-container" class="hidden mb-8">
                     <div class="activity-box">
@@ -450,7 +413,6 @@
                         </div>
                     </div>
                  </div>
-
                  <h3 class="font-bold text-gray-700 text-center mb-4 text-sm uppercase">Bizi Takip Edin</h3>
                  <div class="flex justify-center items-center space-x-8 text-sky-500 text-4xl mb-4">
                     <a href="https://www.facebook.com/crystalhotelscomtr/?locale=tr_TR" target="_blank" class="hover:text-sky-600 transition transform hover:scale-110"><i class="fa-brands fa-facebook"></i></a>
@@ -464,7 +426,6 @@
                     <a href="https://apps.apple.com/tr/app/crystal-hotels/id6744818940" target="_blank" class="crystal-btn flex-1 py-3 text-xs text-center block leading-tight"><i class="fa-brands fa-apple text-[28px] block mb-1"></i> iOS App</a>
                     <a href="https://play.google.com/store/apps/details?id=com.epigra.crystal_hotels&pli=1" target="_blank" class="crystal-btn flex-1 py-3 text-xs text-center block leading-tight"><i class="fa-brands fa-google-play text-[28px] block mb-1"></i> Android App</a>
                  </div>
-                 
                  <button onclick="document.getElementById('live-schedule-container').classList.remove('hidden'); this.style.display='none'; renderActivities();" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg mb-8"><i class="fa-solid fa-calendar-day mr-2"></i> View Live Schedule!</button>
                  <div id="live-schedule-container" class="hidden mb-8">
                     <div class="activity-box">
@@ -473,19 +434,18 @@
                         </div>
                     </div>
                  </div>
-
                  <h3 class="font-bold text-gray-700 text-center mb-4 text-sm uppercase">Follow Us</h3>
                  <div class="flex justify-center items-center space-x-8 text-sky-500 text-4xl mb-4">
                     <a href="https://www.facebook.com/crystalhotelscomtr/?locale=tr_TR" target="_blank" class="hover:text-sky-600 transition transform hover:scale-110"><i class="fa-brands fa-facebook"></i></a>
                     <a href="https://www.instagram.com/crystalhotels/" target="_blank" class="hover:text-sky-600 transition transform hover:scale-110"><i class="fa-brands fa-instagram"></i></a>
                     <a href="https://crystalhotels.com.tr/oteller/crystal-sunset" target="_blank" class="hover:text-sky-600 transition transform hover:scale-110"><i class="fa-solid fa-globe"></i></a>
                  </div>`,
-            de: `<div class="crystal-panel mb-8 text-sm leading-relaxed">Die <b>Crystal Hotels App</b> bietet zentralen Zugriff auf tägliche Aktivitäten und Showprogramme.</div>
+            de: `<div class="crystal-panel mb-8 text-sm leading-relaxed">Die <b>Crystal Hotels App</b> bietet einen zentralen Zugang zu <b>täglichen Aktivitäten, Show-Programmen</b> und wichtigen Informationen zum Aufenthalt und sorgt so für ein reibungsloses und gut informiertes Gästeerlebnis.</div>
                  <div class="flex space-x-3 mb-8">
-                    <a href="https://apps.apple.com/tr/app/crystal-hotels/id6744818940" target="_blank" class="crystal-btn flex-1 py-3 text-xs text-center block leading-tight"><i class="fa-brands fa-apple text-[28px] block mb-1"></i> iOS App</a>
-                    <a href="https://play.google.com/store/apps/details?id=com.epigra.crystal_hotels&pli=1" target="_blank" class="crystal-btn flex-1 py-3 text-xs text-center block leading-tight"><i class="fa-brands fa-google-play text-[28px] block mb-1"></i> Android App</a>
+                    <a href="https://apps.apple.com/tr/app/crystal-hotels/id6744818940" target="_blank" class="crystal-btn flex-1 py-3 text-xs text-center block leading-tight"><i class="fa-brands fa-apple text-[28px] block mb-1"></i> Crystal Hotels App für iOS herunterladen</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.epigra.crystal_hotels&pli=1" target="_blank" class="crystal-btn flex-1 py-3 text-xs text-center block leading-tight"><i class="fa-brands fa-google-play text-[28px] block mb-1"></i> Crystal Hotels App für Android herunterladen</a>
                  </div>
-                 <button onclick="document.getElementById('live-schedule-container').classList.remove('hidden'); this.style.display='none'; renderActivities();" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg mb-8"><i class="fa-solid fa-calendar-day mr-2"></i> Live-Programm Ansehen!</button>
+                 <button onclick="document.getElementById('live-schedule-container').classList.remove('hidden'); this.style.display='none'; renderActivities();" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg mb-8"><i class="fa-solid fa-calendar-day mr-2"></i> Live-Programm ansehen!</button>
                  <div id="live-schedule-container" class="hidden mb-8">
                     <div class="activity-box">
                         <div id="activity-wrapper">
@@ -493,12 +453,12 @@
                         </div>
                     </div>
                  </div>`,
-            ru: `<div class="crystal-panel mb-8 text-sm leading-relaxed">Приложение <b>Crystal Hotels App</b> предоставляет доступ к ежедневным мероприятиям и расписаниям шоу.</div>
+            ru: `<div class="crystal-panel mb-8 text-sm leading-relaxed">Приложение <b>Crystal Hotels App</b>, объединяющее все отели Crystal на единой платформе, обеспечивает мгновенный доступ к ежедневным мероприятиям, шоу-программам и <b>всей важной информации</b> о вашем пребывании, предлагая безупречный и эксклюзивный гостевой опыт.</div>
                  <div class="flex space-x-3 mb-8">
-                    <a href="https://apps.apple.com/tr/app/crystal-hotels/id6744818940" target="_blank" class="crystal-btn flex-1 py-3 text-xs text-center block leading-tight"><i class="fa-brands fa-apple text-[28px] block mb-1"></i> iOS App</a>
-                    <a href="https://play.google.com/store/apps/details?id=com.epigra.crystal_hotels&pli=1" target="_blank" class="crystal-btn flex-1 py-3 text-xs text-center block leading-tight"><i class="fa-brands fa-google-play text-[28px] block mb-1"></i> Android App</a>
+                    <a href="https://apps.apple.com/tr/app/crystal-hotels/id6744818940" target="_blank" class="crystal-btn flex-1 py-3 text-xs text-center block leading-tight"><i class="fa-brands fa-apple text-[28px] block mb-1"></i> Скачать Crystal Hotels App для iOS</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.epigra.crystal_hotels&pli=1" target="_blank" class="crystal-btn flex-1 py-3 text-xs text-center block leading-tight"><i class="fa-brands fa-google-play text-[28px] block mb-1"></i> Скачать Crystal Hotels App для Android</a>
                  </div>
-                 <button onclick="document.getElementById('live-schedule-container').classList.remove('hidden'); this.style.display='none'; renderActivities();" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg mb-8"><i class="fa-solid fa-calendar-day mr-2"></i> Посмотреть расписание!</button>
+                 <button onclick="document.getElementById('live-schedule-container').classList.remove('hidden'); this.style.display='none'; renderActivities();" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg mb-8"><i class="fa-solid fa-calendar-day mr-2"></i> Посмотреть текущую программу!</button>
                  <div id="live-schedule-container" class="hidden mb-8">
                     <div class="activity-box">
                         <div id="activity-wrapper">
@@ -517,34 +477,37 @@
         },
         food: {
             tr: `<h3 class="font-bold text-gray-700 text-center mb-4 text-sm uppercase">Hizmet Saatleri</h3>
-                 <img src="fb-hours.png" alt="Food Beverage Hours" onerror="this.outerHTML='<div class=\\'bg-gray-100 p-10 text-center rounded-xl text-gray-400\\'>Lütfen GitHub\\'a <b>fb-hours.png</b> dosyasını yükleyin.</div>'" class="w-full rounded-xl shadow-md">`,
+                 <img src="fb-hourstr.png" alt="Food Beverage Hours" onerror="this.outerHTML='<div class=\\'bg-gray-100 p-10 text-center rounded-xl text-gray-400\\'>Lütfen GitHub\\'a <b>fb-hourstr.png</b> dosyasını yükleyin.</div>'" class="w-full rounded-xl shadow-md">`,
             en: `<h3 class="font-bold text-gray-700 text-center mb-4 text-sm uppercase">Operation Hours</h3>
                  <img src="fb-hours.png" alt="Food Beverage Hours" onerror="this.outerHTML='<div class=\\'bg-gray-100 p-10 text-center rounded-xl text-gray-400\\'>Please upload <b>fb-hours.png</b> to GitHub.</div>'" class="w-full rounded-xl shadow-md">`,
-            de: `<img src="fb-hours.png" class="w-full rounded-xl">`,
-            ru: `<img src="fb-hours.png" class="w-full rounded-xl">`
+            de: `<h3 class="font-bold text-gray-700 text-center mb-4 text-sm uppercase">Betriebszeiten</h3>
+                 <img src="fb-hoursde.png" alt="Food Beverage Hours" onerror="this.outerHTML='<div class=\\'bg-gray-100 p-10 text-center rounded-xl text-gray-400\\'>Please upload <b>fb-hoursde.png</b> to GitHub.</div>'" class="w-full rounded-xl shadow-md">`,
+            ru: `<h3 class="font-bold text-gray-700 text-center mb-4 text-sm uppercase">Часы работы</h3>
+                 <img src="fb-hoursru.png" alt="Food Beverage Hours" onerror="this.outerHTML='<div class=\\'bg-gray-100 p-10 text-center rounded-xl text-gray-400\\'>Please upload <b>fb-hoursru.png</b> to GitHub.</div>'" class="w-full rounded-xl shadow-md">`
         }
     };
 
+    // --- TEMEL DİL VERİLERİ (Giriş Ekranı Çevirileri Eklendi) ---
     const translations = {
         tr: {
-            welcome: "Konaklamanız boyunca tüm otel bilgilerine zahmetsizce erişin. Restoran saatleri, harita ve AI asistan tek noktada.",
-            room: "Oda Rehberi", food: "Yiyecek & İçecek", map: "Tesis Haritası", act: "Aktiviteler", menus: "Menüler", transfer: "Transfer Bilgileri", ai: "AI Asistan'a Sorun!",
+            welcome: "Konaklamanız boyunca tüm otel bilgilerine zahmetsizce erişin.",
+            room: "Oda Rehberi", food: "Yiyecek & İçecek", map: "Tesis Haritası", act: "Aktiviteler", menus: "Menüler", transfer: "Transfer Bilgileri", ai: "AI Asistan'a Sorun!", backHome: "Geri Dön",
             titles: { room: "ODA REHBERİ", food: "YİYECEK & İÇECEK", map: "TESİS HARİTASI", activities: "AKTİVİTELER", menus: "MENÜLER", transfer: "TRANSFER BİLGİLERİ" }
         },
         en: {
-            welcome: "Effortlessly access all hotel information. Restaurant hours, map, and AI assistant, all in one place.",
-            room: "Room Guide", food: "Food & Beverage", map: "Hotel Map", act: "Activities", menus: "Menus", transfer: "Transfer Info", ai: "Ask AI Assistant!",
+            welcome: "Effortlessly access all hotel information during your stay.",
+            room: "Room Guide", food: "Food & Beverage", map: "Hotel Map", act: "Activities", menus: "Menus", transfer: "Transfer Info", ai: "Ask AI Assistant!", backHome: "Back",
             titles: { room: "ROOM GUIDE", food: "FOOD & BEVERAGE", map: "HOTEL MAP", activities: "ACTIVITIES", menus: "MENUS", transfer: "TRANSFER INFO" }
         },
         de: {
-            welcome: "Erhalten Sie mühelos Zugriff auf alle Hotelinformationen. Restaurantzeiten, Karte und KI-Assistent an einem Ort.",
-            room: "Zimmerleitfaden", food: "Essen & Trinken", map: "Lageplan", act: "Aktivitäten", menus: "Menüs", transfer: "Transfer Info", ai: "KI-Assistent fragen!",
-            titles: { room: "ZIMMERLEITFADEN", food: "ESSEN & TRINKEN", map: "LAGEPLAN", activities: "AKTIVITÄTEN", menus: "MENÜS", transfer: "TRANSFER INFO" }
+            welcome: "Alle wichtigen Hotelinformationen auf einen Blick.",
+            room: "Ihr Zimmer", food: "Essen & Trinken", map: "Karte & Shops", act: "Crystal Aktivitäten", menus: "Menüs", transfer: "Abreise-Info", ai: "KI-Assistent fragen!", backHome: "Zurück",
+            titles: { room: "IHR ZIMMER", food: "ESSEN & TRINKEN", map: "KARTE & SHOPS", activities: "CRYSTAL AKTIVITÄTEN", menus: "MENÜS", transfer: "ABREISE-INFO" }
         },
         ru: {
-            welcome: "Легко получайте доступ ко всей информации об отеле. Часы работы, карта и ИИ-ассистент — всё в одном месте.",
-            room: "Гид по номеру", food: "Еда и Напитки", map: "Карта Отеля", act: "Мероприятия", menus: "Меню", transfer: "Трансфер", ai: "Спросить ИИ-ассистента!",
-            titles: { room: "ГИД ПО НОМЕРУ", food: "ЕДА И НАПИТКИ", map: "КАРТА ОТЕЛЯ", activities: "МЕРОПРИЯТИЯ", menus: "МЕНЮ", transfer: "ТРАНСФЕР" }
+            welcome: "Вся важная информация об отеле доступна в один клик.",
+            room: "Справочник", food: "Еда и напитки", map: "Карта и Магазины", act: "Crystal Активности", menus: "Меню", transfer: "Инфо об отъезде", ai: "Спросите AI Ассистента!", backHome: "На главную",
+            titles: { room: "СПРАВОЧНИК", food: "ЕДА И НАПИТКИ", map: "КАРТА И МАГАЗИНЫ", activities: "CRYSTAL АКТИВНОСТИ", menus: "МЕНЮ", transfer: "ИНФО ОБ ОТЪЕЗДЕ" }
         }
     };
 
@@ -553,6 +516,7 @@
 
     function selectHotel(hotelKey) {
         document.getElementById('hotel-selection-screen').classList.add('hidden');
+        document.getElementById('hotel-selection-screen').classList.remove('flex');
         document.getElementById('main-menu-screen').classList.remove('hidden');
         
         const tooltip = document.getElementById('lang-tooltip');
@@ -570,6 +534,17 @@
         changeLang('tr');
         renderMainContent();
     }
+    
+    // Geri Dönüş Tuşu Fonksiyonu
+    function goToHotelSelection() {
+        document.getElementById('main-menu-screen').classList.add('hidden');
+        document.getElementById('hotel-selection-screen').classList.remove('hidden');
+        document.getElementById('hotel-selection-screen').classList.add('flex');
+        
+        // Açılır menüyü kapat ki baştan seçsin
+        document.getElementById('hotel-dropdown').classList.remove('open');
+        document.getElementById('dropdown-icon').style.transform = 'rotate(0deg)';
+    }
 
     function changeLang(lang) {
         currentLang = lang;
@@ -584,6 +559,7 @@
         document.getElementById('btn-menus').innerText = t.menus;
         document.getElementById('btn-transfer').innerText = t.transfer;
         document.getElementById('btn-ai').innerText = t.ai;
+        document.getElementById('btn-back-home').innerText = t.backHome;
         
         document.getElementById('ai-link').href = `http://crystalsunset.otai.app/${lang}`;
         
@@ -738,12 +714,10 @@
         setTimeout(() => { wrapper.innerHTML = finalHTML; wrapper.classList.remove('fade-out'); }, 400); 
     }
 
-    // --- 3. DÖNGÜ (HER İKİ WIDGET İÇİN ORTAK) ---
     let currentLangIndex = 0;
     setInterval(() => { 
         currentLangIndex = (currentLangIndex + 1) % 4; 
         
-        // Sadece ekranda olan menüyü güncelle ki boşuna kasmasın
         if (!document.getElementById('main-menu-screen').classList.contains('hidden')) {
             renderMainContent(); 
         }
