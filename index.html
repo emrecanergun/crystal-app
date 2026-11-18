@@ -39,13 +39,11 @@
         .dropdown-wrapper { margin: 0 20px; border-radius: 12px; overflow: hidden; border: 1px solid #e5e7eb; box-shadow: 0 10px 25px rgba(0,0,0,0.05); background: white; }
         .dropdown-header { background: linear-gradient(to right, #49bad5, #0288d1); color: white; padding: 18px 20px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
         .dropdown-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; background: #fafafa; }
-        
-        /* OTELLER İÇİN KAYDIRMA ÇUBUĞU (Görünür) */
         .dropdown-content.open { max-height: 60vh; overflow-y: auto; -webkit-overflow-scrolling: touch; }
         .dropdown-content::-webkit-scrollbar { width: 5px; }
         .dropdown-content::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
         .dropdown-content::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-
+        
         .hotel-select-item { padding: 16px 20px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 700; color: #374151; cursor: pointer; transition: background 0.2s; }
         .hotel-select-item:active { background: #e0f2fe; }
         .hotel-select-item:last-child { border-bottom: none; }
@@ -79,7 +77,6 @@
         .alacarte-table-new th, .alacarte-table-new td { text-align: center; vertical-align: middle; padding: 10px 6px; }
         .alacarte-table-new td i { font-size: 12px; }
         
-        /* Sadece genel sayfa Scroll'u gizli tutuldu */
         .hide-scroll::-webkit-scrollbar { display: none; }
         .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
         
@@ -90,16 +87,17 @@
 
 <!-- SPLASH SCREEN -->
 <div id="splash-screen">
+    <!-- Splash Logo Oranı Korundu -->
     <img src="crystallogo.png" alt="Crystal Hotels" onerror="this.style.display='none'" class="h-[150px] object-contain">
     <div class="spinner"></div>
 </div>
 
 <!-- 0. OTEL SEÇİM (GİRİŞ) EKRANI -->
 <div id="hotel-selection-screen" class="app-container bg-gradient-to-b from-sky-50 to-white hidden justify-center pb-20">
-    <div class="text-center mb-8 px-6 mt-10">
-        <!-- Logo Büyük Kaldı -->
-        <img src="crystallogo.png" alt="Crystal Hotels" onerror="this.outerHTML='<h1 class=\\'serif-title text-3xl font-semibold text-gray-800\\'>CRYSTAL HOTELS</h1>'" class="h-[130px] w-[80%] mx-auto object-contain drop-shadow-sm">
-        <p class="text-xs text-gray-500 mt-4 font-bold tracking-[0.25em]">GUEST INFORMATION HUB</p>
+    <div class="text-center mb-8 px-6 mt-6">
+        <!-- LOGO TAM 3 KAT BÜYÜTÜLDÜ (Orijinal 70px'di, şimdi 210px) -->
+        <img src="crystallogo.png" alt="Crystal Hotels" onerror="this.outerHTML='<h1 class=\\'serif-title text-4xl font-semibold text-gray-800\\'>CRYSTAL HOTELS</h1>'" class="h-[210px] w-full mx-auto object-contain drop-shadow-sm">
+        <p class="text-[11px] text-gray-500 mt-2 font-bold tracking-[0.25em]">GUEST INFORMATION HUB</p>
     </div>
     
     <div class="dropdown-wrapper">
@@ -107,22 +105,22 @@
             <span class="tracking-wide text-sm" id="dropdown-title-text"><i class="fa-solid fa-building mr-2"></i> Lütfen Otelinizi Seçin</span>
             <i id="dropdown-icon" class="fa-solid fa-chevron-down transition-transform duration-300"></i>
         </div>
-        <!-- Scrollbar eklendi (CSS'te tanımlandı) -->
         <div id="hotel-dropdown" class="dropdown-content">
-            <div onclick="selectHotel('Prestige', 'CRYSTAL PRESTIGE')" class="hotel-select-item">CRYSTAL PRESTIGE PEARL COL. <i class="fa-solid fa-angle-right text-gray-400"></i></div>
-            <div onclick="selectHotel('Flora', 'CRYSTAL FLORA')" class="hotel-select-item">CRYSTAL FLORA PEARL COL. <i class="fa-solid fa-angle-right text-gray-400"></i></div>
-            <div onclick="selectHotel('Centro', 'CRYSTAL CENTRO')" class="hotel-select-item">CRYSTAL CENTRO PEARL COL. <i class="fa-solid fa-angle-right text-gray-400"></i></div>
-            <div onclick="selectHotel('TatBeach', 'CRYSTAL TAT BEACH')" class="hotel-select-item">CRYSTAL TAT BEACH PEARL COL. <i class="fa-solid fa-angle-right text-gray-400"></i></div>
-            <div onclick="selectHotel('Sunset', 'CRYSTAL SUNSET')" class="hotel-select-item">CRYSTAL SUNSET PEARL COL. <i class="fa-solid fa-angle-right text-gray-400"></i></div>
-            <div onclick="selectHotel('Aura', 'CRYSTAL AURA')" class="hotel-select-item">CRYSTAL AURA AQUA COL. <i class="fa-solid fa-angle-right text-gray-400"></i></div>
-            <div onclick="selectHotel('Waterworld', 'CRYSTAL WATERWORLD')" class="hotel-select-item">CRYSTAL WATERWORLD AQUA COL. <i class="fa-solid fa-angle-right text-gray-400"></i></div>
-            <div onclick="selectHotel('Paraiso', 'CRYSTAL PARAISO')" class="hotel-select-item">CRYSTAL PARAISO AQUA COL. <i class="fa-solid fa-angle-right text-gray-400"></i></div>
-            <div onclick="selectHotel('Admiral', 'CRYSTAL ADMIRAL')" class="hotel-select-item">CRYSTAL ADMIRAL AQUA COL. <i class="fa-solid fa-angle-right text-gray-400"></i></div>
-            <div onclick="selectHotel('DeLuxe', 'CRYSTAL DE LUXE')" class="hotel-select-item">CRYSTAL DE LUXE COMFORT COL. <i class="fa-solid fa-angle-right text-gray-400"></i></div>
-            <div onclick="selectHotel('Family', 'CRYSTAL FAMILY')" class="hotel-select-item">CRYSTAL FAMILY COMFORT COL. <i class="fa-solid fa-angle-right text-gray-400"></i></div>
-            <div onclick="selectHotel('Boutique', 'CRYSTAL BOUTIQUE')" class="hotel-select-item">CRYSTAL BOUTIQUE COMFORT COL. <i class="fa-solid fa-angle-right text-gray-400"></i></div>
-            <div onclick="selectHotel('WorldOfColours', 'CRYSTAL COLOURS')" class="hotel-select-item">CRYSTAL WORLD OF COLOURS <i class="fa-solid fa-angle-right text-gray-400"></i></div>
-            <div onclick="selectHotel('ClubWorld', 'CLUB WORLD OF COLOURS')" class="hotel-select-item">CLUB WORLD OF COLOURS <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <!-- Otel İsimleri Tek Satıra Sığacak Şekilde Kısaltıldı -->
+            <div onclick="selectHotel('Prestige', 'CRYSTAL PRESTIGE')" class="hotel-select-item">CRYSTAL PRESTIGE <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('Flora', 'CRYSTAL FLORA')" class="hotel-select-item">CRYSTAL FLORA <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('Centro', 'CRYSTAL CENTRO')" class="hotel-select-item">CRYSTAL CENTRO <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('TatBeach', 'CRYSTAL TAT BEACH')" class="hotel-select-item">CRYSTAL TAT BEACH <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('Sunset', 'CRYSTAL SUNSET')" class="hotel-select-item">CRYSTAL SUNSET <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('Aura', 'CRYSTAL AURA')" class="hotel-select-item">CRYSTAL AURA <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('Waterworld', 'CRYSTAL WATERWORLD')" class="hotel-select-item">CRYSTAL WATERWORLD <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('Paraiso', 'CRYSTAL PARAISO')" class="hotel-select-item">CRYSTAL PARAISO <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('Admiral', 'CRYSTAL ADMIRAL')" class="hotel-select-item">CRYSTAL ADMIRAL <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('DeLuxe', 'CRYSTAL DE LUXE')" class="hotel-select-item">CRYSTAL DE LUXE <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('Family', 'CRYSTAL FAMILY')" class="hotel-select-item">CRYSTAL FAMILY <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('Boutique', 'CRYSTAL BOUTIQUE')" class="hotel-select-item">CRYSTAL BOUTIQUE <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('WorldOfColours', 'CRYSTAL COLOURS')" class="hotel-select-item">WORLD OF COLOURS <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('ClubWorld', 'CLUB COLOURS')" class="hotel-select-item">CLUB COLOURS <i class="fa-solid fa-angle-right text-gray-400"></i></div>
         </div>
     </div>
 </div>
@@ -132,27 +130,20 @@
     
     <div class="flex justify-between items-center px-6 pt-5 shrink-0 relative z-20">
         
-        <!-- Geri Dön Tuşu -->
         <button onclick="goToHotelSelection()" class="text-gray-500 hover:text-sky-600 transition flex items-center bg-gray-50 px-3 py-2 rounded-lg border border-gray-200 shadow-sm">
             <i class="fa-solid fa-arrow-left text-xs mr-2"></i><span id="btn-back-home" class="text-[10px] font-bold tracking-wide uppercase">Geri</span>
         </button>
 
-        <!-- Dil Seçimi Butonları ve Tooltip -->
-        <div class="flex space-x-1 shrink-0 relative">
+        <!-- Tooltip Tamamen Kaldırıldı, Sadece Seçim Butonları Kaldı -->
+        <div class="flex space-x-1 shrink-0">
             <button onclick="changeLang('tr')" class="px-2 py-1 bg-gray-100 border border-gray-200 rounded text-[10px] font-bold text-gray-700 hover:bg-gray-200">🇹🇷 TR</button>
             <button onclick="changeLang('en')" class="px-2 py-1 bg-gray-100 border border-gray-200 rounded text-[10px] font-bold text-gray-700 hover:bg-gray-200">🇬🇧 EN</button>
             <button onclick="changeLang('de')" class="px-2 py-1 bg-gray-100 border border-gray-200 rounded text-[10px] font-bold text-gray-700 hover:bg-gray-200">🇩🇪 DE</button>
             <button onclick="changeLang('ru')" class="px-2 py-1 bg-gray-100 border border-gray-200 rounded text-[10px] font-bold text-gray-700 hover:bg-gray-200">🇷🇺 RU</button>
-            
-            <!-- Tooltip Div (Doğru konumlandırıldı) -->
-            <div id="lang-tooltip" class="hidden absolute top-8 right-0 bg-gray-800 text-white text-[10px] py-1.5 px-3 rounded shadow-lg transition-opacity duration-500 opacity-0 whitespace-nowrap z-50">
-                <div class="absolute -top-1 right-8 w-2 h-2 bg-gray-800 rotate-45"></div>
-                🌍 Dil / Language
-            </div>
         </div>
     </div>
 
-    <!-- DİNAMİK OTEL BAŞLIĞI (Alt Metin Büyütüldü) -->
+    <!-- DİNAMİK OTEL BAŞLIĞI -->
     <div class="text-center px-6 mt-6 shrink-0 relative">
         <h2 id="hotel-header-title" class="serif-title text-[22px] font-semibold text-gray-800 mb-2 whitespace-nowrap">CRYSTAL HOTELS</h2>
         <p id="welcome-text" class="text-[13px] text-gray-500 leading-tight max-w-sm mx-auto italic font-medium">
@@ -160,7 +151,7 @@
         </p>
     </div>
 
-    <!-- DÜZ 3D MENÜ (Metin ve İkonlar Büyütüldü) -->
+    <!-- DÜZ 3D MENÜ -->
     <div class="dashed-border-y py-4 mt-5 mb-3 grid grid-cols-2 gap-3 px-6 shrink-0">
         <button onclick="openPage('room')" class="crystal-btn flex flex-col items-center justify-center py-4">
             <i class="fa-solid fa-bed text-2xl mb-1.5"></i><span id="btn-room" class="font-bold text-[13px]">Oda Rehberi</span>
@@ -214,7 +205,6 @@
 </div>
 
 <script>
-    // --- Splash ve Dropdown ---
     window.addEventListener('load', () => {
         setTimeout(() => {
             const splash = document.getElementById('splash-screen');
@@ -239,7 +229,6 @@
         }
     }
 
-    // --- 4 Dilde Dönen Dropdown Metni ---
     const dropdownTexts = [
         "<i class='fa-solid fa-building mr-2'></i> Lütfen Otelinizi Seçin",
         "<i class='fa-solid fa-building mr-2'></i> Please Select Your Hotel",
@@ -259,7 +248,6 @@
         }
     }, 3000);
 
-    // --- SABİT METİNLER (A'la Carte Tablo Responsive) ---
     const pageData = {
         transfer: {
             tr: `<div class="crystal-panel mb-6 text-sm leading-relaxed text-left">
@@ -531,22 +519,6 @@
         document.getElementById('hotel-selection-screen').classList.remove('flex');
         document.getElementById('main-menu-screen').classList.remove('hidden');
         
-        const tooltip = document.getElementById('lang-tooltip');
-        if (tooltip && !tooltip.hasAttribute('data-shown')) {
-            tooltip.classList.remove('hidden');
-            void tooltip.offsetWidth; // Reflow for animation
-            tooltip.classList.remove('opacity-0');
-            tooltip.classList.add('opacity-100');
-            tooltip.setAttribute('data-shown', 'true');
-            
-            clearTimeout(tooltipTimer);
-            tooltipTimer = setTimeout(() => {
-                tooltip.classList.remove('opacity-100');
-                tooltip.classList.add('opacity-0');
-                setTimeout(() => tooltip.classList.add('hidden'), 500); 
-            }, 4000);
-        }
-        
         changeLang('tr');
         renderMainContent();
     }
@@ -604,13 +576,6 @@
         if (!document.getElementById('content-screen').classList.contains('hidden')) {
             const activePage = document.getElementById('content-screen').getAttribute('data-active-page');
             if (activePage) openPage(activePage);
-        }
-        
-        const tooltip = document.getElementById('lang-tooltip');
-        if (tooltip && !tooltip.classList.contains('hidden')) {
-             tooltip.classList.remove('opacity-100');
-             tooltip.classList.add('opacity-0');
-             setTimeout(() => tooltip.classList.add('hidden'), 500); 
         }
     }
 
