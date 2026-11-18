@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         body { font-family: 'Montserrat', sans-serif; background-color: #ffffff; margin: 0; padding: 0; overflow-x: hidden; }
@@ -30,6 +30,7 @@
         .dashed-border-y { border-top: 1px dashed #e5e7eb; border-bottom: 1px dashed #e5e7eb; }
         .dashed-border-b { border-bottom: 1px dashed #e5e7eb; }
 
+        /* Daha Kompakt Buton Tasarımı (Ekrana Sığması İçin) */
         .crystal-btn {
             background-color: #49bad5; border-radius: 8px; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.6), 0 2px 4px rgba(0,0,0,0.05); 
             color: #ffffff; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.1); transition: all 0.15s ease; cursor: pointer; border: 1px solid #3ca5be;
@@ -44,7 +45,7 @@
         .dropdown-content::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
         .dropdown-content::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
         
-        .hotel-select-item { padding: 16px 20px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 700; color: #374151; cursor: pointer; transition: background 0.2s; }
+        .hotel-select-item { padding: 16px 20px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; font-size: 10px; font-weight: 700; color: #374151; cursor: pointer; transition: background 0.2s; }
         .hotel-select-item:active { background: #e0f2fe; }
         .hotel-select-item:last-child { border-bottom: none; }
         
@@ -53,14 +54,14 @@
         .crystal-panel { background-color: #49bad5; border-radius: 12px; padding: 1.5rem; color: #ffffff; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5), 0 4px 6px rgba(0,0,0,0.1); text-align: center; }
         .crystal-panel a { text-decoration: underline; font-weight: bold; }
 
-        .now-box { background: linear-gradient(145deg, #ffffff, #fdfdfd); border: 1px solid #eaeaea; border-radius: 12px; padding: 16px 15px; text-align: left; box-shadow: 0 5px 20px rgba(0,0,0,0.04); height: 100%; }
+        .now-box { background: linear-gradient(145deg, #ffffff, #fdfdfd); border: 1px solid #eaeaea; border-radius: 12px; padding: 12px 15px; text-align: left; box-shadow: 0 5px 20px rgba(0,0,0,0.04); height: 100%; }
         #content-wrapper { transition: opacity 0.4s ease-in-out; opacity: 1; }
         .fade-out { opacity: 0 !important; }
-        .now-title { font-size: 11px; color: #8c8c8c; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; font-weight: 600; border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; display: flex; justify-content: center; align-items: center; gap: 8px; }
-        .event-item-main { font-size: 13px; font-weight: 600; color: #2c3e50; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f8f8f8; padding-bottom: 8px; }
+        .now-title { font-size: 11px; color: #8c8c8c; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; font-weight: 600; border-bottom: 1px solid #f0f0f0; padding-bottom: 6px; display: flex; justify-content: center; align-items: center; gap: 8px; }
+        .event-item-main { font-size: 13px; font-weight: 600; color: #2c3e50; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f8f8f8; padding-bottom: 6px; }
         .event-item-main:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-        .event-time-main { font-size: 11px; font-weight: 700; color: #49bad5; background-color: transparent; border: 1px solid #49bad5; padding: 3px 10px; border-radius: 20px; white-space: nowrap; margin-left: 10px; }
-        .weather-note { font-size: 9px; color: #a0a0a0; text-align: center; margin-top: 12px; font-style: italic; font-weight: 500; }
+        .event-time-main { font-size: 10px; font-weight: 700; color: #49bad5; background-color: transparent; border: 1px solid #49bad5; padding: 2px 8px; border-radius: 20px; white-space: nowrap; margin-left: 10px; }
+        .weather-note { font-size: 9px; color: #a0a0a0; text-align: center; margin-top: 10px; font-style: italic; font-weight: 500; }
         
         .activity-box { background: linear-gradient(145deg, #ffffff, #fdfdfd); border: 1px solid #eaeaea; border-radius: 12px; padding: 18px 15px; text-align: left; box-shadow: 0 10px 30px rgba(0,0,0,0.06); position: relative; }
         #activity-wrapper { transition: opacity 0.5s ease-in-out; opacity: 1; }
@@ -80,24 +81,22 @@
         .hide-scroll::-webkit-scrollbar { display: none; }
         .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
         
-        .serif-title { font-family: 'Cinzel', serif; letter-spacing: 1px; }
+        /* Orijinal Logodaki Geniş Serif Font Tasarımı */
+        .serif-title { font-family: 'Cinzel', serif; letter-spacing: 2px; }
     </style>
 </head>
 <body>
 
-<!-- SPLASH SCREEN -->
 <div id="splash-screen">
-    <!-- Splash Logo Oranı Korundu -->
     <img src="crystallogo.png" alt="Crystal Hotels" onerror="this.style.display='none'" class="h-[150px] object-contain">
     <div class="spinner"></div>
 </div>
 
 <!-- 0. OTEL SEÇİM (GİRİŞ) EKRANI -->
-<div id="hotel-selection-screen" class="app-container bg-gradient-to-b from-sky-50 to-white hidden justify-center pb-20">
+<div id="hotel-selection-screen" class="app-container bg-gradient-to-b from-sky-50 to-white hidden justify-center pb-10">
     <div class="text-center mb-8 px-6 mt-6">
-        <!-- LOGO TAM 3 KAT BÜYÜTÜLDÜ (Orijinal 70px'di, şimdi 210px) -->
-        <img src="crystallogo.png" alt="Crystal Hotels" onerror="this.outerHTML='<h1 class=\\'serif-title text-4xl font-semibold text-gray-800\\'>CRYSTAL HOTELS</h1>'" class="h-[210px] w-full mx-auto object-contain drop-shadow-sm">
-        <p class="text-[11px] text-gray-500 mt-2 font-bold tracking-[0.25em]">GUEST INFORMATION HUB</p>
+        <img src="crystallogo.png" alt="Crystal Hotels" onerror="this.outerHTML='<h1 class=\\'serif-title text-4xl font-semibold text-gray-800\\'>CRYSTAL HOTELS</h1>'" class="h-[130px] w-[80%] mx-auto object-contain drop-shadow-sm">
+        <p class="text-xs text-gray-500 mt-4 font-bold tracking-[0.25em]">GUEST INFORMATION HUB</p>
     </div>
     
     <div class="dropdown-wrapper">
@@ -106,21 +105,21 @@
             <i id="dropdown-icon" class="fa-solid fa-chevron-down transition-transform duration-300"></i>
         </div>
         <div id="hotel-dropdown" class="dropdown-content">
-            <!-- Otel İsimleri Tek Satıra Sığacak Şekilde Kısaltıldı -->
-            <div onclick="selectHotel('Prestige', 'CRYSTAL PRESTIGE')" class="hotel-select-item">CRYSTAL PRESTIGE <i class="fa-solid fa-angle-right text-gray-400"></i></div>
-            <div onclick="selectHotel('Flora', 'CRYSTAL FLORA')" class="hotel-select-item">CRYSTAL FLORA <i class="fa-solid fa-angle-right text-gray-400"></i></div>
-            <div onclick="selectHotel('Centro', 'CRYSTAL CENTRO')" class="hotel-select-item">CRYSTAL CENTRO <i class="fa-solid fa-angle-right text-gray-400"></i></div>
-            <div onclick="selectHotel('TatBeach', 'CRYSTAL TAT BEACH')" class="hotel-select-item">CRYSTAL TAT BEACH <i class="fa-solid fa-angle-right text-gray-400"></i></div>
-            <div onclick="selectHotel('Sunset', 'CRYSTAL SUNSET')" class="hotel-select-item">CRYSTAL SUNSET <i class="fa-solid fa-angle-right text-gray-400"></i></div>
-            <div onclick="selectHotel('Aura', 'CRYSTAL AURA')" class="hotel-select-item">CRYSTAL AURA <i class="fa-solid fa-angle-right text-gray-400"></i></div>
-            <div onclick="selectHotel('Waterworld', 'CRYSTAL WATERWORLD')" class="hotel-select-item">CRYSTAL WATERWORLD <i class="fa-solid fa-angle-right text-gray-400"></i></div>
-            <div onclick="selectHotel('Paraiso', 'CRYSTAL PARAISO')" class="hotel-select-item">CRYSTAL PARAISO <i class="fa-solid fa-angle-right text-gray-400"></i></div>
-            <div onclick="selectHotel('Admiral', 'CRYSTAL ADMIRAL')" class="hotel-select-item">CRYSTAL ADMIRAL <i class="fa-solid fa-angle-right text-gray-400"></i></div>
-            <div onclick="selectHotel('DeLuxe', 'CRYSTAL DE LUXE')" class="hotel-select-item">CRYSTAL DE LUXE <i class="fa-solid fa-angle-right text-gray-400"></i></div>
-            <div onclick="selectHotel('Family', 'CRYSTAL FAMILY')" class="hotel-select-item">CRYSTAL FAMILY <i class="fa-solid fa-angle-right text-gray-400"></i></div>
-            <div onclick="selectHotel('Boutique', 'CRYSTAL BOUTIQUE')" class="hotel-select-item">CRYSTAL BOUTIQUE <i class="fa-solid fa-angle-right text-gray-400"></i></div>
-            <div onclick="selectHotel('WorldOfColours', 'CRYSTAL COLOURS')" class="hotel-select-item">WORLD OF COLOURS <i class="fa-solid fa-angle-right text-gray-400"></i></div>
-            <div onclick="selectHotel('ClubWorld', 'CLUB COLOURS')" class="hotel-select-item">CLUB COLOURS <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <!-- Otel İsimleri Orijinal Uzunluğunda Yazıldı -->
+            <div onclick="selectHotel('Prestige', 'CRYSTAL PRESTIGE')" class="hotel-select-item">CRYSTAL PRESTIGE PEARL COLLECTION <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('Flora', 'CRYSTAL FLORA')" class="hotel-select-item">CRYSTAL FLORA PEARL COLLECTION <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('Centro', 'CRYSTAL CENTRO')" class="hotel-select-item">CRYSTAL CENTRO PEARL COLLECTION <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('TatBeach', 'CRYSTAL TAT BEACH')" class="hotel-select-item">CRYSTAL TAT BEACH PEARL COLLECTION <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('Sunset', 'CRYSTAL SUNSET')" class="hotel-select-item">CRYSTAL SUNSET PEARL COLLECTION <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('Aura', 'CRYSTAL AURA')" class="hotel-select-item">CRYSTAL AURA AQUA COLLECTION <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('Waterworld', 'CRYSTAL WATERWORLD')" class="hotel-select-item">CRYSTAL WATERWORLD AQUA COLLECTION <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('Paraiso', 'CRYSTAL PARAISO')" class="hotel-select-item">CRYSTAL PARAISO AQUA COLLECTION <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('Admiral', 'CRYSTAL ADMIRAL')" class="hotel-select-item">CRYSTAL ADMIRAL AQUA COLLECTION <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('DeLuxe', 'CRYSTAL DE LUXE')" class="hotel-select-item">CRYSTAL DE LUXE COMFORT COLLECTION <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('Family', 'CRYSTAL FAMILY')" class="hotel-select-item">CRYSTAL FAMILY COMFORT COLLECTION <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('Boutique', 'CRYSTAL BOUTIQUE')" class="hotel-select-item">CRYSTAL BOUTIQUE COMFORT COLLECTION <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('WorldOfColours', 'CRYSTAL COLOURS')" class="hotel-select-item">CRYSTAL WORLD OF COLOURS COMFORT <i class="fa-solid fa-angle-right text-gray-400"></i></div>
+            <div onclick="selectHotel('ClubWorld', 'CLUB COLOURS')" class="hotel-select-item">CLUB WORLD OF COLOURS <i class="fa-solid fa-angle-right text-gray-400"></i></div>
         </div>
     </div>
 </div>
@@ -128,58 +127,56 @@
 <!-- 1. ANA MENÜ EKRANI -->
 <div id="main-menu-screen" class="app-container hidden bg-white">
     
-    <div class="flex justify-between items-center px-6 pt-5 shrink-0 relative z-20">
-        
-        <button onclick="goToHotelSelection()" class="text-gray-500 hover:text-sky-600 transition flex items-center bg-gray-50 px-3 py-2 rounded-lg border border-gray-200 shadow-sm">
-            <i class="fa-solid fa-arrow-left text-xs mr-2"></i><span id="btn-back-home" class="text-[10px] font-bold tracking-wide uppercase">Geri</span>
+    <div class="flex justify-between items-center px-5 pt-3 shrink-0 relative z-20">
+        <button onclick="goToHotelSelection()" class="text-gray-500 hover:text-sky-600 transition flex items-center bg-gray-50 px-2.5 py-1.5 rounded-lg border border-gray-200 shadow-sm">
+            <i class="fa-solid fa-arrow-left text-[10px] mr-1.5"></i><span id="btn-back-home" class="text-[9px] font-bold tracking-wide uppercase">Geri</span>
         </button>
 
-        <!-- Tooltip Tamamen Kaldırıldı, Sadece Seçim Butonları Kaldı -->
-        <div class="flex space-x-1 shrink-0">
-            <button onclick="changeLang('tr')" class="px-2 py-1 bg-gray-100 border border-gray-200 rounded text-[10px] font-bold text-gray-700 hover:bg-gray-200">🇹🇷 TR</button>
-            <button onclick="changeLang('en')" class="px-2 py-1 bg-gray-100 border border-gray-200 rounded text-[10px] font-bold text-gray-700 hover:bg-gray-200">🇬🇧 EN</button>
-            <button onclick="changeLang('de')" class="px-2 py-1 bg-gray-100 border border-gray-200 rounded text-[10px] font-bold text-gray-700 hover:bg-gray-200">🇩🇪 DE</button>
-            <button onclick="changeLang('ru')" class="px-2 py-1 bg-gray-100 border border-gray-200 rounded text-[10px] font-bold text-gray-700 hover:bg-gray-200">🇷🇺 RU</button>
+        <div class="flex space-x-1 shrink-0 relative">
+            <button onclick="changeLang('tr')" class="px-2 py-1 bg-gray-100 border border-gray-200 rounded text-[9px] font-bold text-gray-700 hover:bg-gray-200">🇹🇷 TR</button>
+            <button onclick="changeLang('en')" class="px-2 py-1 bg-gray-100 border border-gray-200 rounded text-[9px] font-bold text-gray-700 hover:bg-gray-200">🇬🇧 EN</button>
+            <button onclick="changeLang('de')" class="px-2 py-1 bg-gray-100 border border-gray-200 rounded text-[9px] font-bold text-gray-700 hover:bg-gray-200">🇩🇪 DE</button>
+            <button onclick="changeLang('ru')" class="px-2 py-1 bg-gray-100 border border-gray-200 rounded text-[9px] font-bold text-gray-700 hover:bg-gray-200">🇷🇺 RU</button>
         </div>
     </div>
 
-    <!-- DİNAMİK OTEL BAŞLIĞI -->
-    <div class="text-center px-6 mt-6 shrink-0 relative">
-        <h2 id="hotel-header-title" class="serif-title text-[22px] font-semibold text-gray-800 mb-2 whitespace-nowrap">CRYSTAL HOTELS</h2>
-        <p id="welcome-text" class="text-[13px] text-gray-500 leading-tight max-w-sm mx-auto italic font-medium">
+    <!-- DİNAMİK OTEL BAŞLIĞI (Büyütüldü ve Orjinal Font Yapıldı) -->
+    <div class="text-center px-6 mt-3 shrink-0 relative">
+        <h2 id="hotel-header-title" class="serif-title text-3xl font-semibold text-gray-800 mb-1 whitespace-nowrap tracking-[3px]">CRYSTAL HOTELS</h2>
+        <p id="welcome-text" class="text-[12px] text-gray-500 leading-tight max-w-sm mx-auto italic font-medium px-2">
             Konaklamanız boyunca tüm otel bilgilerine zahmetsizce erişin.
         </p>
     </div>
 
-    <!-- DÜZ 3D MENÜ -->
-    <div class="dashed-border-y py-4 mt-5 mb-3 grid grid-cols-2 gap-3 px-6 shrink-0">
-        <button onclick="openPage('room')" class="crystal-btn flex flex-col items-center justify-center py-4">
-            <i class="fa-solid fa-bed text-2xl mb-1.5"></i><span id="btn-room" class="font-bold text-[13px]">Oda Rehberi</span>
+    <!-- DÜZ 3D MENÜ (Padding Daraltıldı) -->
+    <div class="dashed-border-y py-3 mt-3 mb-2 grid grid-cols-2 gap-2 px-5 shrink-0">
+        <button onclick="openPage('room')" class="crystal-btn flex flex-col items-center justify-center py-2.5">
+            <i class="fa-solid fa-bed text-xl mb-1"></i><span id="btn-room" class="font-bold text-[12px]">Oda Rehberi</span>
         </button>
-        <button onclick="openPage('food')" class="crystal-btn flex flex-col items-center justify-center py-4">
-            <i class="fa-solid fa-utensils text-2xl mb-1.5"></i><span id="btn-food" class="font-bold text-[13px]">Yiyecek & İçecek</span>
+        <button onclick="openPage('food')" class="crystal-btn flex flex-col items-center justify-center py-2.5">
+            <i class="fa-solid fa-utensils text-xl mb-1"></i><span id="btn-food" class="font-bold text-[12px]">Yiyecek & İçecek</span>
         </button>
-        <button onclick="openPage('map')" class="crystal-btn flex flex-col items-center justify-center py-4">
-            <i class="fa-solid fa-map-location-dot text-2xl mb-1.5"></i><span id="btn-map" class="font-bold text-[13px]">Tesis Haritası</span>
+        <button onclick="openPage('map')" class="crystal-btn flex flex-col items-center justify-center py-2.5">
+            <i class="fa-solid fa-map-location-dot text-xl mb-1"></i><span id="btn-map" class="font-bold text-[12px]">Tesis Haritası</span>
         </button>
-        <button onclick="openPage('activities')" class="crystal-btn flex flex-col items-center justify-center py-4">
-            <i class="fa-solid fa-icons text-2xl mb-1.5"></i><span id="btn-activities" class="font-bold text-[13px]">Aktiviteler</span>
+        <button onclick="openPage('activities')" class="crystal-btn flex flex-col items-center justify-center py-2.5">
+            <i class="fa-solid fa-icons text-xl mb-1"></i><span id="btn-activities" class="font-bold text-[12px]">Aktiviteler</span>
         </button>
-        <button onclick="openPage('menus')" class="crystal-btn flex flex-col items-center justify-center py-4">
-            <i class="fa-solid fa-book-open-reader text-2xl mb-1.5"></i><span id="btn-menus" class="font-bold text-[13px]">Menüler</span>
+        <button onclick="openPage('menus')" class="crystal-btn flex flex-col items-center justify-center py-2.5">
+            <i class="fa-solid fa-book-open-reader text-xl mb-1"></i><span id="btn-menus" class="font-bold text-[12px]">Menüler</span>
         </button>
-        <button onclick="openPage('transfer')" class="crystal-btn flex flex-col items-center justify-center py-4">
-            <i class="fa-solid fa-plane-departure text-2xl mb-1.5"></i><span id="btn-transfer" class="font-bold text-[13px]">Transfer Bilgileri</span>
+        <button onclick="openPage('transfer')" class="crystal-btn flex flex-col items-center justify-center py-2.5">
+            <i class="fa-solid fa-plane-departure text-xl mb-1"></i><span id="btn-transfer" class="font-bold text-[12px]">Transfer Bilgileri</span>
         </button>
     </div>
 
-    <div class="px-6 shrink-0 mb-3">
-        <a id="ai-link" href="http://crystalsunset.otai.app/tr" target="_blank" class="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold py-3.5 rounded-xl shadow-md flex items-center justify-center space-x-2 transition transform active:scale-95">
-            <i class="fa-solid fa-robot text-lg"></i><span id="btn-ai" class="text-[14px]">AI Asistan'a Sorun!</span>
+    <div class="px-5 shrink-0 mb-2">
+        <a id="ai-link" href="http://crystalsunset.otai.app/tr" target="_blank" class="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold py-2.5 rounded-xl shadow-md flex items-center justify-center space-x-2 transition transform active:scale-95">
+            <i class="fa-solid fa-robot text-lg"></i><span id="btn-ai" class="text-[13px]">AI Asistan'a Sorun!</span>
         </a>
     </div>
 
-    <div class="px-6 flex-grow flex flex-col justify-start overflow-hidden pb-4">
+    <div class="px-5 flex-grow flex flex-col justify-start overflow-hidden pb-2">
         <div class="now-box w-full">
             <div id="content-wrapper">
                 <div style="text-align:center; color:#888; font-size: 12px; margin-top: 10px;">Loading...</div>
@@ -187,8 +184,8 @@
         </div>
     </div>
 
-    <div class="dashed-border-b py-3 flex justify-center items-center bg-white border-t border-gray-100 shrink-0">
-        <img src="mainlogo.png" alt="Main Logo" onerror="this.style.display='none'" class="h-8 object-contain">
+    <div class="dashed-border-b py-2 flex justify-center items-center bg-white border-t border-gray-100 shrink-0">
+        <img src="mainlogo.png" alt="Main Logo" onerror="this.style.display='none'" class="h-6 object-contain">
     </div>
 </div>
 
