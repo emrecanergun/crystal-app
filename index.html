@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Crystal Hotels - Guest Information Hub</title>
     
+    <!-- Yalnızca en acil logo önyüklenir (Açılış hızı için) -->
     <link rel="preload" as="image" href="crystallogo.png">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Yalnızca kullandığımız Montserrat fontu yüklü -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
@@ -31,6 +31,22 @@
         .dashed-border-y { border-top: 1px dashed #e5e7eb; border-bottom: 1px dashed #e5e7eb; }
         .dashed-border-b { border-bottom: 1px dashed #e5e7eb; }
 
+        /* YENİDEN TASARLANAN ARKASI FOTOĞRAFLI BUTONLAR */
+        .crystal-menu-btn {
+            border-radius: 12px; 
+            background-color: #49bad5; /* Fotoğraf gelene kadar orijinal turkuaz durur, boşluk hissi yaratmaz */
+            background-size: cover; 
+            background-position: center;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5), 0 4px 10px rgba(0,0,0,0.08);
+            transition: all 0.15s ease; 
+            cursor: pointer; 
+            border: 1px solid #3ca5be; 
+            position: relative;
+        }
+        .crystal-menu-btn:active { transform: scale(0.96); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .crystal-menu-text { text-shadow: 0 2px 4px rgba(0,0,0,0.6), 0 0 10px rgba(0,0,0,0.4); } /* Fotoğraf üstünde yazıyı belirginleştiren gölge */
+
+        /* Standart Buton (Alt Sayfalar İçin) */
         .crystal-btn {
             background-color: #49bad5; border-radius: 8px; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.6), 0 2px 4px rgba(0,0,0,0.05); 
             color: #ffffff; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.1); transition: all 0.15s ease; cursor: pointer; border: 1px solid #3ca5be;
@@ -45,7 +61,7 @@
         .dropdown-content::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
         .dropdown-content::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
         
-        .hotel-select-item { padding: 16px 20px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 700; color: #374151; cursor: pointer; transition: background 0.2s; }
+        .hotel-select-item { padding: 16px 20px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; font-size: 10px; font-weight: 700; color: #374151; cursor: pointer; transition: background 0.2s; }
         .hotel-select-item:active { background: #e0f2fe; }
         .hotel-select-item:last-child { border-bottom: none; }
         
@@ -54,17 +70,16 @@
         .crystal-panel { background-color: #49bad5; border-radius: 12px; padding: 1.5rem; color: #ffffff; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5), 0 4px 6px rgba(0,0,0,0.1); text-align: center; }
         .crystal-panel a { text-decoration: underline; font-weight: bold; }
 
-        /* LIVE WIDGET */
-        .now-box { background: linear-gradient(145deg, #ffffff, #fdfdfd); border: 1px solid #eaeaea; border-radius: 12px; padding: 12px 15px; text-align: left; box-shadow: 0 5px 20px rgba(0,0,0,0.04); }
+        .now-box { background: linear-gradient(145deg, #ffffff, #fdfdfd); border: 1px solid #eaeaea; border-radius: 12px; padding: 12px 15px; text-align: left; box-shadow: 0 5px 20px rgba(0,0,0,0.04); height: 100%; }
         .now-title { font-size: 11px; color: #8c8c8c; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; font-weight: 600; border-bottom: 1px solid #f0f0f0; padding-bottom: 6px; display: flex; justify-content: center; align-items: center; gap: 8px; }
         .weather-note { font-size: 9px; color: #a0a0a0; text-align: center; margin-top: 8px; font-style: italic; font-weight: 500; }
         .events-scroll { max-height: 155px; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-right: 4px; }
+        
         .event-item-main { font-size: 12px; font-weight: 600; color: #2c3e50; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f8f8f8; padding-bottom: 6px; }
         .event-item-main:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
         .event-time-main { font-size: 10px; font-weight: 700; color: #49bad5; background-color: transparent; border: 1px solid #49bad5; padding: 2px 8px; border-radius: 20px; white-space: nowrap; margin-left: 10px; }
         
         .activity-box { background: linear-gradient(145deg, #ffffff, #fdfdfd); border: 1px solid #eaeaea; border-radius: 12px; padding: 18px 15px; text-align: left; box-shadow: 0 10px 30px rgba(0,0,0,0.06); position: relative; }
-        #activity-wrapper { transition: opacity 0.5s ease-in-out; opacity: 1; }
         .activity-title { font-size: 12px; color: #8c8c8c; text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 15px; font-weight: 600; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; text-align: center; display: flex; justify-content: center; align-items: center; gap: 8px; }
         .activity-item { font-size: 13px; font-weight: 600; color: #2c3e50; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; padding: 10px 8px; border-radius: 8px; border-left: 3px solid transparent; transition: all 0.3s ease; }
         .activity-item.active-now { background: linear-gradient(90deg, #f4fbff 0%, #ffffff 100%); border-left: 3px solid #00a2df; box-shadow: 0 4px 15px rgba(0, 162, 223, 0.05); }
@@ -93,11 +108,10 @@
     <div class="spinner"></div>
 </div>
 
-<!-- 0. OTEL SEÇİM (GİRİŞ) EKRANI (Ortalanmış ve Kompakt Düzen) -->
+<!-- 0. OTEL SEÇİM (GİRİŞ) EKRANI -->
 <div id="hotel-selection-screen" class="app-container bg-gradient-to-b from-sky-50 to-white hidden justify-center items-center">
     
     <div class="w-full flex flex-col items-center justify-center -mt-10">
-        <!-- Logo ve Yazılar Merkezde Yakınlaştırıldı -->
         <div class="text-center mb-10 w-full px-6">
             <img src="crystallogo.png" alt="Crystal Hotels" onerror="this.outerHTML='<h1 class=\\'font-[\\'Montserrat\\'] font-extrabold text-3xl text-gray-800\\'>CRYSTAL HOTELS</h1>'" class="h-[200px] w-full mx-auto object-contain drop-shadow-sm">
             <p class="text-[12px] text-gray-500 mt-2 font-bold tracking-[0.25em]">GUEST INFORMATION HUB</p>
@@ -144,36 +158,47 @@
         </div>
     </div>
 
-    <!-- İSTENİLEN ESKİ LOGO FONT YAPISI -->
+    <!-- DİNAMİK OTEL BAŞLIĞI -->
     <div class="text-center px-6 mt-3 shrink-0 relative">
         <h2 id="hotel-header-title" class="mb-1">
-            <span class="block font-['Montserrat'] font-extrabold text-[26px] tracking-[0.25em] text-[#1e293b]">CRYSTAL</span>
-            <span class="block font-['Montserrat'] font-medium text-[13px] tracking-[0.35em] text-[#334155] -mt-1">SUNSET</span>
+            <!-- JavaScript ile doldurulacak -->
         </h2>
         <p id="welcome-text" class="text-[12px] text-gray-500 leading-tight max-w-sm mx-auto italic font-medium px-2 mt-2">
             Konaklamanız boyunca tüm otel bilgilerine zahmetsizce erişin.
         </p>
     </div>
 
-    <!-- DÜZ 3D MENÜ -->
+    <!-- ARKASI GÖRSELLİ 3D MENÜ (Opaklık %75'e ayarlandı. Daha kaliteli, Premium görünüm) -->
     <div class="dashed-border-y py-3 mt-3 mb-2 grid grid-cols-2 gap-2 px-5 shrink-0">
-        <button onclick="openPage('room')" class="crystal-btn flex flex-col items-center justify-center py-2.5">
-            <i class="fa-solid fa-bed text-xl mb-1"></i><span id="btn-room" class="font-bold text-[12px]">Oda Rehberi</span>
+        <button onclick="openPage('room')" class="crystal-menu-btn flex flex-col items-center justify-center py-2.5" style="background-image: linear-gradient(rgba(73, 186, 213, 0.75), rgba(73, 186, 213, 0.75)), url('bg-room.jpg');">
+            <div class="relative z-10 flex flex-col items-center text-white crystal-menu-text">
+                <i class="fa-solid fa-bed text-xl mb-1"></i><span id="btn-room" class="font-bold text-[12px]">Oda Rehberi</span>
+            </div>
         </button>
-        <button onclick="openPage('food')" class="crystal-btn flex flex-col items-center justify-center py-2.5">
-            <i class="fa-solid fa-utensils text-xl mb-1"></i><span id="btn-food" class="font-bold text-[12px]">Yiyecek & İçecek</span>
+        <button onclick="openPage('food')" class="crystal-menu-btn flex flex-col items-center justify-center py-2.5" style="background-image: linear-gradient(rgba(73, 186, 213, 0.75), rgba(73, 186, 213, 0.75)), url('bg-food.jpg');">
+            <div class="relative z-10 flex flex-col items-center text-white crystal-menu-text">
+                <i class="fa-solid fa-utensils text-xl mb-1"></i><span id="btn-food" class="font-bold text-[12px]">Yiyecek & İçecek</span>
+            </div>
         </button>
-        <button onclick="openPage('map')" class="crystal-btn flex flex-col items-center justify-center py-2.5">
-            <i class="fa-solid fa-map-location-dot text-xl mb-1"></i><span id="btn-map" class="font-bold text-[12px]">Tesis Haritası</span>
+        <button onclick="openPage('map')" class="crystal-menu-btn flex flex-col items-center justify-center py-2.5" style="background-image: linear-gradient(rgba(73, 186, 213, 0.75), rgba(73, 186, 213, 0.75)), url('bg-map.jpg');">
+            <div class="relative z-10 flex flex-col items-center text-white crystal-menu-text">
+                <i class="fa-solid fa-map-location-dot text-xl mb-1"></i><span id="btn-map" class="font-bold text-[12px]">Tesis Haritası</span>
+            </div>
         </button>
-        <button onclick="openPage('activities')" class="crystal-btn flex flex-col items-center justify-center py-2.5">
-            <i class="fa-solid fa-icons text-xl mb-1"></i><span id="btn-activities" class="font-bold text-[12px]">Aktiviteler</span>
+        <button onclick="openPage('activities')" class="crystal-menu-btn flex flex-col items-center justify-center py-2.5" style="background-image: linear-gradient(rgba(73, 186, 213, 0.75), rgba(73, 186, 213, 0.75)), url('bg-act.jpg');">
+            <div class="relative z-10 flex flex-col items-center text-white crystal-menu-text">
+                <i class="fa-solid fa-icons text-xl mb-1"></i><span id="btn-activities" class="font-bold text-[12px]">Aktiviteler</span>
+            </div>
         </button>
-        <button onclick="openPage('menus')" class="crystal-btn flex flex-col items-center justify-center py-2.5">
-            <i class="fa-solid fa-book-open-reader text-xl mb-1"></i><span id="btn-menus" class="font-bold text-[12px]">Menüler</span>
+        <button onclick="openPage('menus')" class="crystal-menu-btn flex flex-col items-center justify-center py-2.5" style="background-image: linear-gradient(rgba(73, 186, 213, 0.75), rgba(73, 186, 213, 0.75)), url('bg-menus.jpg');">
+            <div class="relative z-10 flex flex-col items-center text-white crystal-menu-text">
+                <i class="fa-solid fa-book-open-reader text-xl mb-1"></i><span id="btn-menus" class="font-bold text-[12px]">Menüler</span>
+            </div>
         </button>
-        <button onclick="openPage('transfer')" class="crystal-btn flex flex-col items-center justify-center py-2.5">
-            <i class="fa-solid fa-plane-departure text-xl mb-1"></i><span id="btn-transfer" class="font-bold text-[12px]">Transfer Bilgileri</span>
+        <button onclick="openPage('transfer')" class="crystal-menu-btn flex flex-col items-center justify-center py-2.5" style="background-image: linear-gradient(rgba(73, 186, 213, 0.75), rgba(73, 186, 213, 0.75)), url('bg-transfer.jpg');">
+            <div class="relative z-10 flex flex-col items-center text-white crystal-menu-text">
+                <i class="fa-solid fa-plane-departure text-xl mb-1"></i><span id="btn-transfer" class="font-bold text-[12px]">Transfer Bilgileri</span>
+            </div>
         </button>
     </div>
 
@@ -183,7 +208,6 @@
         </a>
     </div>
 
-    <!-- LIVE WIDGET (Sabit Boyutlu - Ekran Taşmasını Önler) -->
     <div class="px-5 flex-grow flex flex-col justify-start overflow-hidden pb-2">
         <div class="now-box w-full">
             <div id="content-wrapper">
@@ -210,7 +234,15 @@
 </div>
 
 <script>
+    // GİZLİ ÖNYÜKLEME (SILENT PRELOAD)
+    // Uygulama ilk açıldığında arka planda menü fotoğraflarını indirir (Hızı yavaşlatmaz)
     window.addEventListener('load', () => {
+        const imagesToPreload = ['bg-room.jpg', 'bg-food.jpg', 'bg-map.jpg', 'bg-act.jpg', 'bg-menus.jpg', 'bg-transfer.jpg'];
+        imagesToPreload.forEach(src => {
+            const img = new Image();
+            img.src = src;
+        });
+
         setTimeout(() => {
             const splash = document.getElementById('splash-screen');
             splash.style.opacity = '0';
@@ -471,7 +503,7 @@
                     <a href="https://www.instagram.com/crystalhotels/" target="_blank" class="hover:text-sky-600 transition transform hover:scale-110"><i class="fa-brands fa-instagram"></i></a>
                     <a href="https://crystalhotels.com.tr/oteller/crystal-sunset" target="_blank" class="hover:text-sky-600 transition transform hover:scale-110"><i class="fa-solid fa-globe"></i></a>
                  </div>`,
-            de: `<div class="crystal-panel mb-8 text-sm leading-relaxed">Die <b>Crystal Hotels App</b> bietet einen zentralen Zugang zu <b>täglichen Aktivitäten, Show-Programmen</b> und wichtigen Informationen zum Aufenthalt und sorgt so für ein reibungsloses und gut informiertes Gästeerlebnis.</div>
+            de: `<div class="crystal-panel mb-8 text-sm leading-relaxed">Die <b>Crystal Hotels App</b> bietet einen zentralen Zugang zu <b>täglichen Aktivitäten, Show-Programmen</b> und wichtigen Informationen zum Aufenthalt.</div>
                  <div class="flex space-x-3 mb-8">
                     <a href="https://apps.apple.com/tr/app/crystal-hotels/id6744818940" target="_blank" class="crystal-btn flex-1 py-3 text-xs text-center block leading-tight"><i class="fa-brands fa-apple text-[28px] block mb-1"></i> Crystal Hotels App für iOS herunterladen</a>
                     <a href="https://play.google.com/store/apps/details?id=com.epigra.crystal_hotels&pli=1" target="_blank" class="crystal-btn flex-1 py-3 text-xs text-center block leading-tight"><i class="fa-brands fa-google-play text-[28px] block mb-1"></i> Crystal Hotels App für Android herunterladen</a>
@@ -484,7 +516,7 @@
                         </div>
                     </div>
                  </div>`,
-            ru: `<div class="crystal-panel mb-8 text-sm leading-relaxed">Приложение <b>Crystal Hotels App</b>, объединяющее все отели Crystal на единой платформе, обеспечивает мгновенный доступ к ежедневным мероприятиям, шоу-программам и <b>всей важной информации</b> о вашем пребывании, предлагая безупречный и эксклюзивный гостевой опыт.</div>
+            ru: `<div class="crystal-panel mb-8 text-sm leading-relaxed">Приложение <b>Crystal Hotels App</b> обеспечивает мгновенный доступ к ежедневным мероприятиям, шоу-программам и <b>всей важной информации</b> о вашем пребывании.</div>
                  <div class="flex space-x-3 mb-8">
                     <a href="https://apps.apple.com/tr/app/crystal-hotels/id6744818940" target="_blank" class="crystal-btn flex-1 py-3 text-xs text-center block leading-tight"><i class="fa-brands fa-apple text-[28px] block mb-1"></i> Скачать Crystal Hotels App для iOS</a>
                     <a href="https://play.google.com/store/apps/details?id=com.epigra.crystal_hotels&pli=1" target="_blank" class="crystal-btn flex-1 py-3 text-xs text-center block leading-tight"><i class="fa-brands fa-google-play text-[28px] block mb-1"></i> Скачать Crystal Hotels App для Android</a>
@@ -524,6 +556,7 @@
         let firstPart = parts[0]; 
         let secondPart = parts.slice(1).join(' '); 
         
+        // ORİJİNAL LOGO YAZI TİPİ VE HİZALAMASI (İstediğiniz şekil)
         document.getElementById('hotel-header-title').innerHTML = `<span class="block font-['Montserrat'] font-extrabold text-[26px] tracking-[0.25em] text-[#1e293b]">${firstPart}</span><span class="block font-['Montserrat'] font-medium text-[13px] tracking-[0.35em] text-[#334155] -mt-1">${secondPart}</span>`;
         
         document.getElementById('hotel-selection-screen').classList.add('hidden');
