@@ -5,14 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Crystal Hotels - Guest Information Hub</title>
     
-    <!-- Yalnızca en acil logo önyüklenir (Açılış hızı için) -->
     <link rel="preload" as="image" href="crystallogo.png">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
         body { font-family: 'Montserrat', sans-serif; background-color: #ffffff; margin: 0; padding: 0; overflow-x: hidden; }
@@ -24,6 +23,7 @@
         .spinner { width: 40px; height: 40px; border: 3px solid rgba(73, 186, 213, 0.3); border-radius: 50%; border-top-color: #49bad5; animation: spin 1s ease-in-out infinite; margin-top: 20px; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
+        /* Ana Konteyner - Ferah dağılım için justify-between */
         .app-container { max-width: 480px; margin: 0 auto; background-color: #ffffff; height: 100dvh; display: flex; flex-direction: column; justify-content: space-between; position: relative; opacity: 0; animation: fadeInApp 0.5s forwards 0.3s; }
         @keyframes fadeInApp { to { opacity: 1; } }
 
@@ -31,29 +31,21 @@
         .dashed-border-y { border-top: 1px dashed #e5e7eb; border-bottom: 1px dashed #e5e7eb; }
         .dashed-border-b { border-bottom: 1px dashed #e5e7eb; }
 
-        /* YENİDEN TASARLANAN ARKASI FOTOĞRAFLI BUTONLAR */
         .crystal-menu-btn {
-            border-radius: 12px; 
-            background-color: #49bad5; /* Fotoğraf gelene kadar orijinal turkuaz durur, boşluk hissi yaratmaz */
-            background-size: cover; 
-            background-position: center;
-            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5), 0 4px 10px rgba(0,0,0,0.08);
-            transition: all 0.15s ease; 
-            cursor: pointer; 
-            border: 1px solid #3ca5be; 
-            position: relative;
+            border-radius: 12px; background-color: #49bad5; background-size: cover; background-position: center;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5), 0 4px 10px rgba(0,0,0,0.08); transition: all 0.15s ease; cursor: pointer; border: 1px solid #3ca5be; position: relative;
         }
         .crystal-menu-btn:active { transform: scale(0.96); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .crystal-menu-text { text-shadow: 0 2px 4px rgba(0,0,0,0.6), 0 0 10px rgba(0,0,0,0.4); } /* Fotoğraf üstünde yazıyı belirginleştiren gölge */
+        .crystal-menu-text { text-shadow: 0 2px 4px rgba(0,0,0,0.6), 0 0 10px rgba(0,0,0,0.4); }
 
-        /* Standart Buton (Alt Sayfalar İçin) */
         .crystal-btn {
             background-color: #49bad5; border-radius: 8px; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.6), 0 2px 4px rgba(0,0,0,0.05); 
             color: #ffffff; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.1); transition: all 0.15s ease; cursor: pointer; border: 1px solid #3ca5be;
         }
         .crystal-btn:active { transform: scale(0.97); }
 
-        .dropdown-wrapper { margin: 0 20px; border-radius: 12px; overflow: hidden; border: 1px solid #e5e7eb; box-shadow: 0 10px 25px rgba(0,0,0,0.05); background: white; width: 100%; max-width: 440px; }
+        /* Dropdown Menü (Otel Seçimi) Premium Boşluklar */
+        .dropdown-wrapper { margin: 0 30px; border-radius: 12px; overflow: hidden; border: 1px solid #e5e7eb; box-shadow: 0 10px 25px rgba(0,0,0,0.05); background: white; width: calc(100% - 60px); max-width: 420px; }
         .dropdown-header { background: linear-gradient(to right, #49bad5, #0288d1); color: white; padding: 18px 20px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
         .dropdown-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; background: #fafafa; }
         .dropdown-content.open { max-height: 50vh; overflow-y: auto; -webkit-overflow-scrolling: touch; }
@@ -61,7 +53,7 @@
         .dropdown-content::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
         .dropdown-content::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
         
-        .hotel-select-item { padding: 16px 20px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; font-size: 10px; font-weight: 700; color: #374151; cursor: pointer; transition: background 0.2s; }
+        .hotel-select-item { padding: 16px 20px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 700; color: #374151; cursor: pointer; transition: background 0.2s; }
         .hotel-select-item:active { background: #e0f2fe; }
         .hotel-select-item:last-child { border-bottom: none; }
         
@@ -70,16 +62,20 @@
         .crystal-panel { background-color: #49bad5; border-radius: 12px; padding: 1.5rem; color: #ffffff; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5), 0 4px 6px rgba(0,0,0,0.1); text-align: center; }
         .crystal-panel a { text-decoration: underline; font-weight: bold; }
 
+        /* LIVE WIDGET */
         .now-box { background: linear-gradient(145deg, #ffffff, #fdfdfd); border: 1px solid #eaeaea; border-radius: 12px; padding: 12px 15px; text-align: left; box-shadow: 0 5px 20px rgba(0,0,0,0.04); height: 100%; }
         .now-title { font-size: 11px; color: #8c8c8c; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; font-weight: 600; border-bottom: 1px solid #f0f0f0; padding-bottom: 6px; display: flex; justify-content: center; align-items: center; gap: 8px; }
         .weather-note { font-size: 9px; color: #a0a0a0; text-align: center; margin-top: 8px; font-style: italic; font-weight: 500; }
-        .events-scroll { max-height: 155px; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-right: 4px; }
+        
+        /* 5 Satırlık Sabit Kutu (Yaklaşık 145px) */
+        .events-scroll { max-height: 145px; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-right: 4px; }
         
         .event-item-main { font-size: 12px; font-weight: 600; color: #2c3e50; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f8f8f8; padding-bottom: 6px; }
         .event-item-main:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
         .event-time-main { font-size: 10px; font-weight: 700; color: #49bad5; background-color: transparent; border: 1px solid #49bad5; padding: 2px 8px; border-radius: 20px; white-space: nowrap; margin-left: 10px; }
         
         .activity-box { background: linear-gradient(145deg, #ffffff, #fdfdfd); border: 1px solid #eaeaea; border-radius: 12px; padding: 18px 15px; text-align: left; box-shadow: 0 10px 30px rgba(0,0,0,0.06); position: relative; }
+        #activity-wrapper { transition: opacity 0.5s ease-in-out; opacity: 1; }
         .activity-title { font-size: 12px; color: #8c8c8c; text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 15px; font-weight: 600; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; text-align: center; display: flex; justify-content: center; align-items: center; gap: 8px; }
         .activity-item { font-size: 13px; font-weight: 600; color: #2c3e50; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; padding: 10px 8px; border-radius: 8px; border-left: 3px solid transparent; transition: all 0.3s ease; }
         .activity-item.active-now { background: linear-gradient(90deg, #f4fbff 0%, #ffffff 100%); border-left: 3px solid #00a2df; box-shadow: 0 4px 15px rgba(0, 162, 223, 0.05); }
@@ -98,6 +94,9 @@
         
         #content-wrapper { transition: opacity 0.3s ease-in-out; opacity: 1; }
         .fade-out { opacity: 0 !important; }
+        
+        /* Orijinal Geniş Serif Font Tasarımı */
+        .serif-title { font-family: 'Cinzel', serif; letter-spacing: 1px; }
     </style>
 </head>
 <body>
@@ -108,12 +107,13 @@
     <div class="spinner"></div>
 </div>
 
-<!-- 0. OTEL SEÇİM (GİRİŞ) EKRANI -->
+<!-- 0. OTEL SEÇİM (GİRİŞ) EKRANI (Premium Boşluklar) -->
 <div id="hotel-selection-screen" class="app-container bg-gradient-to-b from-sky-50 to-white hidden justify-center items-center">
     
     <div class="w-full flex flex-col items-center justify-center -mt-10">
         <div class="text-center mb-10 w-full px-6">
-            <img src="crystallogo.png" alt="Crystal Hotels" onerror="this.outerHTML='<h1 class=\\'font-[\\'Montserrat\\'] font-extrabold text-3xl text-gray-800\\'>CRYSTAL HOTELS</h1>'" class="h-[200px] w-full mx-auto object-contain drop-shadow-sm">
+            <!-- Büyük Logo -->
+            <img src="crystallogo.png" alt="Crystal Hotels" onerror="this.outerHTML='<h1 class=\\'serif-title text-4xl font-semibold text-gray-800\\'>CRYSTAL HOTELS</h1>'" class="h-[200px] w-full mx-auto object-contain drop-shadow-sm">
             <p class="text-[12px] text-gray-500 mt-2 font-bold tracking-[0.25em]">GUEST INFORMATION HUB</p>
         </div>
         
@@ -123,6 +123,7 @@
                 <i id="dropdown-icon" class="fa-solid fa-chevron-down transition-transform duration-300"></i>
             </div>
             <div id="hotel-dropdown" class="dropdown-content w-full">
+                <!-- 14 Otel -->
                 <div onclick="selectHotel('Prestige', 'CRYSTAL PRESTIGE')" class="hotel-select-item">CRYSTAL PRESTIGE PEARL COL. <i class="fa-solid fa-angle-right text-gray-400"></i></div>
                 <div onclick="selectHotel('Flora', 'CRYSTAL FLORA')" class="hotel-select-item">CRYSTAL FLORA PEARL COL. <i class="fa-solid fa-angle-right text-gray-400"></i></div>
                 <div onclick="selectHotel('Centro', 'CRYSTAL CENTRO')" class="hotel-select-item">CRYSTAL CENTRO PEARL COL. <i class="fa-solid fa-angle-right text-gray-400"></i></div>
@@ -145,8 +146,8 @@
 <!-- 1. ANA MENÜ EKRANI -->
 <div id="main-menu-screen" class="app-container hidden bg-white">
     
-    <div class="flex justify-between items-center px-5 pt-3 shrink-0 relative z-20">
-        <button onclick="goToHotelSelection()" class="text-gray-500 hover:text-sky-600 transition flex items-center bg-gray-50 px-2.5 py-1.5 rounded-lg border border-gray-200 shadow-sm">
+    <div class="flex justify-between items-center px-5 pt-4 shrink-0 relative z-20">
+        <button onclick="goToHotelSelection()" class="text-gray-500 hover:text-sky-600 transition flex items-center bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-200 shadow-sm">
             <i class="fa-solid fa-arrow-left text-[10px] mr-1.5"></i><span id="btn-back-home" class="text-[9px] font-bold tracking-wide uppercase">Geri</span>
         </button>
 
@@ -158,57 +159,56 @@
         </div>
     </div>
 
-    <!-- DİNAMİK OTEL BAŞLIĞI -->
-    <div class="text-center px-6 mt-3 shrink-0 relative">
-        <h2 id="hotel-header-title" class="mb-1">
-            <!-- JavaScript ile doldurulacak -->
-        </h2>
-        <p id="welcome-text" class="text-[12px] text-gray-500 leading-tight max-w-sm mx-auto italic font-medium px-2 mt-2">
+    <!-- DİNAMİK OTEL BAŞLIĞI (Orijinal Serif Font ve Yatay Form) -->
+    <div class="text-center px-6 mt-4 shrink-0 relative">
+        <h2 id="hotel-header-title" class="serif-title text-2xl font-semibold text-gray-800 mb-2 whitespace-nowrap">CRYSTAL HOTELS</h2>
+        <p id="welcome-text" class="text-[12px] text-gray-500 leading-tight max-w-sm mx-auto italic font-medium px-2 mt-1">
             Konaklamanız boyunca tüm otel bilgilerine zahmetsizce erişin.
         </p>
     </div>
 
-    <!-- ARKASI GÖRSELLİ 3D MENÜ (Opaklık %75'e ayarlandı. Daha kaliteli, Premium görünüm) -->
-    <div class="dashed-border-y py-3 mt-3 mb-2 grid grid-cols-2 gap-2 px-5 shrink-0">
-        <button onclick="openPage('room')" class="crystal-menu-btn flex flex-col items-center justify-center py-2.5" style="background-image: linear-gradient(rgba(73, 186, 213, 0.75), rgba(73, 186, 213, 0.75)), url('bg-room.jpg');">
+    <!-- ARKASI GÖRSELLİ 3D MENÜ (Ferah Aralıklar) -->
+    <div class="dashed-border-y py-4 mt-2 mb-2 grid grid-cols-2 gap-3 px-5 shrink-0">
+        <button onclick="openPage('room')" class="crystal-menu-btn flex flex-col items-center justify-center py-3" style="background-image: linear-gradient(rgba(73, 186, 213, 0.75), rgba(73, 186, 213, 0.75)), url('bg-room.jpg');">
             <div class="relative z-10 flex flex-col items-center text-white crystal-menu-text">
-                <i class="fa-solid fa-bed text-xl mb-1"></i><span id="btn-room" class="font-bold text-[12px]">Oda Rehberi</span>
+                <i class="fa-solid fa-bed text-2xl mb-1.5"></i><span id="btn-room" class="font-bold text-[13px]">Oda Rehberi</span>
             </div>
         </button>
-        <button onclick="openPage('food')" class="crystal-menu-btn flex flex-col items-center justify-center py-2.5" style="background-image: linear-gradient(rgba(73, 186, 213, 0.75), rgba(73, 186, 213, 0.75)), url('bg-food.jpg');">
+        <button onclick="openPage('food')" class="crystal-menu-btn flex flex-col items-center justify-center py-3" style="background-image: linear-gradient(rgba(73, 186, 213, 0.75), rgba(73, 186, 213, 0.75)), url('bg-food.jpg');">
             <div class="relative z-10 flex flex-col items-center text-white crystal-menu-text">
-                <i class="fa-solid fa-utensils text-xl mb-1"></i><span id="btn-food" class="font-bold text-[12px]">Yiyecek & İçecek</span>
+                <i class="fa-solid fa-utensils text-2xl mb-1.5"></i><span id="btn-food" class="font-bold text-[13px]">Yiyecek & İçecek</span>
             </div>
         </button>
-        <button onclick="openPage('map')" class="crystal-menu-btn flex flex-col items-center justify-center py-2.5" style="background-image: linear-gradient(rgba(73, 186, 213, 0.75), rgba(73, 186, 213, 0.75)), url('bg-map.jpg');">
+        <button onclick="openPage('map')" class="crystal-menu-btn flex flex-col items-center justify-center py-3" style="background-image: linear-gradient(rgba(73, 186, 213, 0.75), rgba(73, 186, 213, 0.75)), url('bg-map.jpg');">
             <div class="relative z-10 flex flex-col items-center text-white crystal-menu-text">
-                <i class="fa-solid fa-map-location-dot text-xl mb-1"></i><span id="btn-map" class="font-bold text-[12px]">Tesis Haritası</span>
+                <i class="fa-solid fa-map-location-dot text-2xl mb-1.5"></i><span id="btn-map" class="font-bold text-[13px]">Tesis Haritası</span>
             </div>
         </button>
-        <button onclick="openPage('activities')" class="crystal-menu-btn flex flex-col items-center justify-center py-2.5" style="background-image: linear-gradient(rgba(73, 186, 213, 0.75), rgba(73, 186, 213, 0.75)), url('bg-act.jpg');">
+        <button onclick="openPage('activities')" class="crystal-menu-btn flex flex-col items-center justify-center py-3" style="background-image: linear-gradient(rgba(73, 186, 213, 0.75), rgba(73, 186, 213, 0.75)), url('bg-act.jpg');">
             <div class="relative z-10 flex flex-col items-center text-white crystal-menu-text">
-                <i class="fa-solid fa-icons text-xl mb-1"></i><span id="btn-activities" class="font-bold text-[12px]">Aktiviteler</span>
+                <i class="fa-solid fa-icons text-2xl mb-1.5"></i><span id="btn-activities" class="font-bold text-[13px]">Aktiviteler</span>
             </div>
         </button>
-        <button onclick="openPage('menus')" class="crystal-menu-btn flex flex-col items-center justify-center py-2.5" style="background-image: linear-gradient(rgba(73, 186, 213, 0.75), rgba(73, 186, 213, 0.75)), url('bg-menus.jpg');">
+        <button onclick="openPage('menus')" class="crystal-menu-btn flex flex-col items-center justify-center py-3" style="background-image: linear-gradient(rgba(73, 186, 213, 0.75), rgba(73, 186, 213, 0.75)), url('bg-menus.jpg');">
             <div class="relative z-10 flex flex-col items-center text-white crystal-menu-text">
-                <i class="fa-solid fa-book-open-reader text-xl mb-1"></i><span id="btn-menus" class="font-bold text-[12px]">Menüler</span>
+                <i class="fa-solid fa-book-open-reader text-2xl mb-1.5"></i><span id="btn-menus" class="font-bold text-[13px]">Menüler</span>
             </div>
         </button>
-        <button onclick="openPage('transfer')" class="crystal-menu-btn flex flex-col items-center justify-center py-2.5" style="background-image: linear-gradient(rgba(73, 186, 213, 0.75), rgba(73, 186, 213, 0.75)), url('bg-transfer.jpg');">
+        <button onclick="openPage('transfer')" class="crystal-menu-btn flex flex-col items-center justify-center py-3" style="background-image: linear-gradient(rgba(73, 186, 213, 0.75), rgba(73, 186, 213, 0.75)), url('bg-transfer.jpg');">
             <div class="relative z-10 flex flex-col items-center text-white crystal-menu-text">
-                <i class="fa-solid fa-plane-departure text-xl mb-1"></i><span id="btn-transfer" class="font-bold text-[12px]">Transfer Bilgileri</span>
+                <i class="fa-solid fa-plane-departure text-2xl mb-1.5"></i><span id="btn-transfer" class="font-bold text-[13px]">Transfer Bilgileri</span>
             </div>
         </button>
     </div>
 
-    <div class="px-5 shrink-0 mb-2">
-        <a id="ai-link" href="http://crystalsunset.otai.app/tr" target="_blank" class="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold py-2.5 rounded-xl shadow-md flex items-center justify-center space-x-2 transition transform active:scale-95">
-            <i class="fa-solid fa-robot text-lg"></i><span id="btn-ai" class="text-[13px]">AI Asistan'a Sorun!</span>
+    <div class="px-5 shrink-0 mb-3">
+        <a id="ai-link" href="http://crystalsunset.otai.app/tr" target="_blank" class="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold py-3.5 rounded-xl shadow-md flex items-center justify-center space-x-2 transition transform active:scale-95">
+            <i class="fa-solid fa-robot text-lg"></i><span id="btn-ai" class="text-[14px]">AI Asistan'a Sorun!</span>
         </a>
     </div>
 
-    <div class="px-5 flex-grow flex flex-col justify-start overflow-hidden pb-2">
+    <!-- LIVE WIDGET (Sabit Max Height - Scroll Sadece Kutu İçinde) -->
+    <div class="px-5 flex-grow flex flex-col justify-start overflow-hidden pb-4">
         <div class="now-box w-full">
             <div id="content-wrapper">
                 <div style="text-align:center; color:#888; font-size: 12px; margin-top: 10px;">Loading...</div>
@@ -216,7 +216,7 @@
         </div>
     </div>
 
-    <div class="dashed-border-b py-2 flex justify-center items-center bg-white border-t border-gray-100 shrink-0">
+    <div class="dashed-border-b py-3 flex justify-center items-center bg-white border-t border-gray-100 shrink-0">
         <img src="mainlogo.png" alt="Main Logo" onerror="this.style.display='none'" class="h-6 object-contain">
     </div>
 </div>
@@ -235,7 +235,6 @@
 
 <script>
     // GİZLİ ÖNYÜKLEME (SILENT PRELOAD)
-    // Uygulama ilk açıldığında arka planda menü fotoğraflarını indirir (Hızı yavaşlatmaz)
     window.addEventListener('load', () => {
         const imagesToPreload = ['bg-room.jpg', 'bg-food.jpg', 'bg-map.jpg', 'bg-act.jpg', 'bg-menus.jpg', 'bg-transfer.jpg'];
         imagesToPreload.forEach(src => {
@@ -357,7 +356,7 @@
                  </div>
                  <div class="crystal-panel mb-6 text-sm leading-relaxed">Our room service is available <b>24 hours</b> (subject to additional charge).</div>
                  <a href="http://wa.me/905497844996" target="_blank" class="crystal-btn flex justify-center items-center w-full py-4 text-center text-lg bg-green-500 border-green-600"><i class="fa-brands fa-whatsapp text-2xl mr-2"></i> Order Room Service</a>`,
-            de: `<div class="crystal-panel mb-6 text-sm leading-relaxed">Unsere À-la-carte-Restaurants begrüßen Sie täglich von <b>18:30 bis 23:00 Uhr</b>.</div>
+            de: `<div class="crystal-panel mb-6 text-sm leading-relaxed">Unsere À-la-carte-Restaurants begrüßen Sie täglich von <b>18:30 bis 23:00 Uhr</b>.<br><br><u>Eine Reservierung ist nicht erforderlich</u>.</div>
                  <h3 class="font-bold text-gray-700 text-center mb-3 text-sm uppercase">Programm</h3>
                  <div class="overflow-x-auto hide-scroll rounded-xl border border-gray-200 mb-2 shadow-sm">
                     <table class="w-full text-left text-sm text-gray-500 alacarte-table-new">
@@ -542,7 +541,7 @@
             tr: `<h3 class="font-bold text-gray-700 text-center mb-4 text-sm uppercase">Hizmet Saatleri</h3>
                  <img src="fb-hourstr.png" alt="Food Beverage Hours" onerror="this.outerHTML='<div class=\\'bg-gray-100 p-10 text-center rounded-xl text-gray-400\\'>Lütfen GitHub\\'a <b>fb-hourstr.png</b> dosyasını yükleyin.</div>'" class="w-full rounded-xl shadow-md">`,
             en: `<h3 class="font-bold text-gray-700 text-center mb-4 text-sm uppercase">Operation Hours</h3>
-                 <img src="fb-hoursen.png" alt="Food Beverage Hours" onerror="this.outerHTML='<div class=\\'bg-gray-100 p-10 text-center rounded-xl text-gray-400\\'>Please upload <b>fb-hoursen.png</b> to GitHub.</div>'" class="w-full rounded-xl shadow-md">`,
+                 <img src="fb-hours.png" alt="Food Beverage Hours" onerror="this.outerHTML='<div class=\\'bg-gray-100 p-10 text-center rounded-xl text-gray-400\\'>Please upload <b>fb-hours.png</b> to GitHub.</div>'" class="w-full rounded-xl shadow-md">`,
             de: `<h3 class="font-bold text-gray-700 text-center mb-4 text-sm uppercase">Betriebszeiten</h3>
                  <img src="fb-hoursde.png" alt="Food Beverage Hours" onerror="this.outerHTML='<div class=\\'bg-gray-100 p-10 text-center rounded-xl text-gray-400\\'>Please upload <b>fb-hoursde.png</b> to GitHub.</div>'" class="w-full rounded-xl shadow-md">`,
             ru: `<h3 class="font-bold text-gray-700 text-center mb-4 text-sm uppercase">Часы работы</h3>
@@ -551,13 +550,8 @@
     };
 
     function selectHotel(hotelKey, hotelDisplayName) {
-        
-        let parts = hotelDisplayName.split(' ');
-        let firstPart = parts[0]; 
-        let secondPart = parts.slice(1).join(' '); 
-        
-        // ORİJİNAL LOGO YAZI TİPİ VE HİZALAMASI (İstediğiniz şekil)
-        document.getElementById('hotel-header-title').innerHTML = `<span class="block font-['Montserrat'] font-extrabold text-[26px] tracking-[0.25em] text-[#1e293b]">${firstPart}</span><span class="block font-['Montserrat'] font-medium text-[13px] tracking-[0.35em] text-[#334155] -mt-1">${secondPart}</span>`;
+        // Otel Adını Düzenle ve Başlığa Yaz
+        document.getElementById('hotel-header-title').innerHTML = hotelDisplayName;
         
         document.getElementById('hotel-selection-screen').classList.add('hidden');
         document.getElementById('hotel-selection-screen').classList.remove('flex');
