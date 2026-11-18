@@ -16,7 +16,6 @@
     <style>
         body { font-family: 'Montserrat', sans-serif; background-color: #ffffff; margin: 0; padding: 0; overflow-x: hidden; }
         
-        /* Açılış Yükleme Ekranı */
         #splash-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 100%);
             z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.6s ease-out, visibility 0.6s ease-out;
@@ -31,14 +30,12 @@
         .dashed-border-y { border-top: 1px dashed #e5e7eb; border-bottom: 1px dashed #e5e7eb; }
         .dashed-border-b { border-bottom: 1px dashed #e5e7eb; }
 
-        /* Hızlı Yüklenen 3D Buton */
         .crystal-btn {
             background-color: #49bad5; border-radius: 8px; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.6), 0 2px 4px rgba(0,0,0,0.05); 
             color: #ffffff; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.1); transition: all 0.15s ease; cursor: pointer; border: 1px solid #3ca5be;
         }
         .crystal-btn:active { transform: scale(0.97); }
 
-        /* Otel Seçim Dropdown Menüsü */
         .dropdown-wrapper { margin: 0 20px; border-radius: 12px; overflow: hidden; border: 1px solid #e5e7eb; box-shadow: 0 10px 25px rgba(0,0,0,0.05); background: white; }
         .dropdown-header { background: linear-gradient(to right, #49bad5, #0288d1); color: white; padding: 18px 20px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
         .dropdown-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; background: #fafafa; }
@@ -47,7 +44,7 @@
         .hotel-select-item:active { background: #e0f2fe; }
         .hotel-select-item:last-child { border-bottom: none; }
         
-        #dropdown-title-text { transition: opacity 0.3s ease; } /* 4 Dilde Dönen Yazı Efekti */
+        #dropdown-title-text { transition: opacity 0.3s ease; }
 
         .crystal-panel { background-color: #49bad5; border-radius: 12px; padding: 1.5rem; color: #ffffff; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5), 0 4px 6px rgba(0,0,0,0.1); text-align: center; }
         .crystal-panel a { text-decoration: underline; font-weight: bold; }
@@ -72,6 +69,10 @@
         .pulse-dot { width: 6px; height: 6px; background-color: #00a2df; border-radius: 50%; animation: pulse-dot 1.5s infinite; }
         @keyframes pulse-dot { 0% { box-shadow: 0 0 0 0 rgba(0, 162, 223, 0.4); } 70% { box-shadow: 0 0 0 4px rgba(0, 162, 223, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 162, 223, 0); } }
 
+        .alacarte-table-new { border-collapse: separate; border-spacing: 0; min-width: 400px; } /* Min-width eklendi kayma önlendi */
+        .alacarte-table-new th, .alacarte-table-new td { text-align: center; vertical-align: middle; padding: 8px 4px; }
+        .alacarte-table-new td i { font-size: 11px; }
+        
         .hide-scroll::-webkit-scrollbar { display: none; }
         .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
         
@@ -82,15 +83,15 @@
 
 <!-- SPLASH SCREEN -->
 <div id="splash-screen">
-    <img src="crystallogo.png" alt="Crystal Hotels" onerror="this.style.display='none'" style="height: 100px; object-fit: contain;">
+    <img src="crystallogo.png" alt="Crystal Hotels" onerror="this.style.display='none'" class="h-[150px] object-contain">
     <div class="spinner"></div>
 </div>
 
 <!-- 0. OTEL SEÇİM (GİRİŞ) EKRANI -->
 <div id="hotel-selection-screen" class="app-container bg-gradient-to-b from-sky-50 to-white hidden justify-center pb-20">
-    <div class="text-center mb-10 px-6">
-        <!-- Logo Büyütüldü (110px) -->
-        <img src="crystallogo.png" alt="Crystal Hotels" onerror="this.outerHTML='<h1 class=\\'serif-title text-3xl font-semibold text-gray-800\\'>CRYSTAL HOTELS</h1>'" class="h-[110px] mx-auto object-contain drop-shadow-sm">
+    <div class="text-center mb-10 px-6 mt-10">
+        <!-- LOGO BÜYÜTÜLDÜ -->
+        <img src="crystallogo.png" alt="Crystal Hotels" onerror="this.outerHTML='<h1 class=\\'serif-title text-3xl font-semibold text-gray-800\\'>CRYSTAL HOTELS</h1>'" class="h-[180px] w-full mx-auto object-contain drop-shadow-sm">
         <p class="text-[10px] text-gray-500 mt-4 font-bold tracking-[0.25em]">GUEST INFORMATION HUB</p>
     </div>
     
@@ -100,11 +101,11 @@
             <i id="dropdown-icon" class="fa-solid fa-chevron-down transition-transform duration-300"></i>
         </div>
         <div id="hotel-dropdown" class="dropdown-content">
+            <!-- 13 Otelin Tamamı (Aynı Standart Tasarım) -->
             <div onclick="selectHotel('Prestige', 'CRYSTAL PRESTIGE')" class="hotel-select-item">CRYSTAL PRESTIGE PEARL COL. <i class="fa-solid fa-angle-right text-gray-400"></i></div>
             <div onclick="selectHotel('Flora', 'CRYSTAL FLORA')" class="hotel-select-item">CRYSTAL FLORA PEARL COL. <i class="fa-solid fa-angle-right text-gray-400"></i></div>
             <div onclick="selectHotel('Centro', 'CRYSTAL CENTRO')" class="hotel-select-item">CRYSTAL CENTRO PEARL COL. <i class="fa-solid fa-angle-right text-gray-400"></i></div>
             <div onclick="selectHotel('TatBeach', 'CRYSTAL TAT BEACH')" class="hotel-select-item">CRYSTAL TAT BEACH PEARL COL. <i class="fa-solid fa-angle-right text-gray-400"></i></div>
-            <!-- Sunset Butonu Diğerleriyle Eşitlendi -->
             <div onclick="selectHotel('Sunset', 'CRYSTAL SUNSET')" class="hotel-select-item">CRYSTAL SUNSET PEARL COL. <i class="fa-solid fa-angle-right text-gray-400"></i></div>
             <div onclick="selectHotel('Aura', 'CRYSTAL AURA')" class="hotel-select-item">CRYSTAL AURA AQUA COL. <i class="fa-solid fa-angle-right text-gray-400"></i></div>
             <div onclick="selectHotel('Waterworld', 'CRYSTAL WATERWORLD')" class="hotel-select-item">CRYSTAL WATERWORLD AQUA COL. <i class="fa-solid fa-angle-right text-gray-400"></i></div>
@@ -123,26 +124,28 @@
     
     <div class="flex justify-between items-center px-6 pt-5 shrink-0 relative z-20">
         
-        <!-- Otel Seçimine Geri Dön Tuşu -->
-        <button onclick="goToHotelSelection()" class="text-gray-500 hover:text-sky-600 transition flex items-center bg-gray-50 px-3 py-1.5 rounded-full border border-gray-200 shadow-sm">
-            <i class="fa-solid fa-house text-[10px] mr-1.5"></i><span id="btn-back-home" class="text-[9px] font-bold tracking-wider uppercase">Geri Dön</span>
+        <!-- Geri Dön Tuşu -->
+        <button onclick="goToHotelSelection()" class="text-gray-500 hover:text-sky-600 transition flex items-center bg-gray-50 px-3 py-2 rounded-lg border border-gray-200 shadow-sm">
+            <i class="fa-solid fa-arrow-left text-xs mr-2"></i><span id="btn-back-home" class="text-[10px] font-bold tracking-wide uppercase">Geri</span>
         </button>
 
-        <!-- Dil Seçimi Butonları ve Tooltip -->
+        <!-- Dil Seçimi Butonları ve Tooltip (Logonun Üstüne Konumlandırıldı) -->
         <div class="flex space-x-1 shrink-0 relative">
-            <div id="lang-tooltip" class="hidden absolute -top-8 right-0 bg-gray-800 text-white text-[10px] py-1 px-3 rounded shadow-lg transition-opacity duration-700 opacity-0 whitespace-nowrap">
-                🌍 Dil / Language
-                <div class="absolute -bottom-1 right-8 w-2 h-2 bg-gray-800 rotate-45"></div>
-            </div>
             <button onclick="changeLang('tr')" class="px-2 py-1 bg-gray-100 border border-gray-200 rounded text-[10px] font-bold text-gray-700 hover:bg-gray-200">🇹🇷 TR</button>
             <button onclick="changeLang('en')" class="px-2 py-1 bg-gray-100 border border-gray-200 rounded text-[10px] font-bold text-gray-700 hover:bg-gray-200">🇬🇧 EN</button>
             <button onclick="changeLang('de')" class="px-2 py-1 bg-gray-100 border border-gray-200 rounded text-[10px] font-bold text-gray-700 hover:bg-gray-200">🇩🇪 DE</button>
             <button onclick="changeLang('ru')" class="px-2 py-1 bg-gray-100 border border-gray-200 rounded text-[10px] font-bold text-gray-700 hover:bg-gray-200">🇷🇺 RU</button>
+            
+            <!-- Tooltip Bayrakların Altında -->
+            <div id="lang-tooltip" class="hidden absolute top-8 right-0 bg-gray-800 text-white text-[10px] py-1 px-3 rounded shadow-lg transition-opacity duration-500 opacity-0 whitespace-nowrap z-50">
+                <div class="absolute -top-1 right-8 w-2 h-2 bg-gray-800 rotate-45"></div>
+                🌍 Dil / Language
+            </div>
         </div>
     </div>
 
     <!-- DİNAMİK OTEL BAŞLIĞI -->
-    <div class="text-center px-6 mt-6 shrink-0">
+    <div class="text-center px-6 mt-6 shrink-0 relative">
         <h2 id="hotel-header-title" class="serif-title text-2xl font-semibold text-gray-800 mb-2">CRYSTAL HOTELS</h2>
         <p id="welcome-text" class="text-[11px] text-gray-500 leading-tight max-w-sm mx-auto italic">
             Konaklamanız boyunca tüm otel bilgilerine zahmetsizce erişin.
@@ -248,7 +251,7 @@
         }
     }, 3000);
 
-    // --- SABİT METİNLER (Rusça/Almanca Çeviriler) ---
+    // --- SABİT METİNLER (Tablo Kayması Düzeltildi) ---
     const pageData = {
         transfer: {
             tr: `<div class="crystal-panel mb-6 text-sm leading-relaxed text-left">
@@ -529,7 +532,7 @@
                 tooltip.classList.remove('opacity-100');
                 tooltip.classList.add('opacity-0');
                 setTimeout(() => tooltip.classList.add('hidden'), 700); 
-            }, 4000);
+            }, 3000);
         }
         
         changeLang('tr');
@@ -547,7 +550,7 @@
     const translations = {
         tr: {
             welcome: "Konaklamanız boyunca tüm otel bilgilerine zahmetsizce erişin.",
-            room: "Oda Rehberi", food: "Yiyecek & İçecek", map: "Tesis Haritası", act: "Aktiviteler", menus: "Menüler", transfer: "Transfer Bilgileri", ai: "AI Asistan'a Sorun!", backHome: "Geri Dön",
+            room: "Oda Rehberi", food: "Yiyecek & İçecek", map: "Tesis Haritası", act: "Aktiviteler", menus: "Menüler", transfer: "Transfer Bilgileri", ai: "AI Asistan'a Sorun!", backHome: "Geri",
             titles: { room: "ODA REHBERİ", food: "YİYECEK & İÇECEK", map: "TESİS HARİTASI", activities: "AKTİVİTELER", menus: "MENÜLER", transfer: "TRANSFER BİLGİLERİ" }
         },
         en: {
@@ -562,7 +565,7 @@
         },
         ru: {
             welcome: "Вся важная информация об отеле доступна в один клик.",
-            room: "Справочник", food: "Еда и напитки", map: "Карта и Магазины", act: "Crystal Активности", menus: "Меню", transfer: "Инфо об отъезде", ai: "Спросите AI Ассистента!", backHome: "На главную",
+            room: "Справочник", food: "Еда и напитки", map: "Карта и Магазины", act: "Crystal Активности", menus: "Меню", transfer: "Инфо об отъезде", ai: "Спросите AI Ассистента!", backHome: "Назад",
             titles: { room: "СПРАВОЧНИК", food: "ЕДА И НАПИТКИ", map: "КАРТА И МАГАЗИНЫ", activities: "CRYSTAL АКТИВНОСТИ", menus: "МЕНЮ", transfer: "ИНФО ОБ ОТЪЕЗДЕ" }
         }
     };
@@ -589,6 +592,14 @@
         if (!document.getElementById('content-screen').classList.contains('hidden')) {
             const activePage = document.getElementById('content-screen').getAttribute('data-active-page');
             if (activePage) openPage(activePage);
+        }
+        
+        // Dil değiştirildiğinde tooltip'i hemen gizle
+        const tooltip = document.getElementById('lang-tooltip');
+        if (tooltip && !tooltip.classList.contains('hidden')) {
+             tooltip.classList.remove('opacity-100');
+             tooltip.classList.add('opacity-0');
+             setTimeout(() => tooltip.classList.add('hidden'), 700); 
         }
     }
 
