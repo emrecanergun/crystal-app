@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Crystal Hotels - Guest Information Hub</title>
     
+    <!-- YENİ: Tarayıcı Sekmesi ve Ana Ekran (App) İkon Ayarları -->
+    <link rel="icon" type="image/png" href="crystallogo.png">
+    <link rel="apple-touch-icon" href="crystallogo.png">
+    <meta name="apple-mobile-web-app-title" content="Crystal Hotels">
+    <meta name="application-name" content="Crystal Hotels">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#ffffff">
+    
     <link rel="preload" as="image" href="crystallogo.png">
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -23,7 +33,6 @@
         .spinner { width: 40px; height: 40px; border: 3px solid rgba(73, 186, 213, 0.3); border-radius: 50%; border-top-color: #49bad5; animation: spin 1s ease-in-out infinite; margin-top: 20px; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* Ana Konteyner - Ferah dağılım için justify-between */
         .app-container { max-width: 480px; margin: 0 auto; background-color: #ffffff; height: 100dvh; display: flex; flex-direction: column; justify-content: space-between; position: relative; opacity: 0; animation: fadeInApp 0.5s forwards 0.3s; }
         @keyframes fadeInApp { to { opacity: 1; } }
 
@@ -44,7 +53,6 @@
         }
         .crystal-btn:active { transform: scale(0.97); }
 
-        /* Dropdown Menü (Otel Seçimi) Premium Boşluklar */
         .dropdown-wrapper { margin: 0 30px; border-radius: 12px; overflow: hidden; border: 1px solid #e5e7eb; box-shadow: 0 10px 25px rgba(0,0,0,0.05); background: white; width: calc(100% - 60px); max-width: 420px; }
         .dropdown-header { background: linear-gradient(to right, #49bad5, #0288d1); color: white; padding: 18px 20px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
         .dropdown-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; background: #fafafa; }
@@ -62,12 +70,10 @@
         .crystal-panel { background-color: #49bad5; border-radius: 12px; padding: 1.5rem; color: #ffffff; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5), 0 4px 6px rgba(0,0,0,0.1); text-align: center; }
         .crystal-panel a { text-decoration: underline; font-weight: bold; }
 
-        /* LIVE WIDGET */
         .now-box { background: linear-gradient(145deg, #ffffff, #fdfdfd); border: 1px solid #eaeaea; border-radius: 12px; padding: 12px 15px; text-align: left; box-shadow: 0 5px 20px rgba(0,0,0,0.04); height: 100%; }
         .now-title { font-size: 11px; color: #8c8c8c; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; font-weight: 600; border-bottom: 1px solid #f0f0f0; padding-bottom: 6px; display: flex; justify-content: center; align-items: center; gap: 8px; }
         .weather-note { font-size: 9px; color: #a0a0a0; text-align: center; margin-top: 8px; font-style: italic; font-weight: 500; }
         
-        /* 5 Satırlık Sabit Kutu (Yaklaşık 145px) */
         .events-scroll { max-height: 145px; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-right: 4px; }
         
         .event-item-main { font-size: 12px; font-weight: 600; color: #2c3e50; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f8f8f8; padding-bottom: 6px; }
@@ -95,25 +101,22 @@
         #content-wrapper { transition: opacity 0.3s ease-in-out; opacity: 1; }
         .fade-out { opacity: 0 !important; }
         
-        /* Orijinal Geniş Serif Font Tasarımı */
         .serif-title { font-family: 'Cinzel', serif; letter-spacing: 1px; }
     </style>
 </head>
 <body>
 
-<!-- SPLASH SCREEN -->
 <div id="splash-screen">
     <img src="crystallogo.png" alt="Crystal Hotels" onerror="this.style.display='none'" class="h-[150px] object-contain">
     <div class="spinner"></div>
 </div>
 
-<!-- 0. OTEL SEÇİM (GİRİŞ) EKRANI (Premium Boşluklar) -->
+<!-- 0. OTEL SEÇİM (GİRİŞ) EKRANI -->
 <div id="hotel-selection-screen" class="app-container bg-gradient-to-b from-sky-50 to-white hidden justify-center items-center">
     
     <div class="w-full flex flex-col items-center justify-center -mt-10">
         <div class="text-center mb-10 w-full px-6">
-            <!-- Büyük Logo -->
-            <img src="crystallogo.png" alt="Crystal Hotels" onerror="this.outerHTML='<h1 class=\\'serif-title text-4xl font-semibold text-gray-800\\'>CRYSTAL HOTELS</h1>'" class="h-[200px] w-full mx-auto object-contain drop-shadow-sm">
+            <img src="crystallogo.png" alt="Crystal Hotels" onerror="this.outerHTML='<h1 class=\\'font-[\\'Montserrat\\'] font-extrabold text-3xl text-gray-800\\'>CRYSTAL HOTELS</h1>'" class="h-[200px] w-full mx-auto object-contain drop-shadow-sm">
             <p class="text-[12px] text-gray-500 mt-2 font-bold tracking-[0.25em]">GUEST INFORMATION HUB</p>
         </div>
         
@@ -123,7 +126,6 @@
                 <i id="dropdown-icon" class="fa-solid fa-chevron-down transition-transform duration-300"></i>
             </div>
             <div id="hotel-dropdown" class="dropdown-content w-full">
-                <!-- 14 Otel -->
                 <div onclick="selectHotel('Prestige', 'CRYSTAL PRESTIGE')" class="hotel-select-item">CRYSTAL PRESTIGE PEARL COL. <i class="fa-solid fa-angle-right text-gray-400"></i></div>
                 <div onclick="selectHotel('Flora', 'CRYSTAL FLORA')" class="hotel-select-item">CRYSTAL FLORA PEARL COL. <i class="fa-solid fa-angle-right text-gray-400"></i></div>
                 <div onclick="selectHotel('Centro', 'CRYSTAL CENTRO')" class="hotel-select-item">CRYSTAL CENTRO PEARL COL. <i class="fa-solid fa-angle-right text-gray-400"></i></div>
@@ -146,8 +148,8 @@
 <!-- 1. ANA MENÜ EKRANI -->
 <div id="main-menu-screen" class="app-container hidden bg-white">
     
-    <div class="flex justify-between items-center px-5 pt-4 shrink-0 relative z-20">
-        <button onclick="goToHotelSelection()" class="text-gray-500 hover:text-sky-600 transition flex items-center bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-200 shadow-sm">
+    <div class="flex justify-between items-center px-5 pt-3 shrink-0 relative z-20">
+        <button onclick="goToHotelSelection()" class="text-gray-500 hover:text-sky-600 transition flex items-center bg-gray-50 px-2.5 py-1.5 rounded-lg border border-gray-200 shadow-sm">
             <i class="fa-solid fa-arrow-left text-[10px] mr-1.5"></i><span id="btn-back-home" class="text-[9px] font-bold tracking-wide uppercase">Geri</span>
         </button>
 
@@ -159,56 +161,56 @@
         </div>
     </div>
 
-    <!-- DİNAMİK OTEL BAŞLIĞI (Orijinal Serif Font ve Yatay Form) -->
-    <div class="text-center px-6 mt-4 shrink-0 relative">
-        <h2 id="hotel-header-title" class="serif-title text-2xl font-semibold text-gray-800 mb-2 whitespace-nowrap">CRYSTAL HOTELS</h2>
-        <p id="welcome-text" class="text-[12px] text-gray-500 leading-tight max-w-sm mx-auto italic font-medium px-2 mt-1">
+    <!-- DİNAMİK OTEL BAŞLIĞI -->
+    <div class="text-center px-6 mt-4 shrink-0">
+        <h2 id="hotel-header-title" class="mb-2">
+            <!-- JavaScript ile doldurulacak -->
+        </h2>
+        <p id="welcome-text" class="text-[12px] text-gray-500 leading-tight max-w-sm mx-auto italic font-medium px-2 mt-2">
             Konaklamanız boyunca tüm otel bilgilerine zahmetsizce erişin.
         </p>
     </div>
 
-    <!-- ARKASI GÖRSELLİ 3D MENÜ (Ferah Aralıklar) -->
-    <div class="dashed-border-y py-4 mt-2 mb-2 grid grid-cols-2 gap-3 px-5 shrink-0">
-        <button onclick="openPage('room')" class="crystal-menu-btn flex flex-col items-center justify-center py-3" style="background-image: linear-gradient(rgba(73, 186, 213, 0.75), rgba(73, 186, 213, 0.75)), url('bg-room.jpg');">
+    <div class="dashed-border-y py-3 mt-3 mb-2 grid grid-cols-2 gap-2 px-5 shrink-0">
+        <button onclick="openPage('room')" class="crystal-menu-btn flex flex-col items-center justify-center py-2.5" style="background-image: linear-gradient(rgba(73, 186, 213, 0.75), rgba(73, 186, 213, 0.75)), url('bg-room.jpg');">
             <div class="relative z-10 flex flex-col items-center text-white crystal-menu-text">
-                <i class="fa-solid fa-bed text-2xl mb-1.5"></i><span id="btn-room" class="font-bold text-[13px]">Oda Rehberi</span>
+                <i class="fa-solid fa-bed text-xl mb-1"></i><span id="btn-room" class="font-bold text-[12px]">Oda Rehberi</span>
             </div>
         </button>
-        <button onclick="openPage('food')" class="crystal-menu-btn flex flex-col items-center justify-center py-3" style="background-image: linear-gradient(rgba(73, 186, 213, 0.75), rgba(73, 186, 213, 0.75)), url('bg-food.jpg');">
+        <button onclick="openPage('food')" class="crystal-menu-btn flex flex-col items-center justify-center py-2.5" style="background-image: linear-gradient(rgba(73, 186, 213, 0.75), rgba(73, 186, 213, 0.75)), url('bg-food.jpg');">
             <div class="relative z-10 flex flex-col items-center text-white crystal-menu-text">
-                <i class="fa-solid fa-utensils text-2xl mb-1.5"></i><span id="btn-food" class="font-bold text-[13px]">Yiyecek & İçecek</span>
+                <i class="fa-solid fa-utensils text-xl mb-1"></i><span id="btn-food" class="font-bold text-[12px]">Yiyecek & İçecek</span>
             </div>
         </button>
-        <button onclick="openPage('map')" class="crystal-menu-btn flex flex-col items-center justify-center py-3" style="background-image: linear-gradient(rgba(73, 186, 213, 0.75), rgba(73, 186, 213, 0.75)), url('bg-map.jpg');">
+        <button onclick="openPage('map')" class="crystal-menu-btn flex flex-col items-center justify-center py-2.5" style="background-image: linear-gradient(rgba(73, 186, 213, 0.75), rgba(73, 186, 213, 0.75)), url('bg-map.jpg');">
             <div class="relative z-10 flex flex-col items-center text-white crystal-menu-text">
-                <i class="fa-solid fa-map-location-dot text-2xl mb-1.5"></i><span id="btn-map" class="font-bold text-[13px]">Tesis Haritası</span>
+                <i class="fa-solid fa-map-location-dot text-xl mb-1"></i><span id="btn-map" class="font-bold text-[12px]">Tesis Haritası</span>
             </div>
         </button>
-        <button onclick="openPage('activities')" class="crystal-menu-btn flex flex-col items-center justify-center py-3" style="background-image: linear-gradient(rgba(73, 186, 213, 0.75), rgba(73, 186, 213, 0.75)), url('bg-act.jpg');">
+        <button onclick="openPage('activities')" class="crystal-menu-btn flex flex-col items-center justify-center py-2.5" style="background-image: linear-gradient(rgba(73, 186, 213, 0.75), rgba(73, 186, 213, 0.75)), url('bg-act.jpg');">
             <div class="relative z-10 flex flex-col items-center text-white crystal-menu-text">
-                <i class="fa-solid fa-icons text-2xl mb-1.5"></i><span id="btn-activities" class="font-bold text-[13px]">Aktiviteler</span>
+                <i class="fa-solid fa-icons text-xl mb-1"></i><span id="btn-activities" class="font-bold text-[12px]">Aktiviteler</span>
             </div>
         </button>
-        <button onclick="openPage('menus')" class="crystal-menu-btn flex flex-col items-center justify-center py-3" style="background-image: linear-gradient(rgba(73, 186, 213, 0.75), rgba(73, 186, 213, 0.75)), url('bg-menus.jpg');">
+        <button onclick="openPage('menus')" class="crystal-menu-btn flex flex-col items-center justify-center py-2.5" style="background-image: linear-gradient(rgba(73, 186, 213, 0.75), rgba(73, 186, 213, 0.75)), url('bg-menus.jpg');">
             <div class="relative z-10 flex flex-col items-center text-white crystal-menu-text">
-                <i class="fa-solid fa-book-open-reader text-2xl mb-1.5"></i><span id="btn-menus" class="font-bold text-[13px]">Menüler</span>
+                <i class="fa-solid fa-book-open-reader text-xl mb-1"></i><span id="btn-menus" class="font-bold text-[12px]">Menüler</span>
             </div>
         </button>
-        <button onclick="openPage('transfer')" class="crystal-menu-btn flex flex-col items-center justify-center py-3" style="background-image: linear-gradient(rgba(73, 186, 213, 0.75), rgba(73, 186, 213, 0.75)), url('bg-transfer.jpg');">
+        <button onclick="openPage('transfer')" class="crystal-menu-btn flex flex-col items-center justify-center py-2.5" style="background-image: linear-gradient(rgba(73, 186, 213, 0.75), rgba(73, 186, 213, 0.75)), url('bg-transfer.jpg');">
             <div class="relative z-10 flex flex-col items-center text-white crystal-menu-text">
-                <i class="fa-solid fa-plane-departure text-2xl mb-1.5"></i><span id="btn-transfer" class="font-bold text-[13px]">Transfer Bilgileri</span>
+                <i class="fa-solid fa-plane-departure text-xl mb-1"></i><span id="btn-transfer" class="font-bold text-[12px]">Transfer Bilgileri</span>
             </div>
         </button>
     </div>
 
-    <div class="px-5 shrink-0 mb-3">
-        <a id="ai-link" href="http://crystalsunset.otai.app/tr" target="_blank" class="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold py-3.5 rounded-xl shadow-md flex items-center justify-center space-x-2 transition transform active:scale-95">
-            <i class="fa-solid fa-robot text-lg"></i><span id="btn-ai" class="text-[14px]">AI Asistan'a Sorun!</span>
+    <div class="px-5 shrink-0 mb-2">
+        <a id="ai-link" href="http://crystalsunset.otai.app/tr" target="_blank" class="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold py-2.5 rounded-xl shadow-md flex items-center justify-center space-x-2 transition transform active:scale-95">
+            <i class="fa-solid fa-robot text-lg"></i><span id="btn-ai" class="text-[13px]">AI Asistan'a Sorun!</span>
         </a>
     </div>
 
-    <!-- LIVE WIDGET (Sabit Max Height - Scroll Sadece Kutu İçinde) -->
-    <div class="px-5 flex-grow flex flex-col justify-start overflow-hidden pb-4">
+    <div class="px-5 flex-grow flex flex-col justify-start overflow-hidden pb-2">
         <div class="now-box w-full">
             <div id="content-wrapper">
                 <div style="text-align:center; color:#888; font-size: 12px; margin-top: 10px;">Loading...</div>
@@ -216,7 +218,7 @@
         </div>
     </div>
 
-    <div class="dashed-border-b py-3 flex justify-center items-center bg-white border-t border-gray-100 shrink-0">
+    <div class="dashed-border-b py-2 flex justify-center items-center bg-white border-t border-gray-100 shrink-0">
         <img src="mainlogo.png" alt="Main Logo" onerror="this.style.display='none'" class="h-6 object-contain">
     </div>
 </div>
@@ -234,7 +236,7 @@
 </div>
 
 <script>
-    // GİZLİ ÖNYÜKLEME (SILENT PRELOAD)
+    // PRELOAD
     window.addEventListener('load', () => {
         const imagesToPreload = ['bg-room.jpg', 'bg-food.jpg', 'bg-map.jpg', 'bg-act.jpg', 'bg-menus.jpg', 'bg-transfer.jpg'];
         imagesToPreload.forEach(src => {
@@ -550,8 +552,12 @@
     };
 
     function selectHotel(hotelKey, hotelDisplayName) {
-        // Otel Adını Düzenle ve Başlığa Yaz
-        document.getElementById('hotel-header-title').innerHTML = hotelDisplayName;
+        // Otel Adını Düzenle ve Başlığa Yaz (Orijinal Tasarım Formunda)
+        let parts = hotelDisplayName.split(' ');
+        let firstPart = parts[0]; 
+        let secondPart = parts.slice(1).join(' '); 
+        
+        document.getElementById('hotel-header-title').innerHTML = `<span class="block font-['Cinzel'] font-bold text-2xl tracking-[4px] text-[#1e293b]">${firstPart} ${secondPart}</span>`;
         
         document.getElementById('hotel-selection-screen').classList.add('hidden');
         document.getElementById('hotel-selection-screen').classList.remove('flex');
